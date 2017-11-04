@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "方案决策";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        是否上会：
+    </h2>
+    <p id="labSfsh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        项目及采购需求简述：
+    </h2>
+    <p id="labdescription" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预（估）算金额：
+    </h2>
+    <p id="labprices" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        建议采购方式：
+    </h2>
+    <p id="labadvice" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        供应商选择标准：
+    </h2>
+    <p id="labselectionstantard" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        供应商选择资格条件：
+    </h2>
+    <p id="labselectioncondition" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        其他说明：
+    </h2>
+    <p id="labothers" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labSfsh").text(processDatajson.processData.f_sfsh);  //是否上会
+        $("#labdescription").text(processDatajson.processData.f_xmjs);  //项目及采购需求简述
+        $("#labprices").text(processDatajson.processData.f_ysje+"元");  //预算金额
+        $("#labadvice").text(processDatajson.processData.f_jycgfs);  //建议采购方式
+        $("#labselectionstantard").text(processDatajson.processData.f_ProjectGysXzBz);  //供应商选择标准
+        $("#labselectioncondition").text(processDatajson.processData.f_ProjectGysZgTj);  //供应商选择资格条件
+        $("#labothers").text(processDatajson.processData.f_qtsm);  //其他说明
+    };
+</script>

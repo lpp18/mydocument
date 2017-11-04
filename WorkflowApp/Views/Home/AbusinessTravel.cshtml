@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "出差申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        出差事由：
+    </h2>
+    <p id="f_ccsy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出发地：
+    </h2>
+    <p id="f_cfd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        目的地：
+    </h2>
+    <p id="f_mdd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差日期：
+    </h2>
+    <p id="f_ccrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差天数(预)：
+    </h2>
+    <p id="f_yjccts" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预计返回日期：
+    </h2>
+    <p id="f_yjfhrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        实际返回日期：
+    </h2>
+    <p id="f_sjfhrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差补助金额：
+    </h2>
+    <p id="f_ccbz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差目的：
+    </h2>
+    <p id="f_ccmd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差结果：
+    </h2>
+    <p id="f_ccjg" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差总结：
+    </h2>
+    <p id="f_cczj" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labFphone").text(processDatajson.phone);   //联系电话
+        $("#f_ccsy").text(processDatajson.processData.f_ccsy);
+        $("#f_cfd").text(processDatajson.processData.f_cfd);
+        $("#f_mdd").text(processDatajson.processData.f_mdd);
+        $("#f_ccrq").text(processDatajson.processData.f_ccrq);
+        $("#f_yjccts").text(processDatajson.processData.f_yjccts);
+        $("#f_yjfhrq").text(processDatajson.processData.f_yjfhrq);
+        $("#f_sjfhrq").text(processDatajson.processData.f_sjfhrq);
+        $("#f_ccbz").text(processDatajson.processData.f_ccbz+"元");
+        $("#f_ccmd").append(decodeURIComponent(processDatajson.processData.f_ccmd));
+        $("#f_ccjg").append(decodeURIComponent(processDatajson.processData.f_ccjg));
+        $("#f_cczj").text(processDatajson.processData.f_cczj);
+    };
+</script>

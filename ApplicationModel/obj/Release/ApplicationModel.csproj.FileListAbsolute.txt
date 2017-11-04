@@ -1,0 +1,10 @@
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\ApplicationModel.dll
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\ApplicationModel.pdb
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\Dos.ORM.dll
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\NPOI.dll
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\NPOI.OOXML.dll
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\NPOI.OpenXml4Net.dll
+H:\Project2017\RCSApplication\ApplicationModel\bin\Release\NPOI.OpenXmlFormats.dll
+H:\Project2017\RCSApplication\ApplicationModel\obj\Release\ApplicationModel.csprojResolveAssemblyReference.cache
+H:\Project2017\RCSApplication\ApplicationModel\obj\Release\ApplicationModel.dll
+H:\Project2017\RCSApplication\ApplicationModel\obj\Release\ApplicationModel.pdb

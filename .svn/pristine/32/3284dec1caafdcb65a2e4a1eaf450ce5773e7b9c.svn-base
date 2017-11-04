@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "印章";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用章性质：
+    </h2>
+    <p id="labsealNature" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用章种类：
+    </h2>
+    <p id="labsealType" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用章公司：
+    </h2>
+    <p id="labsealCompany" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        所需资质：
+    </h2>
+    <p id="labqualificatiom" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用印份数：
+    </h2>
+    <p id="labsealCount" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        涉及金额：
+    </h2>
+    <p id="labsealCapitals" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用章说明：
+    </h2>
+    <p id="labsealExplain" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labFphone").text(processDatajson.phone);
+        $("#labsealNature").text(processDatajson.processData.sealType);
+        $("#labsealType").text(processDatajson.processData.sealClass);
+        $("#labsealCompany").text(processDatajson.processData.sealCompany);
+        $("#labqualificatiom").text(processDatajson.processData.qualificatiom);
+        $("#labsealCount").text(processDatajson.processData.count);
+        $("#labsealCapitals").text(processDatajson.processData.amount + "元");
+        $("#labsealExplain").append(decodeURIComponent(processDatajson.processData.reason));
+    };
+</script>

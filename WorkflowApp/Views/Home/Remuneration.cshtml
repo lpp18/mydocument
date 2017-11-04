@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "薪酬申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        薪酬类型：
+    </h2>
+    <p id="F_RemunerationType" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#F_RemunerationType").text(processDatajson.processData.F_RemunerationType);
+    };
+</script>
+

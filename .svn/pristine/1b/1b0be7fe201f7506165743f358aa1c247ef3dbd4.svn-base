@@ -1,0 +1,259 @@
+#box {
+	position: relative;
+}
+/*
+	essential_infor 电子流
+*/
+#essential_infor_nav {
+	top:0;
+}
+.essential_infor li{
+	box-sizing: border-box;
+	border-bottom: 1px solid #cfccc7;
+	padding:.75rem .7rem;
+	font-size: .65rem;
+}
+.essential_infor li>h2 {
+	display: inline-block;
+	width: 21.6%;
+	height:100%;
+	color: #666;
+	text-align: left;
+	font-size: .65rem;
+}
+.essential_infor li>p {
+	display: inline-block;
+	width: 70%;
+	height:100%;
+	color: #353535;
+}
+.essential_infor_deal {
+	width: 100%;
+	height:auto;
+}
+.essential_infor_btn {
+	position: fixed;
+	bottom: 0;
+	box-sizing: border-box;
+	padding:0 2rem;
+	width:100%;
+	height:2.2rem;
+	background: #2dc5c1;
+	font-size: .75rem;
+	color: #fff;
+	line-height: 2.2rem;
+	text-align: center;
+}
+.essential_infor_btn i {
+	position:absolute;
+	top:50%;
+	margin-top:-.4rem;
+	left: 50%;
+	margin-left: -3rem;
+	display: inline-block;
+	width: .875rem;
+	height:.8rem;
+	background: url("../img/edit.png") no-repeat;
+	background-size: 100% 100%;
+}
+.essential_infor_deal h3 {
+	box-sizing: border-box;
+	width: 100%;
+	height:1.75rem;
+	line-height: 1.75rem;
+	background-color: #e8e8e8;
+	color: #666;
+	font-size: .6rem;
+	padding: 0 .7rem;
+}
+.essential_infor_deal .deal-content {
+	box-sizing: border-box;
+	width: 100%;
+	padding: .7rem;
+	margin-bottom: 3rem;
+}
+.essential_infor_deal textarea {
+	display: block;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	box-sizing: border-box;
+	padding:.6rem .5rem;
+	width: 100%;
+	height: 7.5rem;
+	border:1px solid #999;
+	border-radius: .5rem;
+	text-align: left;
+}
+.essential_infor_footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	height:2.2rem;
+	border-top:1px solid #cfcfcf;
+	background: #fff;
+}
+.essential_infor_footer>p {
+	position: relative;
+	width: 50%;
+	height:2.2rem;
+	line-height: 2.2rem;
+	float: left;
+	text-align: center;
+	font-size: .75rem;
+}
+.essential_infor_footer>p i {
+	position: absolute;
+	display: inline-block;
+	width: .75rem;
+	height:.75rem;
+	top:50%;
+	margin-top: -.375rem;
+	left:3rem;
+}
+.aggree {
+	color: #2bc5c1;
+}
+.disagree {
+	color: #e75050;
+}
+.agree_img {
+	background: url("../img/aggree.png") no-repeat;
+	background-size: 100% 100%;
+}
+.disagree_img {
+	background: url("../img/reject.png") no-repeat;
+	background-size: 100% 100%;
+}
+.footer_line {
+	width: 1px;
+	border-left:2px solid #2bc5c1;
+	height:.8rem;
+	position: absolute;
+	left: 50%;
+	margin-left:-1px;
+	top:50%;
+	margin-top: -.4rem;
+}
+.layer_success {
+	width: 100%;
+	height: 100%;
+}
+.layer_success_top {
+	width: 2rem;
+	height:2rem;
+	margin: 0 auto;
+	padding-top: 1.625rem;
+	padding-bottom: .625rem;
+}
+.layer_success_top img{
+	width: 100%;
+	height: 100%;
+}
+.layer_success p {
+	font-size: .7rem;
+	color: #353535;
+	text-align: center;
+	margin-bottom:1.8rem;
+}
+.layer_fail {
+	width: 100%;
+	height: 100%;
+	font-size: .7rem;
+}
+.layer_fail_top {
+	width: 100%;
+	height:4.375rem;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 4.375rem;
+	color: #353535;
+}
+.layer_fail ul {
+	border-top: 1px solid #d6d6d6;
+	width: 100%;
+	height: 2.4rem;
+	line-height: 2.4rem;
+}
+.layer_fail ul li {
+	box-sizing: border-box;
+	float: left;
+	width: 50%;
+	height:2.4rem;
+	text-align: center;
+}
+.layer_fail ul .reject {
+	color: #e75050;
+	border-right: 1px solid #d6d6d6;
+}
+
+/*
+	enclosure 公文
+*/
+.enclosure li {
+	width: 100%;
+	height: 4rem;
+	box-sizing: border-box;
+	padding: 1.05rem .7rem;
+}
+/*
+ approval_log 审批日志
+*/
+.approval_log {
+ padding-top:1.05rem;
+}
+.approval_log li {
+	width: 100%;
+	min-height: 3.1rem;
+	box-sizing: border-box;
+	padding:0 .7rem;
+    overflow:hidden
+}
+.approval_log li>div {
+	float: left;
+	font-size: .7rem;
+}
+.approval_log_name {
+	width: 3.75rem;
+	height:100%;
+	text-align: right;
+	color: #666;
+}
+.approval_log_style {
+	width: 2.625rem;
+	height:100%;
+}
+.approval_log_style img {
+	width: 1.1rem;
+	height:1.1rem;
+	margin: 0 auto;
+}
+.approval_log_style p {
+	width: 100%;
+	height:2rem;
+}
+.approval_log_style p em {
+	box-sizing: border-box;
+	display: block;
+	width: 1px;
+	height: 100%;
+	margin: 0 auto;
+	border-left: 1px dotted #9c9c9c;
+}
+.approval_log_access {
+	width: 10.975rem;
+	height:auto;
+}
+.approval_log_access>h2 {
+    text-align:left;
+	font-size: .7rem;
+	color: #353535;
+}
+.approval_log_access>p {
+    text-align:left;
+	font-size: .5rem;
+	color: #9f9f9f;
+	margin-top: .6rem;
+}
+.approval_log li:last-child .approval_log_style em {
+	display: none !important;
+}

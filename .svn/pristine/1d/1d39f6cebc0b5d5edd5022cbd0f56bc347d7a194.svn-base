@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "办公用品";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        领用人部门：
+    </h2>
+    <p id="labf_lyrDept" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        领用方式：
+    </h2>
+    <p id="labf_lyfs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        代领员工：
+    </h2>
+    <p id="labf_lyrNameCN" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_HSTX").text(processDatajson.processData.f_lyrDept);  //领用人部门
+        $("#labf_lyfs").text(processDatajson.processData.f_lyfs);  //领用方式
+        $("#labf_lyrNameCN").text(processDatajson.processData.f_lyrNameCN);  //代领员工
+    };
+</script>
+

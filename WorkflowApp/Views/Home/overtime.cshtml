@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "加班申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预计加班开始时间：
+    </h2>
+    <p id="labyjjbkssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预计加班结束时间：
+    </h2>
+    <p id="labyjjbjssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        实际加班开始时间：
+    </h2>
+    <p id="labsjjbkssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        实际加班结束时间：
+    </h2>
+    <p id="labsjjbjssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        加班事由：
+    </h2>
+    <p id="labjbsy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        加班类型：
+    </h2>
+    <p id="labjblx" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012"    //project
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        console.log(processDatajson.processData);
+        $("#labFphone").text(processDatajson.phone);   //联系电话
+        $("#labyjjbkssj").text(processDatajson.processData.F_yjksrq + " " + processDatajson.processData.F_yjkssj);
+        $("#labyjjbjssj").text(processDatajson.processData.F_yjjsrq + " " + processDatajson.processData.F_yjjssj);
+        $("#labsjjbkssj").text(processDatajson.processData.F_sjksrq + " " + processDatajson.processData.F_sjkssj);
+        $("#labsjjbjssj").text(processDatajson.processData.F_sjjsrq + " " + processDatajson.processData.F_sjjssj);
+        $("#labjbsy").append(processDatajson.processData.F_jbsy);
+        $("#labjblx").text(processDatajson.processData.F_jblx);
+    };
+</script>

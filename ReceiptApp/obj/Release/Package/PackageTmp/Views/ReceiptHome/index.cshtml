@@ -1,0 +1,210 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <title>我的发票</title>
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/main.css" />
+
+</head>
+<body style="border-top: 1px solid #e8e8e8; padding-top: 1px;box-sizing:border-box">
+    <ul class="alist" id="ReceiptList">
+    </ul>
+    @if (ViewBag.IsSupperAdmin != null && ViewBag.IsSupperAdmin)
+    {
+        <div class="ibottom" style="height: 1.6rem;">
+
+        </div>
+    }
+    @if (ViewBag.IsSupperAdmin != null && ViewBag.IsSupperAdmin)
+    {
+        <div class="newfa bottom">
+            <img src="~/Content/Receipt/img/new.png" alt="" />
+            <span style="text-align: left;" onclick="javascript: window.location.href = '../ReceiptHome/AddReceipt?option=add'">新建</span>
+        </div>
+    }
+    <div class="mylayer">
+        <div class="spinner">
+            <div class="double-bounce1"></div>
+            <div class="double-bounce2"></div>
+        </div>
+    </div>
+    <div class="noContent"><img src="../Content/Receipt/img/noContent.png" /><p>暂无发票信息</p></div>
+    <script type="text/javascript" src="../Content/Receipt/js/fontSize.js"></script>
+    <script type="text/javascript" src="../Content/Receipt/js/zepto.min.js"></script>
+    <script type="text/javascript" src="../Content/Receipt/js/layer.js"></script>
+    <script src="../Content/Receipt/js/mui.min.js"></script>
+    <script src="../Content/Receipt/js/index.js"></script>
+    <script type="text/javascript">
+        var IsSupperAdmin = '@ViewBag.IsSupperAdmin';
+        //绑定操作事件
+        function addOption() {
+            if (IsSupperAdmin == "True") {
+                //左滑操作
+                $("li").swipeLeft(function () {
+                    $(this).find(".delet").animate({
+                        right: '0',
+                        opacity: ".9",
+                    }, 200, 'ease-in-out', function () {
+
+                    }
+                       )
+                });
+            }
+            //删除选中项
+            $(document).on("tap", ".delet", function () {
+                var id = $(this).parent().children().find("input").val();
+                var That = $(this).parent();
+                $(this).parent().animate({
+                    opacity: '0',
+                }, 100, 'ease-in-out', function () {
+                    //That.remove();
+                    //删除选中条
+                    DelReceipt(id, That);
+
+                }
+                  )
+            })
+            //点击列表进入详情
+            $("li").click(function () {
+                var Opacity = $(this).find(".delet").css("opacity")
+                if (Opacity == .9) {
+                    $(this).find(".delet").animate({
+                        right: '-2rem',
+                        opacity: "1"
+                    }, 200, 'ease-in-out', function () {
+
+                    }
+                   )
+                } else {
+                    var id = $(this).find("input").val();
+                    window.location.href = "../ReceiptHome/ReceiptDetails?id=" + id;
+                }
+            })
+
+
+        }
+
+        window.onload = function () {
+            GetReceiptList();
+        }
+        //获取发票列表信息方法
+        function GetReceiptList() {
+            mui.ajax(
+                //请求服务URL
+                '@Url.Content("../ReceiptHome/GetReceiptList")',
+                {
+                    //data: null,    //请求参数
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //1秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            mui.toast(data.Message);
+                            console.log(data);
+                            return;
+                        }
+                        //输出发票信息
+                        //console.log(data);
+                        if (data.length > 0) {
+                            var MsgList = "";
+                            for (var item in data) {
+                                var id = data[item].id;
+                                var CompanyName = data[item].CompanyName != null ? data[item].CompanyName : "";
+                                var CreateTime = data[item].CreateTime != null ? data[item].CreateTime : "";
+                                var Creator = data[item].Creator != null ? data[item].Creator : "";
+                                MsgList += "<li class=\"disflex\">";
+                                MsgList += "<div><input type='hidden' value='" + id + "' /><p>" + CompanyName + "</p><p><span>";
+                                MsgList += "创建部门 - </span><span>财务部</span></p></div>";
+
+                                MsgList += "<div><img src=\"@Url.Content("~/Content/Receipt/img/arrow.png")\"  /></div>";
+                                if (IsSupperAdmin == "True") {
+                                    MsgList += "<div class=\"delet\"> <img src=\"@Url.Content("~/Content/Receipt/img/trash.png")\"  /></div>";
+                                }
+
+                                MsgList += "</li>";
+                            }
+                            document.getElementById("ReceiptList").innerHTML = MsgList;
+                            addOption();
+                        } else {
+                            console.log(111)
+                            $(".noContent").fadeIn(0)
+                        }
+                        $(".mylayer").fadeOut(100)
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+
+        //根据id删除发票信息方法
+        function DelReceipt(id, That) {
+            mui.ajax(
+                //请求服务URL
+                "../ReceiptHome/DelReceipt",
+                {
+                    data: { id: id },
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //10秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            mui.toast(data.Message);
+                            console.log(data);
+                            return;
+                        }
+                        That.animate({ opacity: '1' })
+                        That.remove();
+
+                        if (!$("#ReceiptList li").length){
+                            $(".noContent").fadeIn(0)
+                        }
+
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+
+
+        function rcsOptimizeReady() {
+            if (window.WebContainer != null) {
+                if (window.WebContainer.rcsShowRightMoreButton == null) { alert('rcsGetCurrentLocation is null'); }
+                else {
+
+                    try {
+
+
+                    }
+                    catch (error) {
+                        alert(error);
+                    }
+                }
+            }
+            else {
+                try {
+                    navigator.WebContainer.rcsShowRightMoreButton("[]")
+
+                }
+                catch (error) {
+                    alert(error);
+                }
+
+            }
+
+        }
+
+    </script>
+</body>
+</html>

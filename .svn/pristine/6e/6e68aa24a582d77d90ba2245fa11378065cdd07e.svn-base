@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "外出申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        外出原因：
+    </h2>
+    <p id="gououtyuanyin" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        外出地点：
+    </h2>
+    <p id="gououtdidian" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        开始时间：
+    </h2>
+    <p id="startTime" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        结束时间：
+    </h2>
+    <p id="endTime" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        外出事由：
+    </h2>
+    <p id="gooutshiyou" class="mydocument_infor_title_text"></p>
+</li>
+ <script type="text/javascript">
+     var Project = "HD2012"    //project
+     var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#gououtyuanyin").text(processDatajson.processData.reason);  //外出原因
+        $("#gooutshiyou").text(decodeURIComponent(processDatajson.processData.description));  //外出事由
+        $("#startTime").text(processDatajson.processData.startTime);  //开始时间
+        $("#endTime").text(processDatajson.processData.endTime);  //结束时间
+        $("#gououtdidian").text(decodeURIComponent(processDatajson.processData.place));  //外出地点
+    };
+</script>                             
+                               

@@ -1,0 +1,243 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth*20/375+'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/swiper-3.3.1.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/main.css" />
+    <style type="text/css">
+        .swiper-container, .w {
+            height: calc(100vh - 140px);
+        }
+    </style>
+</head>
+<body class="padd_40">
+    <div class="a">
+        <input id="Search" type="search" class="isearch" placeholder="请输入关键字" />
+        <img src="../Content/img/sear.png" />
+    </div>
+    <div class="tab tab1">
+        <a class="active" href="javascript:;">已处理电子流</a>
+        <a href="javascript:;">已处理公文</a>
+    </div>
+    <div class="swiper-container">
+        <div class="refreshtip">下拉可以刷新</div>
+        <div class="swiper-wrapper w">
+            <div class="swiper-slide d">
+                <div class="init-loading list-group-item text-center" style="display: none;">下拉可以刷新</div>
+                <div class="swiper-container2">
+                    <div class="swiper-wrapper">
+                        <div id="DbInfo" class="swiper-slide list-group processed1">
+                            @*<div class="list-group-item">
+                                    <div>
+                                        <p class="tit">用章及资质申请-杜旭</p>
+                                        <p class="cont">事项 : 关于2017-2018卓望公司设备维修保养服务的通知</p>
+                                        <p class="mydate">提交日期 : 2017-09-09 09:23</p>
+                                    </div>
+                                    <p class="arrow">
+                                        <img src="../Content/img/arrow.png" />
+                                    </p>
+                                </div>*@
+
+                        </div>
+                        <div id="DocumentInfo" class="swiper-slide list-group processed2">
+                            @*<div class="list-group-item">
+                                    <div>
+                                        <p class="tit bclolor">公文签报-杜旭</p>
+                                        <p class="cont">事项 : 关于2017-2018卓望公司设备维修保养服务的通知</p>
+                                        <p class="mydate">提交日期 : 2017-09-09 09:23</p>
+                                    </div>
+                                    <p class="arrow">
+                                        <img src="../Content/img/arrow.png" />
+                                    </p>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loadtip">上拉加载更多</div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div id="QuickLook" class="sfind">
+        <p>点击下方流程标题，可进行快捷筛选</p>
+        <p class="gcolor">加班申请，2条</p>
+        <p class="gcolor">合同预审，3条</p>
+        <p class="gcolor">发票申请，1条</p>
+        <p class="gcolor">基础费用分摊申请，1条</p>
+        <p class="gcolor">财务申请，3条</p>
+    </div>
+    <script src="@Url.Content("~/Content/js/require.js")" defer async="true" data-main="@Url.Content("~/Content/js/processed")"></script>
+    <script type="text/javascript">
+        function ProcessDetails(id, type, Status, option, IsTips) {
+            if (type == "7281")//报销
+            {
+                window.location.href = '../Home/Reimbursement?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "332373")//印章
+            {
+                window.location.href = '../Home/seal?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7559")    //请假
+            {
+                window.location.href = '../Home/dayOff?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "181382")   //考勤申请
+            {
+                window.location.href = '../Home/Checkwork?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "183443")   //外出申请
+            {
+                window.location.href = '../Home/Goout?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7575") {    //名片申请
+                window.location.href = '../Home/BusinessCard?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "183445")   //加班申请
+            {
+                window.location.href = '../Home/overtime?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7573")   //出差申请
+            {
+                window.location.href = '../Home/AbusinessTravel?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "374334")   //会议申请
+            {
+                window.location.href = '../Home/Meeting?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "184002")   //工卡申请
+            {
+                window.location.href = '../Home/JobCard?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "22283")   //培训申请
+            {
+                window.location.href = '../Home/Train?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "38926")   //发票申请
+            {
+                window.location.href = '../Home/invoice?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "164584")   //工会活动申请
+            {
+                window.location.href = '../Home/GHHDSQ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "35876")   //机票变更
+            {
+                window.location.href = '../Home/JPBG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "364244")   //弹性考勤
+            {
+                window.location.href = '../Home/TXKQ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "343373")   //外包变更
+            {
+                window.location.href = '../Home/WBBG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "239336")   //外包到场
+            {
+                window.location.href = '../Home/WBDC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "243670")   ////外包离场
+            {
+                window.location.href = '../Home/WBLC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "163755")   //合同评审
+            {
+                window.location.href = '../Home/ContractReview?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "266961")   //采购请购
+            {
+                window.location.href = '../Home/Purchase?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181943")   //薪酬
+            {
+                window.location.href = '../Home/Remuneration?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "270494")   //方案决策
+            {
+                window.location.href = '../Home/FAJZ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "270497")   //结果确认
+            {
+                window.location.href = '../Home/JGQR?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "9597")   //员工变动
+            {
+                window.location.href = '../Home/EmployeeTurnOver?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "10788")   //员工离职
+            {
+                window.location.href = '../Home/EmployeeLeave?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "10767")   //员工入职
+            {
+                window.location.href = '../Home/EmployeeEntry?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "41556")   //员工转正
+            {
+                window.location.href = '../Home/EmployeeRegular?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181603")   //招聘需求申请
+            {
+                window.location.href = '../Home/RecruitmentRequirements?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "411557")   //卓学平台资源申请
+            {
+                window.location.href = '../Home/ZhuoXuePingTaiResource?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181846")   //内容发布
+            {
+                window.location.href = '../Home/NRFB?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "19788")   //公司用车
+            {
+                window.location.href = '../Home/GSYC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "326448")   //通知发布
+            {
+                window.location.href = '../Home/TZFB?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "11058")   //因公出国
+            {
+                window.location.href = '../Home/YGCG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "205944")   //领导信息评审
+            {
+                window.location.href = '../Home/LeadInformationReview?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "37931")   //租车申请
+            {
+                window.location.href = '../Home/RentCar?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "62487")   //虚拟结算
+            {
+                window.location.href = '../Home/XNJS?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "27195")   //劳动合同
+            {
+                window.location.href = '../Home/LDHT?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "23966")   //采购预审
+            {
+                window.location.href = '../Home/CGYS?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "7542")   //办公用品
+            {
+                window.location.href = '../Home/BGYP?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "129472")   //网络资源
+            {
+                window.location.href = '../Home/WLZY?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661089")   //报备收入
+            {
+                window.location.href = '../Home/BBSR?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661091")   //报备支出
+            {
+                window.location.href = '../Home/BBZC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661086")   //报备非收支
+            {
+                window.location.href = '../Home/BBFSZ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            //公文类型
+            if (IsTips != null && IsTips == "0") {
+                window.location.href = '../Home/DocumentDetails?option=' + option + '&billNo=' + id + '&Status=' + Status;
+            } else if (IsTips != null && IsTips == "1") {
+                window.location.href = '../Home/DocumentToRead?option=' + option + '&billNo=' + id + '&Status=' + Status;
+            }
+        }
+    </script>
+</body>
+</html>

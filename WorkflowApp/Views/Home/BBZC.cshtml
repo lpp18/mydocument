@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "报备支出";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labf_LXFS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        签约主体：
+    </h2>
+    <p id="labf_QYZT" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        对方名称：
+    </h2>
+    <p id="labf_DFMC" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_LXFS").text(processDatajson.processData.f_LXFS);  //联系方式
+        $("#labf_QYZT").text(processDatajson.processData.f_QYZT);  //签约主体
+        $("#labf_DFMC").text(processDatajson.processData.f_DFMC);  //对方名称
+    };
+</script>
+

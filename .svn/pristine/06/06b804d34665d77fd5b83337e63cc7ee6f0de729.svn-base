@@ -1,0 +1,158 @@
+{
+  "taskID": "80",
+  "phone": "13923780864",
+  "processId": "501497",
+  "status": "公司副总经理审批(张晓明)",
+  "billDate": "2017-07-28 19:06:33",
+  "isTest": "0",
+  "billEmpName": "李京",
+  "approveEmpName": "",
+  "approveEmpId": "likuo",
+  "id": "",
+  "modelId": "440871",
+  "billTitle": "控股公司发文测试单",
+  "billNo": "GWQB20170728501497",
+  "billDept": "卓望公司/卓望信息/信息系统解决方案部/IT运维部",
+  "processData": {
+    "docType": "规范类公文： （1）规定、（2）办法、（3）细则",
+    "secClass": "普通商密",
+    "phone": "",
+    "subject": "",
+    "permission": "仅限相关部门",
+    "toDept": "综合部",
+    "copyToDept": "",
+    "flowSheet": "%e6%98%8e%e7%a5%96%e5%8c%80--%3e%e9%98%8e%e6%b0%b4%e9%be%99--%3e%e9%a9%ac%e8%89%af",
+    "PublishPerm": "mingzy,yanshuilong,maliang,zhangxiaoming,lijing_d,change",
+    "textContentHtml": "http://eipwf.aspirecn.com/CwFile/440871/0/20170728190249660/HTML/1.htm",
+    "signDept": [ ],
+    "informOf": [ ],
+    "dealModeList": [
+      {
+        "dealName": "送总经理审批",
+        "dealCode": "1",
+        "dealEmplList": [
+          {
+            "loginName": "wanghongyu",
+            "name": "王红宇"
+          }
+        ]
+      },
+      {
+        "dealName": "请其他公司领导阅示",
+        "dealCode": "",
+        "dealEmplList": [
+          {
+            "loginName": "liuhanying",
+            "name": "刘晗英"
+          },
+          {
+            "loginName": "zhangxiaoming",
+            "name": "张晓明"
+          },
+          {
+            "loginName": "tuzhisen",
+            "name": "涂志森"
+          },
+          {
+            "loginName": "lijianghua",
+            "name": "李江华"
+          }
+        ]
+      },
+       {
+        "dealName": "征求他人意见",
+        "dealCode": "1",
+        "dealEmplList": [
+          {
+            "loginName": "huangkailong",
+            "name": "黄凯龙"
+          }
+        ]
+      }
+    ],
+    "returnModeList": [
+      {
+        "returnName": "退回至起点",
+        "returnCode": "2",
+        "returnEmplList": [ ]
+      },
+      {
+        "returnName": "退回其他已审批人",
+        "returnCode": "8",
+        "returnEmplList": [
+          {
+            "loginName": "mingzy",
+            "name": "明祖匀"
+          },
+          {
+            "loginName": "yanshuilong",
+            "name": "阎水龙"
+          },
+          {
+            "loginName": "maliang",
+            "name": "马良"
+          },
+          {
+            "loginName": "zhangxiaoming",
+            "name": "张晓明"
+          }
+        ]
+      }
+    ]
+  },
+  "approveEmpId_Real": "",
+  "serverId": "7",
+  "billEmpId": "lijing_d",
+  "approveLog": [
+    {
+      "auditorName": "李京",
+      "auditTime": "2017-07-28T19:06:33",
+      "remark": "提交申请。"
+    },
+    {
+      "auditorName": "系统",
+      "auditTime": "2017-07-28T19:06:36",
+      "remark": "抄送给常娥、李京。"
+    },
+    {
+      "auditorName": "明祖匀",
+      "auditTime": "2017-07-28T19:07:24",
+      "remark": "同意"
+    },
+    {
+      "auditorName": "阎水龙",
+      "auditTime": "2017-07-28T19:07:38",
+      "remark": "同意"
+    },
+    {
+      "auditorName": "马良",
+      "auditTime": "2017-07-28T19:08:22",
+      "remark": "同意"
+    },
+    {
+      "auditorName": "冯文佩",
+      "auditTime": "2017-08-01T10:56:19",
+      "remark": "已阅。"
+    },
+    {
+      "auditorName": "李阔",
+      "auditTime": "2017-08-04T17:24:17",
+      "remark": "已阅。"
+    }
+  ],
+  "attachedFile": [
+    {
+      "id": 157879,
+      "ServerID": 7,
+      "pid": 501497,
+      "tid": 0,
+      "fileName": "公文.doc",
+      "size": 0,
+      "fileUrl": "C:\\UploadFiles\\440871\\0\\20170728190248926\\公文.doc",
+      "userName": "System",
+      "timeCreated": "2017-07-28T19:02:48",
+      "Keyword": "-1",
+      "_MASK_FROM_V2": "AAAAAAKLmd4="
+    }
+  ]
+}

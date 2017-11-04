@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+您 Web 项目的发布/打包进程将使用此文件。您可以通过编辑此 MSBuild 文件
+来自定义该进程的行为。若要了解与此相关的详细信息，请访问 http://go.microsoft.com/fwlink/?LinkID=208121。
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>H:\RCSApplication_Publish\DakaApp\</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/ApplicationModel.dll">
+      <publishTime>09/29/2017 15:25:53</publishTime>
+    </File>
+    <File Include="bin/DaKaApp.dll">
+      <publishTime>09/29/2017 15:54:45</publishTime>
+    </File>
+    <File Include="bin/Dos.ORM.dll">
+      <publishTime>03/20/2017 13:05:12</publishTime>
+    </File>
+    <File Include="bin/Dos.ORM.MySql.dll">
+      <publishTime>03/20/2017 13:05:12</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>06/15/2015 02:06:24</publishTime>
+    </File>
+    <File Include="bin/Microsoft.Web.Infrastructure.dll">
+      <publishTime>04/23/2012 15:23:58</publishTime>
+    </File>
+    <File Include="bin/MySql.Data.dll">
+      <publishTime>03/20/2017 13:05:12</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>10/02/2013 12:10:10</publishTime>
+    </File>
+    <File Include="bin/NPOI.dll">
+      <publishTime>06/27/2014 15:58:23</publishTime>
+    </File>
+    <File Include="bin/NPOI.OOXML.dll">
+      <publishTime>06/27/2014 15:58:37</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXml4Net.dll">
+      <publishTime>06/27/2014 15:58:25</publishTime>
+    </File>
+    <File Include="bin/NPOI.OpenXmlFormats.dll">
+      <publishTime>06/27/2014 15:58:33</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>06/18/2015 20:19:44</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>06/18/2015 20:19:46</publishTime>
+    </File>
+    <File Include="bin/System.Web.Helpers.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Mvc.dll">
+      <publishTime>01/28/2015 04:02:18</publishTime>
+    </File>
+    <File Include="bin/System.Web.Razor.dll">
+      <publishTime>01/28/2015 04:02:32</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Deployment.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Webpages.Razor.dll">
+      <publishTime>01/28/2015 04:04:30</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Helpers.resources.dll">
+      <publishTime>01/28/2015 04:04:32</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Mvc.resources.dll">
+      <publishTime>01/28/2015 04:02:22</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Razor.resources.dll">
+      <publishTime>01/28/2015 04:02:34</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.Deployment.resources.dll">
+      <publishTime>01/28/2015 04:04:32</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.Razor.resources.dll">
+      <publishTime>01/28/2015 04:04:32</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Web.Webpages.resources.dll">
+      <publishTime>01/28/2015 04:04:32</publishTime>
+    </File>
+    <File Include="Content/css/mui.min.css">
+      <publishTime>09/27/2017 17:08:26</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/css/main.css">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/2.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/calender.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/close.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/dot1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/head.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/line.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/loacteh.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/loading.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/locate.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/locatec.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/stat.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/img/stath.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/js/layer.js">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/daka/js/main.js">
+      <publishTime>09/29/2017 11:45:20</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/css/main.css">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/css/main1.css">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/iconfont/iconfont.svg">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/2.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/calender.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/close.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/dot1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/head.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/line.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/loacteh.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/loading.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/locate.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/locatec.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/stat.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/img/stath.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/js/layer.js">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcs/js/main.js">
+      <publishTime>09/29/2017 13:53:44</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakarcsTwo/js/main.js">
+      <publishTime>09/27/2017 16:46:45</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/.project">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/css/css.rar">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/css/main.css">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/iconfont/iconfont.svg">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/2.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/calender.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/close.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/dot1.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/head.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/line.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/loacteh.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/loading.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/locate.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/locatec.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/stat.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/stath.png">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/img/Thumbs.db">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/js/jquery-1.11.3.min.js">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/js/layer.js">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/DaKa/dakaTest/js/main.js">
+      <publishTime>09/27/2017 16:40:36</publishTime>
+    </File>
+    <File Include="Content/js/ajaxfileupload.js">
+      <publishTime>09/27/2017 17:06:07</publishTime>
+    </File>
+    <File Include="Content/js/jquery.min.js">
+      <publishTime>09/27/2017 16:33:47</publishTime>
+    </File>
+    <File Include="Content/js/mui.min.js">
+      <publishTime>09/27/2017 17:06:07</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>09/27/2017 14:31:57</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>09/27/2017 14:31:58</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/DaKaRCS.cshtml">
+      <publishTime>09/29/2017 13:50:42</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/DaKaRCSTwo.cshtml">
+      <publishTime>09/29/2017 13:55:42</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/DaKaRuleOperation.cshtml">
+      <publishTime>09/27/2017 16:41:14</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/DaKaTest.cshtml">
+      <publishTime>09/27/2017 16:43:03</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/Index.cshtml">
+      <publishTime>09/29/2017 11:38:45</publishTime>
+    </File>
+    <File Include="Views/DaKaHome/RCSLogin.cshtml">
+      <publishTime>09/29/2017 15:23:45</publishTime>
+    </File>
+    <File Include="Views/web.config">
+      <publishTime>09/28/2017 16:42:17</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>09/28/2017 16:42:39</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

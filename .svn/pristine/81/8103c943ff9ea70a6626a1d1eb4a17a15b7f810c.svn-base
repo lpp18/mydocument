@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "采购预审";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labf_contact" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        所属公司：
+    </h2>
+    <p id="labf_company" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会签：
+    </h2>
+    <p id="labf_HQLISTName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        采购分类：
+    </h2>
+    <p id="labf_type" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        需求描述：
+    </h2>
+    <p id="labf_description" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_contact").text(processDatajson.processData.f_contact);  //联系方式
+        $("#labf_company").text(processDatajson.processData.f_company);  //所属公司
+        $("#labf_HQLISTName").text(processDatajson.processData.f_HQLISTName);  //会签
+        $("#labf_type").text(processDatajson.processData.f_type);  //采购分类
+        $("#labf_description").text(processDatajson.processData.f_description);  //需求描述
+    };
+</script>
+

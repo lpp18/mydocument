@@ -1,0 +1,78 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script type="text/javascript">
+        document.documentElement.style.fontSize=document.documentElement.clientWidth*20/375+'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/swiper-3.3.1.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/main.css" />
+    <style type="text/css">
+        .swiper-container, .w {
+            height: calc(100vh - 140px);
+        }
+    </style>
+</head>
+<body class="padd_40">
+    <div class="a">
+        <input type="search" class="isearch" placeholder="请输入关键字" />
+        <img src="../Content/img/sear.png" />
+    </div>
+    <div class="tab tab1">
+        <a class="active" href="javascript:;">已处理电子流</a>
+        <a href="javascript:;">已处理公文</a>
+    </div>
+    <div class="swiper-container">
+        <div class="refreshtip">下拉可以刷新</div>
+        <div class="swiper-wrapper w">
+            <div class="swiper-slide d">
+                <div class="init-loading list-group-item text-center" style="display: none;">下拉可以刷新</div>
+                <div class="swiper-container2">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide list-group processed1">
+                            <div class="list-group-item">
+                                <div>
+                                    <p class="tit">用章及资质申请-杜旭</p>
+                                    <p class="cont">事项 : 关于2017-2018卓望公司设备维修保养服务的通知</p>
+                                    <p class="mydate">提交日期 : 2017-09-09 09:23</p>
+                                </div>
+                                <p class="arrow">
+                                    <img src="../Content/img/arrow.png" />
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="swiper-slide list-group processed2">
+                            <div class="list-group-item">
+                                <div>
+                                    <p class="tit bclolor">公文签报-杜旭</p>
+                                    <p class="cont">事项 : 关于2017-2018卓望公司设备维修保养服务的通知</p>
+                                    <p class="mydate">提交日期 : 2017-09-09 09:23</p>
+                                </div>
+                                <p class="arrow">
+                                    <img src="../Content/img/arrow.png" />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loadtip">上拉加载更多</div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <div class="sfind">
+        <p>点击下方流程标题，可进行快捷筛选</p>
+        <p class="gcolor">加班申请，2条</p>
+        <p class="gcolor">合同预审，3条</p>
+        <p class="gcolor">发票申请，1条</p>
+        <p class="gcolor">基础费用分摊申请，1条</p>
+        <p class="gcolor">财务申请，3条</p>
+    </div>
+    <script src="@Url.Content("~/Content/js/require.js")" defer async="true" data-main="@Url.Content("~/Content/js/processed")"></script>
+</body>
+</html>

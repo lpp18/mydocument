@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "公司用车";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        用车地域：
+    </h2>
+    <p id="labf_location" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用车单位：
+    </h2>
+    <p id="labf_companyname" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        乘车人数：
+    </h2>
+    <p id="labf_passengers" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用车人：
+    </h2>
+    <p id="labf_user" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        联系人：
+    </h2>
+    <p id="labf_contact" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        联系人电话：
+    </h2>
+    <p id="labf_contactphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        建议车型：
+    </h2>
+    <p id="labf_expectedmodel" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预计用车日期：
+    </h2>
+    <p id="labf_expstartdate" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_location").text(processDatajson.processData.f_location);  //用车地域
+        $("#labf_companyname").text(processDatajson.processData.f_companyname);  //用车单位
+        $("#labf_passengers").text(processDatajson.processData.f_passengers);  //乘车人数
+        $("#labf_user").text(processDatajson.processData.f_user);  //用车人
+        $("#labf_contact").text(processDatajson.processData.f_contact);  //联系人
+        $("#labf_contactphone").text(processDatajson.processData.f_contactphone);  //联系电话
+        $("#labf_expectedmodel").text(processDatajson.processData.f_expectedmodel);  //建议车型
+        $("#labf_expstartdate").text(processDatajson.processData.f_expstartdate);  //建议用车日期
+    };
+</script>
+

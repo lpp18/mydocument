@@ -1,0 +1,329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{06253075-40F9-422E-B119-8688A3417596}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WorkflowApp</RootNamespace>
+    <AssemblyName>WorkflowApp</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dos.ORM, Version=1.10.6.7, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Dos.ORM.dll</HintPath>
+    </Reference>
+    <Reference Include="Dos.ORM.MySql, Version=1.1.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Dos.ORM.MySql.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=6.9.8.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Webpages.Razor">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Webpages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.Webpages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\essential_infor.css" />
+    <Content Include="Content\css\jquery.touchPDF.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\my_common.css" />
+    <Content Include="Content\css\my_document.css" />
+    <Content Include="Content\css\normalize.css" />
+    <Content Include="Content\css\swiper-3.3.1.min.css" />
+    <Content Include="Content\img\4.jpg" />
+    <Content Include="Content\img\aggree.png" />
+    <Content Include="Content\img\arrow.png" />
+    <Content Include="Content\img\Delete.png" />
+    <Content Include="Content\img\edit.png" />
+    <Content Include="Content\img\error.png" />
+    <Content Include="Content\img\fujian.png" />
+    <Content Include="Content\img\nodata.png" />
+    <Content Include="Content\img\nofujian.png" />
+    <Content Include="Content\img\norecord.png" />
+    <Content Include="Content\img\readed.png" />
+    <Content Include="Content\img\reject.png" />
+    <Content Include="Content\img\return.png" />
+    <Content Include="Content\img\right.png" />
+    <Content Include="Content\img\sear.png" />
+    <Content Include="Content\img\succ.png" />
+    <Content Include="Content\img\succ1.png" />
+    <Content Include="Content\img\sumbmit.png" />
+    <Content Include="Content\js\document.js" />
+    <Content Include="Content\js\hasSee.js" />
+    <Content Include="Content\js\libs\jquery.js" />
+    <Content Include="Content\js\libs\layer.js" />
+    <Content Include="Content\js\libs\my_document.js" />
+    <Content Include="Content\js\libs\need\layer.css" />
+    <Content Include="Content\js\libs\record.js" />
+    <Content Include="Content\js\libs\swiper.jquery.min.js" />
+    <Content Include="Content\js\main.js" />
+    <Content Include="Content\js\mainPDF.js" />
+    <Content Include="Content\js\need\layer.css" />
+    <Content Include="Content\js\processed.js" />
+    <Content Include="Content\js\require.js" />
+    <Content Include="Content\js\return.js" />
+    <Content Include="Global.asax" />
+    <Content Include="Properties\DataSources\System.Data.DataSet.datasource" />
+    <None Include="Service References\SvcWorkflowMWF\configuration91.svcinfo" />
+    <None Include="Service References\SvcWorkflowMWF\configuration.svcinfo" />
+    <None Include="Service References\SvcWorkflowMWF\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DAL.cs" />
+    <Compile Include="Models\DB.cs" />
+    <Compile Include="Models\wx_org_attachment.cs" />
+    <Compile Include="Models\wx_org_log.cs" />
+    <Compile Include="Models\wx_org_process.cs" />
+    <Compile Include="Models\wx_org_process_processed.cs" />
+    <Compile Include="Models\wx_org_process_ucml.cs" />
+    <Compile Include="Models\WX_ORG_SmsCodeTemporary.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\SvcWorkflowMWF\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config" />
+    <Content Include="packages.config" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\DocumentDetails.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Receipt.cshtml" />
+    <Content Include="Views\Home\AbusinessTravel.cshtml" />
+    <Content Include="Views\Home\AttachmentUpdateUrl.cshtml" />
+    <Content Include="Views\Home\BBFSZ.cshtml" />
+    <Content Include="Views\Home\BBSR.cshtml" />
+    <Content Include="Views\Home\BBZC.cshtml" />
+    <Content Include="Views\Home\BGYP.cshtml" />
+    <Content Include="Views\Home\bumphdetails.cshtml" />
+    <Content Include="Views\Home\BusinessCard.cshtml" />
+    <Content Include="Views\Home\CGYS.cshtml" />
+    <Content Include="Views\Home\Checkwork.cshtml" />
+    <Content Include="Views\Home\ContractReview.cshtml" />
+    <Content Include="Views\Home\dayOff.cshtml" />
+    <Content Include="Views\Home\EmployeeEntry.cshtml" />
+    <Content Include="Views\Home\EmployeeLeave.cshtml" />
+    <Content Include="Views\Home\EmployeeRegular.cshtml" />
+    <Content Include="Views\Home\EmployeeTurnOver.cshtml" />
+    <Content Include="Views\Home\FAJZ.cshtml" />
+    <Content Include="Views\Home\GHHDSQ.cshtml" />
+    <Content Include="Views\Home\Goout.cshtml" />
+    <Content Include="Views\Home\GSYC.cshtml" />
+    <Content Include="Views\Home\invoice.cshtml" />
+    <Content Include="Views\Home\JGQR.cshtml" />
+    <Content Include="Views\Home\JobCard.cshtml" />
+    <Content Include="Views\Home\JPBG.cshtml" />
+    <Content Include="Views\Home\LDHT.cshtml" />
+    <Content Include="Views\Home\LeadInformationReview.cshtml" />
+    <Content Include="Views\Home\Meeting.cshtml" />
+    <Content Include="Views\Home\NRFB.cshtml" />
+    <Content Include="Views\Home\overtime.cshtml" />
+    <Content Include="Views\Home\Purchase.cshtml" />
+    <Content Include="Views\Home\RecruitmentRequirements.cshtml" />
+    <Content Include="Views\Home\Reimbursement.cshtml" />
+    <Content Include="Views\Home\Remuneration.cshtml" />
+    <Content Include="Views\Home\RentCar.cshtml" />
+    <Content Include="Views\Home\seal.cshtml" />
+    <Content Include="Views\Home\SendMessage.cshtml" />
+    <Content Include="Views\Home\Train.cshtml" />
+    <Content Include="Views\Home\TXKQ.cshtml" />
+    <Content Include="Views\Home\TZFB.cshtml" />
+    <Content Include="Views\Home\ViewPage1.cshtml" />
+    <Content Include="Views\Home\WBBG.cshtml" />
+    <Content Include="Views\Home\WBDC.cshtml" />
+    <Content Include="Views\Home\WBLC.cshtml" />
+    <Content Include="Views\Home\WLZY.cshtml" />
+    <Content Include="Views\Home\XNJS.cshtml" />
+    <Content Include="Views\Home\YGCG.cshtml" />
+    <Content Include="Views\Home\ZhuoXuePingTaiResource.cshtml" />
+    <Content Include="Views\Home\DocumentToRead.cshtml" />
+    <Content Include="tsconfig.json" />
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF.wsdl" />
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SvcWorkflowMWF\SvcWorkflowMWF4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Service References\SvcWorkflowMWF\WorkflowApp.SvcWorkflowMWF.Return_Model.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\DocumentReturn.cshtml" />
+    <Content Include="Views\Home\DocumentProcessed.cshtml" />
+    <Content Include="Views\Home\DocumentList.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationModel\ApplicationModel.csproj">
+      <Project>{2dbde7c8-f042-4015-bb8f-71e793e3e2a3}</Project>
+      <Name>ApplicationModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SvcWorkflowMWF\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>22552</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:22552/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

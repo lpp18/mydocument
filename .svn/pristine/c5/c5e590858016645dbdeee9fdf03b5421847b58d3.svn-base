@@ -1,0 +1,85 @@
+/**
+ * Created by wuzhenjie on 2017/9/26 0026.
+ */
+
+var myDocument = {
+    isfade:true,
+    init: function(){
+        myDocument.mydocument_infor.listener();
+    },
+    mydocument_infor: {
+        listener: function(){
+            $(document).on('touchend','.mydocument_infor_btn',function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                $(this).hide(200);
+                $(".tab-content-1").animate({  
+                    scrollTop: $("#footer_do").offset().top  
+                }, 400); 
+            });
+            $(document).on('click','.report_up',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+            $(document).on('click','.ask_advice',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+            $(document).on('click','.transfer_others',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+       
+            //当页面高度达到一定高度时出现底部处理按钮
+            
+             if ($(".mydocument_infor_footer").length) {
+                 if ($("body").height() - $(".mydocument_infor_deal")[0].offsetTop < 50) {
+                     console.log(50)
+                                 var isscroll = true;
+                            $(".tab-content-1").scroll(function(){
+                                if (isscroll) {
+                                   // console.log(2222)
+                                    $(".mydocument_infor_btn").fadeIn(100)
+                                }
+                                isscroll = false;
+                            })
+
+                            $(".tab-content-1").scroll(function(){
+               
+            	
+                //		    	setInterval(function(){
+                //		    		console.log(1)
+                //		    		$(".mydocument_infor_btn").css("bottom",0)
+                //		    	},30)
+                                //console.log($(".mydocument_infor").height() - $(".swiper-wrapper").height())
+		    	                if($(this).scrollTop()==0){
+		    		
+		    	                    $(".mydocument_infor_btn").fadeIn(100)
+                    
+		    	                } else if ($(this).scrollTop() >= $(".mydocument_infor").height() - $(".swiper-wrapper").height() - 50) {
+		    	                    //console.log(111)
+		    	                    //console.log($(this).scrollTop(), $(".swiper-wrapper").height())
+		    		                $(".mydocument_infor_btn").fadeOut(100)
+		    	                }
+		    	
+		                    })
+                 } else {
+              
+                    myDocument.isfade = false;
+                    
+                 }
+            }
+           
+           
+        },
+        select:function(_this){//选中事件
+            if($(_this).attr('checked')){
+                $(_this).removeAttr('checked');
+                console.log("移除")
+            }else {
+                $(_this).attr('checked',true);
+                console.log("选中")
+            }
+        }
+    }
+}

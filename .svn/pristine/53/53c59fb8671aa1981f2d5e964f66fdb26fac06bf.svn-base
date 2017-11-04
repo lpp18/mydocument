@@ -1,0 +1,402 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>内容发布</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="~/Content/NewUi/Content/css/mui.min.css">
+    <!--App自定义的css-->
+    <link rel="stylesheet" type="text/css" href="~/Content/NewUi/Content/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/NewUi/Content/css/common.css" />
+    <link href="~/Content/NewUi/Content/css/Loding.css" rel="stylesheet" />
+    <style>
+    </style>
+</head>
+<body>
+    <div class="mui-content">
+        <div id="slider" class="mui-slider">
+            <div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+                <a class="mui-control-item" href="#item1mobile">基本信息</a>
+                <a class="mui-control-item" href="#item2mobile">附件</a>
+                <a class="mui-control-item" href="#item3mobile">审批日志</a>
+            </div>
+            <div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+            <div class="mui-slider-group">
+                <!--基本信息内容 -->
+                <div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
+                    <div id="scroll1" class="mui-scroll-wrapper">
+                        <div class="mui-scroll">
+                            <ul class="mui-table-view">
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">申请人</div>
+                                    <div class="mui-col-xs-9" id="labproposerName"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">编号</div>
+                                    <div class="mui-col-xs-9" id="labbillNo"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">申请部门</div>
+                                    <div class="mui-col-xs-9 mui-text-justify" id="labbillDept"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">主题</div>
+                                    <div class="mui-col-xs-9" id="theme"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">计划内容发布时间</div>
+                                    <div class="mui-col-xs-9" id="labf_SXSJ"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">所属事业部</div>
+                                    <div class="mui-col-xs-9" id="labf_SSSYB"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">计划内容发布版块</div>
+                                    <div class="mui-col-xs-9" id="labf_FBBK"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">发布内容题目</div>
+                                    <div class="mui-col-xs-9" id="labf_NRTM"></div>
+                                </li>
+                                <li class="mui-table-view-cell mui-row">
+                                    <div class="mui-col-xs-3">发布内容总体描述</div>
+                                    <div class="mui-col-xs-9" id="labf_NRMS"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <footer class="" id="footer">
+                        <div class="mui-row">
+                            <div class="idea">审批意见</div>
+                            <div class="Content">
+                                <textarea class="txtarea" id="RejectOpinion" placeholder="请输入内容"></textarea>
+                            </div>
+                        </div>
+                        <div class="bot">
+                            <p class="point active agree">同意</p>
+                            <p class="point reject">驳回</p>
+                        </div>
+                    </footer>
+                </div>
+                <!--附件内容 -->
+                <div id="item2mobile" class="mui-slider-item mui-control-content">
+
+                </div>
+                <!--审批日志内容 -->
+                <div id="item3mobile" class="mui-slider-item mui-control-content">
+
+                </div>
+            </div>
+        </div>
+</body>
+</html>
+<script src="~/Content/NewUi/Content/js/jquery.min.js"></script>
+<script src="~/Content/NewUi/Content/js/mui.min.js"></script>
+<script type="text/javascript" src="~/Content/NewUi/Content/js/fontSize.js"></script>
+<script>
+    mui.init({
+        swipeBack: false
+    });
+    var gwqb = [];
+    var billNo = "";
+    var InterValObj; //timer变量，控制时间
+    var curCount = 1;//当前剩余秒数
+    (function ($) {
+        $('.mui-scroll-wrapper').scroll({
+            indicators: true //是否显示滚动条
+        });
+        selectprocess();
+    })(mui);
+
+    //获取路径参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    };
+
+    //查询工作流
+    function selectprocess() {
+
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+            },
+            success: function (mes) {
+
+                //console.log(mes);
+                gwqb = mes;
+                for (var i = 0; i < mes.length; i++) {
+                    billNo = mes[i].BillNo;
+                    console.log(mes[i]);
+
+                    mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                    var processDatajson = $.parseJSON(mes[i].ProcessData);
+
+                    console.log(processDatajson.processData);
+                    $("#labbillNo").text(mes[i].BillNo);  //申请编号
+                    $("#labproposerName").text(mes[i].BillEmpName);   // 申请人
+                    $("#labbillDept").text(processDatajson.billDept);  //所属部门
+                    $("#theme").text(processDatajson.billTitle);  //主题
+
+                    $("#labf_SXSJ").text(processDatajson.processData.f_SXSJ);  //计划内容发布时间
+                    $("#labf_SSSYB").text(processDatajson.processData.f_SSSYB);  //所属事业部
+                    $("#labf_FBBK").text(processDatajson.processData.f_FBBK);  //计划内容发布版块
+                    $("#labf_NRTM").text(processDatajson.processData.f_NRTM);  //发布内容题目
+                    $("#labf_NRMS").text(processDatajson.processData.f_NRMS);  //发布内容总体描述
+
+                    //开始填充审批日志
+                    var strlog = "<div class=\"tableDiv\"><table class=\"tableStyle\"><thead><tr><th>审批人</th><th>审批时间</th><th>审批意见</th></tr></thead><tbody>";
+                    for (var j = 0; j < processDatajson.approveLog.length; j++) {
+                        strlog += "<tr>";
+                        strlog += "<td>" + processDatajson.approveLog[j].auditorName + "</td>";
+                        strlog += "<td >" + processDatajson.approveLog[j].auditTime + "</td>";
+                        strlog += "<td> " + processDatajson.approveLog[j].remark + "</td></tr>";
+                    };
+                    strlog += "</tbody></table></div>";
+                    $("#item3mobile").append(strlog);
+                    selectatt(mes[i].ServerID, mes[i].ModelId, mes[i].ProcessID);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    }
+
+    function selectatt(sid, mid, pid) {
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/selectAttachment',
+            cache: false,
+            data: 'sid=' + sid + '&mid=' + mid + '&pid=' + pid,
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+            },
+            success: function (mes) {
+                //开始附件
+                $("#item2mobile").text("");
+                var strlog = "<div class=\"tableDiv\"><table class=\"tableStyle\"><thead><tr><th>附件名称</th><th>添加人</th></tr></thead><tbody>";
+                for (var j = 0; j < mes.length; j++) {
+                    strlog += "<tr>";
+                    if (mes[j].FileUrl == "") {
+                        strlog += "<td style='background-color:#ddd;'>" + mes[j].FileName + "</td>";
+                        strlog += "<td style='background-color:#ddd;'>" + mes[j].UserLoginName + "</td></tr>";
+                    }
+                    else {
+                        strlog += "<td><a href='" + mes[j].FileUrl + "'>" + mes[j].FileName + "</a></td>";
+                        strlog += "<td>" + mes[j].UserLoginName + "</td></tr>";
+                    }
+                };
+                strlog += "</tbody></table></div>";
+                $("#item2mobile").append(strlog);
+            },
+            error: function () {
+            }
+        });
+    }
+
+    $(".agree").on("click", (function () {
+        Agree();
+    }));
+    $(".reject").on("click", (function () {
+        Reject();
+    }));
+
+
+    //驳回操作
+    function Reject() {
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD2012"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //驳回意见
+        var Processing_Code = 2; //驳回代码
+        var ServerID = 7;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        if (RejectOpinion == "" || RejectOpinion == "null") {
+            mui.alert("请输入驳回意见", " ", "关闭", function () { }, "div");
+        } else {
+            var btnArray = ['取消', '确定'];
+            mui.confirm('确认驳回处理吗？', '  ', btnArray, function (e) {
+                if (e.index == 1) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Workflow/Home/SvcWorkflowMWFs',
+                        cache: false,
+                        data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=0',
+                        dataType: "text", //返回数据形式为json
+                        beforeSend: function () {
+
+                        },
+                        success: function (mes) {
+                            if (mes == "OK") {
+                                mui.alert("处理成功！1秒返回首页", " ", " ", function () { }, "div");
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            } else if (mes == "NO") {
+                                mui.alert("处理成功失败！1秒返回首页", " ", " ", function () { }, "div");
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            }
+                            else {
+                                mui.alert("处理失败！1秒返回首页", " ", " ", function () { }, "div");
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            }
+                        }
+                    });
+                }
+            })
+        }
+    }
+
+
+    //同意操作
+    function Agree() {
+        //同意意见
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD2012"    //project
+        var ServerID = 7;
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //驳回意见
+        var Processing_Code = 1; //驳回代码
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        var btnArray = ['取消', '确定'];
+        mui.confirm('确认处理吗？', '  ', btnArray, function (e) {
+            if (e.index == 1) {
+                $.ajax({
+                    type: 'post',
+                    url: '/Workflow/Home/SvcWorkflowMWFs',
+                    cache: false,
+                    data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=1',
+                    dataType: "text", //返回数据形式为json
+                    beforeSend: function () {
+                    },
+                    success: function (mes) {
+                        if (mes == "OK") {
+                            mui.alert("处理成功！1秒返回首页", " ", " ", function () { }, "div");
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        } else if (mes == "NO") {
+                            mui.alert("处理失败！1秒返回首页", " ", " ", function () { }, "div");
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        }
+                        else {
+                            mui.alert("处理失败！1秒返回首页", " ", " ", function () { }, "div");
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        }
+                    }
+                });
+            }
+        })
+    }
+
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            window.location.href = '/Workflow/Home/Index';
+        }
+        else {
+            curCount--;
+        }
+    }
+
+
+
+    $.toJSON = typeof JSON === 'object' && JSON.stringify ? JSON.stringify : function (o) {
+        if (o === null) {
+            return 'null';
+        }
+        var pairs, k, name, val,
+            type = $.type(o);
+        if (type === 'undefined') {
+            return undefined;
+        }
+        if (type === 'number' || type === 'boolean') {
+            return String(o);
+        }
+        if (type === 'string') {
+            return $.quoteString(o);
+        }
+        if (typeof o.toJSON === 'function') {
+            return $.toJSON(o.toJSON());
+        }
+        if (type === 'date') {
+            var month = o.getUTCMonth() + 1,
+                day = o.getUTCDate(),
+                year = o.getUTCFullYear(),
+                hours = o.getUTCHours(),
+                minutes = o.getUTCMinutes(),
+                seconds = o.getUTCSeconds(),
+                milli = o.getUTCMilliseconds();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            if (milli < 100) {
+                milli = '0' + milli;
+            }
+            if (milli < 10) {
+                milli = '0' + milli;
+            }
+            return '"' + year + '-' + month + '-' + day + 'T' +
+                hours + ':' + minutes + ':' + seconds +
+                '.' + milli + 'Z"';
+        }
+        pairs = [];
+        if ($.isArray(o)) {
+            for (k = 0; k < o.length; k++) {
+                pairs.push($.toJSON(o[k]) || 'null');
+            }
+            return '[' + pairs.join(',') + ']';
+        }
+        if (typeof o === 'object') {
+            for (k in o) {
+                if (hasOwn.call(o, k)) {
+                    type = typeof k;
+                    if (type === 'number') {
+                        name = '"' + k + '"';
+                    } else if (type === 'string') {
+                        name = $.quoteString(k);
+                    } else {
+                        continue;
+                    }
+                    type = typeof o[k];
+                    if (type !== 'function' && type !== 'undefined') {
+                        val = $.toJSON(o[k]);
+                        pairs.push(name + ':' + val);
+                    }
+                }
+            }
+            return '{' + pairs.join(',') + '}';
+        }
+    };
+
+</script>
+

@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "合同评审";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        合同名称：
+    </h2>
+    <p id="f_ContractName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同编号：
+    </h2>
+    <p id="f_ContractNo" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同期限(起)：
+    </h2>
+    <p id="f_ContractPeriodStart" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同期限(终)：
+    </h2>
+    <p id="f_ContractPeriodEnd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        背景说明：
+    </h2>
+    <p id="f_BackgroundNote" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        是否报备：
+    </h2>
+    <p id="f_IsReport" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#f_ContractName").text(processDatajson.processData.f_ContractName);
+        $("#f_ContractPeriodStart").text(processDatajson.processData.f_ContractPeriodStart);
+        $("#f_ContractPeriodEnd").text(processDatajson.processData.f_ContractPeriodEnd);
+        $("#f_BackgroundNote").text(processDatajson.processData.f_BackgroundNote);
+        $("#f_IsReport").text(processDatajson.processData.f_IsReport);
+        $("#f_ContractNo").text(processDatajson.processData.f_ContractNo);
+    };
+</script>

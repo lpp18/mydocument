@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的待办</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script type="text/javascript">
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 375 + 'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/swiper-3.3.1.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/main.css" />
+    <style type="text/css">
+        .swiper-container, .w {
+            height: calc(100vh - 140px);
+        }
+    </style>
+</head>
+<body class="padd_40">
+    <div class="swiper-container">
+        <div class="refreshtip">下拉可以刷新</div>
+        <div class="swiper-wrapper w">
+            <div class="swiper-slide d">
+                <div class="init-loading list-group-item text-center" style="display: none;">下拉可以刷新</div>
+                <div class="swiper-container2">
+                    <div class="swiper-wrapper">
+                        <div id="DocumentInfo" class="swiper-slide list-group eflow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="loadtip">上拉加载更多</div>
+        <div class="swiper-scrollbar"></div>
+    </div>
+    <script src="~/Content/js/libs/jquery.js"></script>
+    <script src="~/Content/js/libs/swiper.jquery.min.js"></script>
+    <script src="~/Content/js/libs/layer.js"></script>
+
+    <script type="text/javascript">
+        var loadFlag = true;
+        var oi = 0;
+        var mySwiper = new Swiper('.swiper-container', {
+            direction: 'vertical',
+            scrollbar: '.swiper-scrollbar',
+            slidesPerView: 'auto',
+            mousewheelControl: true,
+            freeMode: true,
+            onTouchMove: function (swiper) {		//手动滑动中触发
+                var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+                var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+
+
+                if (mySwiper.translate < 50 && mySwiper.translate > 0) {
+                    $(".init-loading").html('下拉刷新...').show();
+                } else if (mySwiper.translate > 50) {
+                    $(".init-loading").html('释放刷新...').show();
+                }
+            },
+            onTouchEnd: function (swiper) {
+                var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+                var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+                // 上拉加载
+                if (mySwiper.translate <= _viewHeight - _contentHeight - 50 && mySwiper.translate < 0) {
+                    // console.log("已经到达底部！");
+                    if (loadFlag) {
+                        $(".loadtip").html('正在加载...');
+                    } else {
+                        $(".loadtip").html('没有更多啦！');
+                    }
+                    if (mySwiper2.activeIndex == 0) {
+                        countIndex1 += 10;
+                        DocumentProcess(countIndex1);
+                    } else if (mySwiper2.activeIndex == 1) {
+                    };
+
+                    $(".loadtip").html('上拉加载更多...');
+                    mySwiper.update(); // 重新计算高度;
+                }
+
+                // 下拉刷新
+                if (mySwiper.translate >= 50) {
+                    $(".init-loading").html('正在刷新...').show();
+                    $(".loadtip").html('上拉加载更多');
+                    loadFlag = true;
+                    DocumentProcess(countIndex1);
+                    setTimeout(function () {
+                        $(".refreshtip").show(0);
+                        $(".init-loading").html('刷新成功！');
+                        setTimeout(function () {
+                            $(".init-loading").html('').hide();
+                        }, 800);
+                        $(".loadtip").show(0);
+
+                        //刷新操作
+                        mySwiper.update(); // 重新计算高度;
+                    }, 1000);
+                } else if (mySwiper.translate >= 0 && mySwiper.translate < 50) {
+                    $(".init-loading").html('').hide();
+                }
+                return false;
+            }
+        });
+        var mySwiper2 = new Swiper('.swiper-container2', {
+            onTransitionEnd: function (swiper) {
+
+                $('.w').css('transform', 'translate3d(0px, 0px, 0px)')
+                $('.swiper-container2 .swiper-slide-active').css('height', 'auto').siblings('.swiper-slide').css('height', '0px');
+                mySwiper.update();
+
+                $('.tab a').eq(mySwiper2.activeIndex).addClass('active').siblings('a').removeClass('active');
+            }
+
+        });
+
+        var page = 1;
+        var countIndex1 = 20;  //每页加载数量
+        $(function () {
+            DocumentProcess(countIndex1);
+        });
+        var TotalCount = 0;
+        //加载公文流程
+        function DocumentProcess(count) {
+            $.ajax({
+                type: 'post',
+                url: '../Home/DocumentProcess',
+                cache: false,
+                dataType: "json",
+                data: {
+                    page: page,
+                    count: count
+                },
+                success: function (mes) {
+                    var HtmlStr = "";
+                    var count = 0;
+                    if (mes.length > 0) {
+                        //流程名称
+                        for (var i = 0; i < mes.length; i++) {
+                            try {
+                                //20171010
+                                //去掉字符串回车换行符
+                                mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                                var processDatajson = $.parseJSON(mes[i].ProcessData);
+                                var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                                var BillNO = mes[i].BillNo.toString();
+                                var Status = mes[i].Status ? "1" : "0";
+                                var IsTips = mes[i].IsTips ? "1" : "0";
+                                var ProcessName = "公文签报";  //流程名称
+                                var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                                var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                                var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                                //test();
+                                HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','" + IsTips + "')\" >  <div>";
+                                //HtmlStr += "<input type='hidden' value='' /><div>";
+                                HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                                HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                                HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                                HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+
+                            } catch (e) {
+                                //异常
+                                console.log(e);
+                            }
+                        }
+                    } else {
+                        HtmlStr += "<div class=\"list-group-item\"  >  <div>";
+                        HtmlStr += "<p class=\"tit\">数据为空！</p></div>";
+                    };
+                    document.getElementById("DocumentInfo").innerHTML = HtmlStr;
+                    mySwiper.update();
+                    //TotalCount = mes.length;
+                    //MsgAlert("测试使用,待办 流程" + TotalCount + "条", 2);
+                }
+            });
+        }
+        
+        function ProcessDetails(id, type, Status, IsTips) {
+            var option = 1;
+            if (type == "7281")//报销
+            {
+                window.location.href = '../Home/Reimbursement?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "332373")//印章
+            {
+                window.location.href = '../Home/seal?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7559")    //请假
+            {
+                window.location.href = '../Home/dayOff?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "181382")   //考勤申请
+            {
+                window.location.href = '../Home/Checkwork?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "183443")   //外出申请
+            {
+                window.location.href = '../Home/Goout?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7575") {    //名片申请
+                window.location.href = '../Home/BusinessCard?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "183445")   //加班申请
+            {
+                window.location.href = '../Home/overtime?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "7573")   //出差申请
+            {
+                window.location.href = '../Home/AbusinessTravel?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "374334")   //会议申请
+            {
+                window.location.href = '../Home/Meeting?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "184002")   //工卡申请
+            {
+                window.location.href = '../Home/JobCard?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "22283")   //培训申请
+            {
+                window.location.href = '../Home/Train?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "38926")   //发票申请
+            {
+                window.location.href = '../Home/invoice?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "164584")   //工会活动申请
+            {
+                window.location.href = '../Home/GHHDSQ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "35876")   //机票变更
+            {
+                window.location.href = '../Home/JPBG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "364244")   //弹性考勤
+            {
+                window.location.href = '../Home/TXKQ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "343373")   //外包变更
+            {
+                window.location.href = '../Home/WBBG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "239336")   //外包到场
+            {
+                window.location.href = '../Home/WBDC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            } else if (type == "243670")   ////外包离场
+            {
+                window.location.href = '../Home/WBLC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "163755")   //合同评审
+            {
+                window.location.href = '../Home/ContractReview?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "266961")   //采购请购
+            {
+                window.location.href = '../Home/Purchase?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181943")   //薪酬
+            {
+                window.location.href = '../Home/Remuneration?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "270494")   //方案决策
+            {
+                window.location.href = '../Home/FAJZ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "270497")   //结果确认
+            {
+                window.location.href = '../Home/JGQR?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "9597")   //员工变动
+            {
+                window.location.href = '../Home/EmployeeTurnOver?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "10788")   //员工离职
+            {
+                window.location.href = '../Home/EmployeeLeave?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "10767")   //员工入职
+            {
+                window.location.href = '../Home/EmployeeEntry?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "41556")   //员工转正
+            {
+                window.location.href = '../Home/EmployeeRegular?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181603")   //招聘需求申请
+            {
+                window.location.href = '../Home/RecruitmentRequirements?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "411557")   //卓学平台资源申请
+            {
+                window.location.href = '../Home/ZhuoXuePingTaiResource?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "181846")   //内容发布
+            {
+                window.location.href = '../Home/NRFB?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "19788")   //公司用车
+            {
+                window.location.href = '../Home/GSYC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "326448")   //通知发布
+            {
+                window.location.href = '../Home/TZFB?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "11058")   //因公出国
+            {
+                window.location.href = '../Home/YGCG?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "205944")   //领导信息评审
+            {
+                window.location.href = '../Home/LeadInformationReview?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "37931")   //租车申请
+            {
+                window.location.href = '../Home/RentCar?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "62487")   //虚拟结算
+            {
+                window.location.href = '../Home/XNJS?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "27195")   //劳动合同
+            {
+                window.location.href = '../Home/LDHT?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "23966")   //采购预审
+            {
+                window.location.href = '../Home/CGYS?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "7542")   //办公用品
+            {
+                window.location.href = '../Home/BGYP?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "129472")   //网络资源
+            {
+                window.location.href = '../Home/WLZY?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661089")   //报备收入
+            {
+                window.location.href = '../Home/BBSR?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661091")   //报备支出
+            {
+                window.location.href = '../Home/BBZC?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            else if (type == "661086")   //报备非收支
+            {
+                window.location.href = '../Home/BBFSZ?option='+option+'&billNo=' + id + '&Status=' + Status;
+            }
+            //公文类型
+            if (IsTips != null && IsTips == "0") {
+                window.location.href = '../Home/DocumentDetails?option=' + option + '&billNo=' + id + '&Status=' + Status;
+            } else if (IsTips != null && IsTips == "1") {
+                window.location.href = '../Home/DocumentToRead?option=' + option + '&billNo=' + id + '&Status=' + Status;
+            }
+        }
+        //消息提示
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        };
+    </script>
+</body>
+</html>

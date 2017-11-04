@@ -1,0 +1,750 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!--设置网页编码-->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <!--页面关键字-->
+    <meta http-equiv="keywords" content="" />
+    <!--640宽meta头-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!-- 删除默认的苹果工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 苹果手机顶部为黑色 -->
+    <meta name="apple-mobile-web-status-bar-style" content="block" />
+    <!-- 屏蔽浏览器自动识别数字为电话号码 -->
+    <meta name="fromat-detecition" content="telephone=no" />
+    <title>公文详情</title>
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 375 + 'px';
+    </script>
+    <script src="~/Content/js/pdf.js"></script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link href="../Content/css/swiper-3.3.1.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../Content/js/libs/need/layer.css" />
+    <link rel="stylesheet" href="../Content/css/main.css" />
+    <link rel="stylesheet" href="../Content/css/my_common.css">
+    <link rel="stylesheet" href="../Content/css/my_document.css">
+
+    <style type="text/css">
+        html, body {
+            height: 100%;
+            background: #e8e8e8;
+        }
+        /*-----------------------content-------------------------------*/
+        .wrapper {
+            margin: 0 auto;
+        }
+        /*列表切换*/
+        .maple-tab {
+            background-color: #fff;
+            width: 100%;
+        }
+
+            .maple-tab ul {
+                width: 100%;
+                overflow: hidden;
+            }
+
+                .maple-tab ul li {
+                    list-style-type: none;
+                    float: left;
+                    width: 25%;
+                    text-align: center;
+                    color: #333;
+                    font-size: 3rem;
+                    border-bottom: 2px solid #dedede;
+                    cursor: pointer;
+                }
+
+            /*tab活动状态样式*/
+            .maple-tab .active {
+                color: #2ec4c2;
+                border-bottom: 2px solid #2ec4c2;
+            }
+
+
+        .tab-content-1, .tab-content-2 {
+            width: 100%;
+            height: 17.875rem;
+            text-align: center;
+            font-size: 3.75rem;
+        }
+
+        .tab-content-1 {
+            color: #f76755;
+        }
+
+        .tab-content-2 {
+            color: mediumslateblue;
+        }
+
+        .nav_tab {
+            margin-top: .1875rem;
+            position: fixed;
+            top: 0;
+            background: #fff;
+            z-index: 1000;
+        }
+
+            .nav_tab li {
+                height: 2.194rem;
+                box-sizing: border-box;
+            }
+
+                .nav_tab li p {
+                    font-size: .75rem;
+                    line-height: 2.194rem;
+                }
+
+        .swiper-container {
+            box-sizing: border-box;
+            padding-top: 2.25rem;
+        }
+
+        .swiper-wrapper {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: 100%;
+            overflow: auto;
+        }
+
+        .mydocument_infor {
+            background: #fff;
+        }
+
+        .mydocument_infor_deal_type p {
+            border: none;
+        }
+
+        .rdiv {
+            width: 100%;
+            box-sizing: border-box;
+            padding-left: 0;
+            border-bottom: 1px solid #ddd !important;
+        }
+
+        .mydocument_infor_deal_type p {
+            width: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" style="height:100%">
+
+        <!--列表切换选项卡-->
+        <div class="maple-tab clearFix">
+            <ul class="nav_tab">
+                <li class="active"><p class="m-border-right">基本信息</p></li>
+                <li><p>公文正文</p></li>
+                <li><p>公文附件</p></li>
+                <li><p>批阅日志</p></li>
+            </ul>
+        </div>
+
+        <!--列表内容-->
+        <div class="swiper-container" style="height:100%">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide tab-content-1">
+                    <ul class="mydocument_infor">
+                        <li class="title">
+                            <h2 class="mydocument_infor_title">主题：</h2>
+                            <p id="labtitle" class="mydocument_infor_title_text">@*关于2017-2018年卓望公司设备保修服务内部实施的请示*@</p>
+                        </li>
+                        <li class="user">
+                            <h2 class="mydocument_infor_title">申请人：</h2>
+                            <p id="labproposerName" class="mydocument_infor_title_text">@*杜旭*@</p>
+                        </li>
+                        <li class="timer">
+                            <h2 class="mydocument_infor_title">签报日期：</h2>
+                            <p id="labapplyTime" class="mydocument_infor_title_text">@*2017-09-21 16:33:21*@</p>
+                        </li>
+                        <li class="mobile">
+                            <h2 class="mydocument_infor_title">联系电话：</h2>
+                            <p id="labFphone" class="mydocument_infor_title_text">@*15201420109*@</p>
+                        </li>
+                        <li class="document_type">
+                            <h2 class="mydocument_infor_title">公文种类：</h2>
+                            <p id="labdocType" class="mydocument_infor_title_text">@*签报公文：（10）请示、（11）报告、（12）建议方案*@</p>
+                        </li>
+                        <li class="overtime_type">
+                            <h2 class="mydocument_infor_title">
+                                申请部门：
+                            </h2>
+                            <p id="labbillDept" class="mydocument_infor_title_text">@*卓望公司/卓望信息/平台业务部*@</p>
+                        </li>
+                        <div id="ProcessMode" class="mydocument_infor_deal_type">
+
+                            @*<h3>处理方式：</h3>
+                                <div class="disflex rdiv">
+                                    <p>向上呈报</p>
+                                    <div class="checbox">
+                                        <input type="radio" value="1" id="checf1" name="1">
+                                        <label for="checf1"></label>
+                                    </div>
+                                </div>
+                                <p class="rdiv">
+                                    <span class="fl">选择人员</span>
+                                    <span class="fr sel">请选择（必选）<i></i></span>
+                                </p>
+                                <div class="disflex rdiv">
+                                    <p>征求他人意见</p>
+                                    <div class="checbox">
+                                        <input type="radio" value="1" id="checf2" name="1">
+                                        <label for="checf2"></label>
+                                    </div>
+                                </div>
+                                <div class="disflex rdiv">
+                                    <p>转办给他人</p>
+                                    <div class="checbox">
+                                        <input type="radio" value="1" id="checf3" name="1">
+                                        <label for="checf3"></label>
+                                    </div>
+                                </div>*@
+                        </div>
+                        <div id="AgreeOperate" class="mydocument_infor_deal">
+                            <h3>审批意见：</h3>
+                            <div class="deal-content">
+                                <textarea id="ApproveOpinion" placeholder="请输入内容"></textarea>
+                            </div>
+                            <div class="mydocument_infor_footer" id="footer_do">
+                                <p id="btnAgreee" class="agree">
+                                    <i class="agree_img"></i>
+                                    <span>提交</span>
+                                </p>
+                                <p id="btnDisAgree" class="disagree">
+                                    <i class="disagree_img disagree_img_back"></i>
+                                    <span>回退公文</span>
+                                </p>
+                                <div class="footer_line"></div>
+                            </div>
+                        </div>
+                    </ul>
+                </div>
+                <div id="DocumentBody" class="swiper-slide tab-content-2">
+                    <button id="prevpage">上一页</button>
+                    <button id="nextpage">下一页</button>
+                    <div id="demo">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+                <div id="AttachmentInfo" class="swiper-slide tab-content-2 appendix">
+                    @*<div class="list-group-item li">
+                            <div>
+                                <p><img src="../Content/img/fujian.png" /><span>卓望公司设备维保服务内部设施的.doc</span></p>
+                                <p><span>添加人 : 杜旭</span><span> 添加日期 : 2017-08-15</span></p>
+                            </div>
+                            <p><a href="lpp.docx" target="_blank" download class="mui-btn mui-btn-outlined font24">下载</a></p>
+                        </div>
+                    *@
+                </div>
+                <div id="ApproveLog" class="swiper-slide tab-content-2 readlog">
+                    @*<p class="ltit">公司领导批示</p>
+                        <div>
+                            <p>授权给刘春明同意</p>
+                            <p class="pname">张晓明(卓望公司)</p>
+                            <p class="pname">2015-09-08 &nbsp;17:40:30</p>
+                        </div>
+                        <div>
+                            <p>同意,请将打分结果与付款比例挂钩。</p>
+                            <p class="pname">马良(卓望公司)</p>
+                            <p class="pname">2015-09-08 &nbsp;17:40:30</p>
+                        </div>*@
+
+                    <p class="ltit">公文阅览</p>
+                    <div>
+                        <p>已阅 </p>
+                        <p class="pname">冯文佩 ( 卓望信息 - 信息系统解决方案部)</p>
+                        <p class="pname">2015-09-08 &nbsp;17:40:30</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="manlist">
+        <p id="Finished" class="finished">完成</p>
+        <ul id="selectpeople">
+            @*<li>
+                    <p>王总</p>
+                    <div class="recheckbox fl">
+                        <div class="lbord">
+                            <input type="checkbox" id="sendMsg1">
+                            <span></span>
+                        </div>
+                    </div>
+                </li>
+            *@
+
+        </ul>
+    </div>
+    <h2 id="SkipAgree" class="mydocument_infor_btn">
+        <i></i>
+        电子流处理
+    </h2>
+    @*<script src="../Content/js/require.js" defer async="true" data-main="../Content/js/document"></script>*@
+
+    <script src="~/Content/js/libs/jquery.js"></script>
+    <script src="~/Content/js/libs/swiper.jquery.min.js"></script>
+    <script src="~/Content/js/libs/layer.js"></script>
+    <script src="~/Content/js/libs/my_document.js"></script>
+    
+    <script>
+
+        $(function () {
+            myDocument.init();
+            var mySwiper = new Swiper('.swiper-container', {
+                onSlideChangeEnd: function (swiper) {
+                    var j = mySwiper.activeIndex;
+                    if (j != 0) {
+                        $(".mydocument_infor_btn").fadeOut(0)
+                    } else if ($(".tab-content-1").scrollTop() <= 50) {
+                        $(".mydocument_infor_btn").fadeIn(100)
+                    }
+                    $('.maple-tab li, .maple-tab2 li').removeClass('active').eq(j).addClass('active');
+                }
+            })
+            /*列表切换*/
+            $('.maple-tab li, .maple-tab2 li').on('click', function (e) {
+                e.preventDefault();
+                //得到当前索引
+                var i = $(this).index();
+                if (i != 0) {
+                    $(".mydocument_infor_btn").fadeOut(0)
+                } else if ($(".tab-content-1").scrollTop() <= 50) {
+                    $(".mydocument_infor_btn").fadeIn(100)
+                }
+                $('.maple-tab li, .maple-tab2 li').removeClass('active').eq(i).addClass('active');
+                mySwiper.slideTo(i, 500, false);
+            });
+        });
+        function timeConvert(obj, IsMi) {
+            var correcttime1 = eval('( new ' + obj.replace(new RegExp("\/", "gm"), "") + ')');
+            var myDate = correcttime1;
+            var year = myDate.getFullYear();
+            var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+            var day = ("0" + myDate.getDate()).slice(-2);
+            var h = ("0" + myDate.getHours()).slice(-2);
+            var m = ("0" + myDate.getMinutes()).slice(-2);
+            var s = ("0" + myDate.getSeconds()).slice(-2);
+            var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+            if (IsMi == false) {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+            }
+            else {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s + " " + mi;
+            }
+        }
+        //获取参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        };
+        //说明，option=0，代表未处理待办操作，option=1，已处理待办操作
+        var Url = "../Home/select_bumphdetails";
+        var option = getUrlParam("option");
+        if (option == "1") {
+            $("#AgreeOperate").remove();
+            $("#SkipAgree").remove();
+            $("#ProcessMode").remove();
+            Url = "../Home/QueryProcessedDocument";
+        };
+        //人员选择完成按钮
+        $("#Finished").on("click", function () {
+            $(".manlist").animate({ bottom: "-100%" }, 200, "swing");
+            var len = $(".manlist").find("input:checked").length;
+            var html = len == 0 ? "请选择(必选)" : "共" + len + "人";
+            //len == 0 ? $(".sel span").text("请选择(必选)") : $(".sel span").text("共" + len + "人");
+            document.getElementById("ChoosePeople").innerHTML = html;
+        });
+
+        var gwqb;
+        var Processing_Code = "";//选择处理方式
+        var Processing_CodeName = "";  //处理方式中文名
+        $(function () {
+            selectprocess();
+        });
+        //1、公文流程详细信息
+        function selectprocess() {
+            //debugger
+            $.ajax({
+                type: 'post',
+                url: Url,
+                cache: false,
+                data: 'billNo=' + getUrlParam("billNo"),
+                dataType: "json", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    gwqb = mes;
+                    //console.log(mes);
+                    for (var i = 0; i < mes.length; i++) {
+                        billNo = mes[i].BillNo;
+                        var processDatajson = $.parseJSON(mes[i].ProcessData);
+                        //$("#labbillNo").text(mes[i].BillNo);
+                        $("#labtitle").text(processDatajson.billTitle);
+                        $("#labproposerName").text(mes[i].BillEmpName);
+                        $("#labapplyTime").text(processDatajson.billDate);
+                        $("#labFphone").text(processDatajson.phone);
+                        var textContentHtml = processDatajson.processData.textContentHtml;
+                        //console.log(textContentHtml);
+                        //$("#DocumentBody").html(mes[i].selecttextcontenthtml);
+                        PDFJS.getDocument('http://111.203.123.26/WorkflowApp/Test.pdf').then(loadPdf);
+                        nextPage.onclick = function (a) {
+
+                            PDFJS.getDocument('http://111.203.123.26/WorkflowApp/Test.pdf').then(loadPdf(a));
+
+                        }
+                        prevPage.onclick = function (b) {
+
+                            PDFJS.getDocument('http://111.203.123.26/WorkflowApp/Test.pdf').then(loadPdf(b));
+
+                        }
+                        $("#labbillDept").text(processDatajson.billDept);
+                        $("#labdocType").text(processDatajson.processData.docType);
+                        //console.log(processDatajson.processData);
+                        //开始填充审批日志
+                        ApproveLog(processDatajson.approveLog);
+                        selectatt(mes[i].ServerID, mes[i].ModelId, mes[i].ProcessID);
+
+                        //处理方式
+                        if (option == "0") {
+                            ProcessMode();
+                        }
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+
+        //2、附件
+        function selectatt(sid, mid, pid) {
+            $.ajax({
+                type: 'post',
+                url: '../Home/selectAttachment',
+                cache: false,
+                data: 'sid=' + sid + '&mid=' + mid + '&pid=' + pid,
+                dataType: "json", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    //开始附件
+                    $("#AttachmentInfo").text("");
+                    var strlog = "";
+                    for (var j = 0; j < mes.length; j++) {
+                        var FileUrl = mes[j].FileUrl;
+                        var FileName = mes[j].FileName;
+                        var UserLoginName = mes[j].UserLoginName;
+                        var CreateTime = timeConvert(mes[j].AddTime, false);
+                        if (FileUrl == "") {
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].FileName + "</td>";
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        else {
+                            //strlog += "<td><a href='" + mes[j].FileUrl + "'>" + mes[j].FileName + "</a></td>";
+                            //strlog += "<td>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        strlog = "<div class=\"list-group-item li\"><div>";
+                        strlog += "<p><img src=\"../Content/img/fujian.png\" /><span>" + FileName + "</span></p>";
+                        strlog += "<p><span>添加人 : " + UserLoginName + "</span><span> 添加日期 : " + CreateTime + "</span></p></div>";
+                        strlog += "<p><a href=\"" + FileUrl + "\" target=\"_blank\" download class=\"mui-btn mui-btn-outlined font24\">下载</a></p></div>";
+                    };
+                    $("#AttachmentInfo").html(strlog);
+                },
+                error: function () {
+                }
+            });
+        };
+        //3、审批日志
+        function ApproveLog(approveLog) {
+            var strlog = "";
+            for (var j = 0; j < approveLog.length; j++) {
+                var auditorName = approveLog[j].auditorName != null ? approveLog[j].auditorName : "";
+                var auditTime = approveLog[j].auditTime != null ? approveLog[j].auditTime : "";
+                auditTime = auditTime.replace("T", "&nbsp;")
+                var remark = approveLog[j].remark != null ? approveLog[j].remark : "";
+                strlog += "<p class=\"ltit\">审批环节</p>";
+                strlog += "<div>";
+                strlog += "<p>" + remark + "</p>";
+                strlog += "<p class=\"pname\">" + auditorName + "</p>";
+                strlog += " <p class=\"pname\">" + auditTime + "</p>";
+                strlog += "</div>";
+            };
+            $("#ApproveLog").html(strlog);
+        };
+        //4、处理方式
+        function ProcessMode() {
+            //gwqb = mes;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var zhongshenfawen = "";       //终审发文
+            var xiangshangchengbao = "";  //向上呈报
+            var qita = "";                //其他
+            var str = "";     //div标签，id=ProcessMode;
+            var dealModeList = processDatajson.processData.dealModeList;  //处理方式
+            console.log(dealModeList);
+            for (var i = 0; i < dealModeList.length; i++) {
+                var dealCode = dealModeList[i].dealCode != null ? dealModeList[i].dealCode : "";
+                var dealName = dealModeList[i].dealName != null ? dealModeList[i].dealName : "";
+                //if (dealModeList[i].dealName == "终审发文") {
+                //    zhongshenfawen += "<option    value=\"" + dealCode + "\">" + dealName + "</option>";
+                //} else if (dealModeList[i].dealName == "向上呈报") {
+                //    xiangshangchengbao += "<option    value=\"" + dealModeList[i].dealCode + "\">" + dealModeList[i].dealName + "</option>";
+                //} else {
+                //    qita += "<option    value=\"" + dealModeList[i].dealCode + "\">" + dealModeList[i].dealName + "</option>";
+                //}
+                var checked = i == 0 ? "checked='checked'" : "";
+                str += "<div class=\"disflex rdiv\">";
+                str += "<p>" + dealName + "</p>";
+                str += "<div class=\"checbox\">";
+                str += "<input type=\"radio\"   " + checked + "  value=\"" + dealCode + "\"  onclick=\"selectpeopleoption('" + dealName + "')\"   id=\"check_" + i + "\" name=\"1\"><label for=\"check_" + i + "\"></label>";
+                str += "</div></div>";
+            }
+            //str = zhongshenfawen + xiangshangchengbao + qita;
+            //if (zhongshenfawen == "" && xiangshangchengbao == "" && qita == "") {
+            //    qita += "<option    value=\"1\">审批通过</option>";
+            //    str = qita;
+            //}
+
+            //setTimeout(function () {
+            //    //toast.hide();
+            //}, 1000);
+            //selectpeopleoption();
+
+            //拼接选择人员
+            var peopleStr = " <p class=\"rdiv\"><span class=\"fl\">选择人员</span> <span id='ChoosePeople' class=\"fr sel\">请选择（必选）<i></i></span><\p>";
+            if (str == "") {
+                str += "<div class=\"disflex rdiv\"><p>审批通过</p><div class=\"checbox_1\"><input type=\"radio\"   checked='checked'   onclick=\"selectpeopleoption('审批通过')\"  value=\"1\"  name=\"1\"> <label for=\"check_1\"></label></div></div>";
+                //处理方式为“审批通过”时，无审批人员加载
+                peopleStr = "";
+            };
+            str += peopleStr;
+            $("#ProcessMode").html("<h3>处理方式：</h3>" + str);
+
+            $(".sel").on("click", function () {
+                $(".manlist").animate({ bottom: 0 }, 200, "swing");
+                //加载处理方式对应审批人
+                if (Processing_CodeName != "审批通过") {
+                    selectpeopleoption(Processing_CodeName);
+                }
+            });
+            ShowApprove();
+        }
+        //5、选择人员
+        function selectpeopleoption(selecttype) {
+            $(".manlist").animate({ bottom: 0 }, 200, "swing");
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var dealModeList = processDatajson.processData.dealModeList;  //处理方式
+            //var selecttype = $("#selectpeopleoption").find("option:selected").text();
+            $("#selectpeople").find("li").remove();
+            for (var i = 0; i < dealModeList.length; i++) {
+                var ss = dealModeList[i].dealName;
+                if (dealModeList[i].dealName == selecttype) {
+                    var str = "";
+                    for (var j = 0; j < dealModeList[i].dealEmplList.length; j++) {
+                        //var item = dealModeList[i].dealEmplList[j];    //处理人列表
+                        //if (selecttype == "征求他人意见") {
+                        //    str += "<li class='aui-list-item'  id=\"" + item.loginName.substring(0, item.loginName.length - 1) + "\" >"
+                        //} else {
+                        //    str += "<li class='aui-list-item'  id=\"" + item.loginName + "\" >"
+                        //}
+                        //str += "<div class='aui-list-item-inner'>";
+                        //str += "<div class='aui-list-item-title'>" + item.name + "</div>";
+                        //str += "<div class='aui-list-item-right'  style='margin-right: 10px;'>";
+                        //str += "<span class='tg-list-item'>";
+                        //str += "<input class='tgl tgl-flat' id='" + j + 4 + "' type='checkbox'>";
+                        //str += "<label class='tgl-btn' for='" + j + 4 + "'></label></span></div></div>";
+                        //str += "</li>";
+
+                        var item = dealModeList[i].dealEmplList[j];    //处理人列表
+                        var name = item.name;
+                        var loginName = item.loginName;
+                        if (selecttype == "征求他人意见") {
+                            loginName = loginName.substring(0, loginName.length - 1);
+                        }
+                        str += "<li id='" + loginName + "'><p>" + name + "</p>";
+                        str += "<div class=\"recheckbox fl\">";
+                        str += "<div class=\"lbord\"><input type=\"checkbox\" id=\"sendMsg_" + i + "\">";
+                        str += "<span></span>";
+                        str += "</div></div></li>";
+                    }
+                    $("#selectpeople").find("li").remove();
+                    $("#selectpeople").append(str);
+                    Processing_CodeName = selecttype;
+                }
+            }
+        };
+        //6、获取选择人Id
+        function GetChoosePeopleId() {
+            $("#selectpeople").find("li").each(function () {
+                var zhuangtai = $(this).find("input[type='checkbox']").prop('checked');
+                if (zhuangtai == true) {
+                    if (xuanzerenID.length == 0) {
+                        xuanzerenID = $(this).attr("id");
+                    } else {
+                        xuanzerenID = xuanzerenID + "," + $(this).attr("id");
+                    }
+                    snum = snum + 1;
+                }
+            });
+        }
+        var snum = 0;
+        var xuanzerenID = "";//选择人id
+
+        //7、默认选中加载审批人
+        function ShowApprove() {
+            $("#ProcessMode input[type='radio']").each(function () {
+                var ApproveObj = $(this);
+                if (ApproveObj.attr("checked") == "checked") {
+                    Processing_Code = ApproveObj.val();
+                    Processing_CodeName = ApproveObj.parent().prev().text();
+                    //加载处理方式对应审批人
+                    if (Processing_CodeName != "审批通过") {
+                        
+                        //selectpeopleoption(Processing_CodeName);
+                    }
+                }
+            });
+        };
+
+        //8、公文提交按钮
+        $(document).on('click', '#btnAgreee', function () {
+            var index = layer.open({
+                content: '您确定要提交吗？',
+                shade: 'background-color: rgba(0,0,0,.5)'
+                    , btn: ['取消', '提交']
+                    , yes: function (index) {
+                        layer.close(index);
+                    }, no: function (index) {
+                        //退回操作
+                        layer.close(index);
+                        DocumentSubmit();
+                    }
+            });
+
+        });
+        //9、公文回退按钮
+        $("#btnDisAgree").click(function () {
+            location.href = "../Home/DocumentReturn?billNo=" + gwqb[0].BillNo;
+        });
+        //8、公文提交
+        function DocumentSubmit() {
+            var BillNo = gwqb[0].BillNo;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var strApproveNote = $("#ApproveOpinion").val(); //审批意见
+            var ServerID = processDatajson.serverId;   //serverID
+            var Project = "HD2012"    //project
+            var taskId = processDatajson.taskID;  //taskid
+            var ModelId = gwqb[0].ModelId;     //模块ID
+            var ProcessID = processDatajson.processId;   //processId;
+            //var Processing_Code = Processing_Code;
+            //var Processing_CodeName = $("#selectpeopleoption").find("option:selected").text();
+            GetChoosePeopleId();
+            //是否选择审批人
+            var Condition1 = (snum == 0 && Processing_Code != 11 && Processing_Code != 1);
+            var Condition2 = (snum == 0 && (Processing_CodeName == "送董事长审批" || Processing_CodeName == "送总经理审批"));
+            var Condition3 = (strApproveNote == "" && Processing_Code != 1 && Processing_Code != 11);
+            if (Condition1 || Condition2) {
+                MsgAlert("请选择审批人", 1); return;
+            } else if (Condition3) {
+                MsgAlert("请填入审批意见", 1); return;
+            };
+            $.ajax({
+                type: 'post',
+                url: '../Home/SvcWorkflowMWFs',
+                cache: false,
+                data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + strApproveNote + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=' + xuanzerenID + '&Processing_Code=' + Processing_Code + '&liuchengType=1' + '&Processing_CodeName=' + Processing_CodeName,
+                dataType: "text", //返回数据形式为json
+                beforeSend: function () {
+                    Loading("正在处理");
+                },
+                success: function (mes) {
+                    layer.closeAll();
+                    if (mes == "OK") {
+                        SkipIndex("处理成功", "succ1");
+                    } else if (mes == "NO") {
+                        SkipIndex("处理失败", "edit");
+                    }
+                    else {
+                        SkipIndex(mes + ",处理失败", "succ1");
+                    };
+                }
+            });
+        };
+        //进度显示
+        function Loading(content) {
+            var index1 = layer.open({
+                shade: 'background-color: rgba(0,0,0,.5)',
+                type: 2,
+                content: content
+            });
+        }
+        //消息提示
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        };
+        //跳转首页
+        function SkipIndex(content, ico) {
+            //处理完成
+            var html = '<div class="over">' +
+                        '<p><img src="../Content/img/' + ico + '.png" alt="" /></p>' +
+                        '<p>处理完成！</p>' +
+                        '</div>';
+            var index2 = layer.open({
+                style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+                content: html
+            });
+            setTimeout(function () {
+                location.href = "../Home/index";
+            }, 800);
+        }
+
+
+        //生成PDF
+        var pdf = {
+            pdfDoc: null,
+            numPages: 1,
+            page: 1,
+            okFunction: openPage
+        };
+   
+        var canvas = document.getElementById('canvas');
+        var nextPage = document.getElementById("nextpage");
+        var prevPage = document.getElementById("prevpage");
+        //控件加载pdf,完成后执行loadPdf方法
+       // PDFJS.getDocument('http://localhost:22552/aa1.pdf').then(loadPdf);
+      
+        
+        function loadPdf(m) {
+              
+            pdf.okFunction(pdf.page,m);
+        }
+        function openPage(n,m) {
+            var ctx = canvas.getContext("2d");
+            function showPage(page) {
+                //此处1为缩放比例
+                var viewport = page.getViewport(1);
+                //获取pdf经过缩放的宽高并赋值给canvas的宽高
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                var renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                page.render(renderContext);
+            }
+            //传入页数然后打开
+            this.pdfDoc.getPage(n).then(showPage);
+             m == a? pdf.page++ : pdf.page--;
+            // this.pdfDoc.getPage(1).then(showPage);
+        }
+    </script>
+
+</body>
+</html>

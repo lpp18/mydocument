@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "员工离职";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        职位：
+    </h2>
+    <p id="f_Jobs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        学历：
+    </h2>
+    <p id="f_EducationBackground" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        入职日期：
+    </h2>
+    <p id="f_EntryDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        离职日期：
+    </h2>
+    <p id="f_DepartureDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        工作内容说明：
+    </h2>
+    <p id="f_JobDescription" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        HR面谈记录：
+    </h2>
+    <p id="f_Interviews" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        离职主要原因：
+    </h2>
+    <p id="f_MainCause" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        核算体系：
+    </h2>
+    <p id="f_AccountingSystem" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#f_Jobs").text(processDatajson.processData.F_Jobs);
+        //学历
+        $("#f_EducationBackground").text(processDatajson.processData.F_EducationBackground);
+        //入职日期
+        $("#f_EntryDate").text(processDatajson.processData.F_EntryDate);
+        //离职日期
+        $("#f_DepartureDate").text(processDatajson.processData.F_DepartureDate);
+        //工作内容说明
+        $("#f_JobDescription").text(processDatajson.processData.F_JobDescription);
+        //HR面谈记录
+        $("#f_Interviews").text(processDatajson.processData.F_Interviews);
+        //离职主要原因
+        $("#f_MainCause").text(processDatajson.processData.F_MainCause);
+        //核算体系
+        $("#f_AccountingSystem").text(processDatajson.processData.F_AccountingSystem);
+    };
+</script>
+

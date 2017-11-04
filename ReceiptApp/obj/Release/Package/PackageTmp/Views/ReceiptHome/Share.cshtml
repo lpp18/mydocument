@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="@(Model!=null?Model.CompanyName:"")" />  
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/main.css" />
+    <title>发票信息</title>
+    <style type="text/css">
+        body {
+            padding: .3rem;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body style="background:#2EC4C2;padding:.1rem .6rem .773rem">
+    <div class="swrap disflex" style="height:100%">
+
+        @*<img style="display:none;" src="@Url.Content("~/Content/Receipt/img/ishare.png")" />*@
+        <div class="top">
+            <p class="logo"><img src="http://weixintest.aspirecn.com/Content/Receipt/img/logo.png" /></p>
+            <h2 class="stitle">@(Model==null? "数据为空！": "增值税发票开具信息")</h2>
+            <div class="kong kong1"></div>
+            <div class="kong kong2"></div>
+        </div>
+        <ul class="newlist dlist slist">
+            <li>
+                <span>单位名称</span>
+                <span class="rSpan">@(Model != null ? Model.CompanyName : "")</span>
+            </li>
+            <li>
+                <span>税号</span>
+                <span class="rSpan">@(Model != null ? Model.DutyParagraph : "")</span>
+            </li>
+            <li>
+                <span>单位地址</span>
+                <span class="rSpan">@(Model != null ? Model.Address : "")</span> 
+            </li>
+            <li>
+                <span>电话号码</span>
+                <span class="rSpan">@(Model != null ? Model.Tel : "")</span>
+
+            </li>
+            <li>
+                <span>开户银行</span>
+                <span class="rSpan">@(Model != null ? Model.BankOfDeposit : "")</span>
+            </li>
+            <li>
+                <span>银行账号</span>
+                <span class="rSpan">@(Model != null ? Model.BankAccount : "")</span>
+            </li>
+        </ul>
+        <div class="sma">
+            <div class="ma">
+                <img src="@(Model!=null?Model.QRCode:"")" />
+            </div>
+            <p>扫一扫或点击右上方按钮<br />
+            分享发票抬头信息</p>
+            <div class="bot">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="../Content/Receipt/js/fontSize.js"></script>
+    <script src="../Content/Receipt/js/zepto.min.js"></script>
+    <script>
+        $(".slist textarea").each(function () {
+            if ($(this).val() == "") {
+                 $(this).closest("li").remove()
+            }
+        })
+        //无内容隐藏
+        $(".slist .rSpan").each(function () {
+
+            if ($(this).html() == "") {
+                $(this).closest("li").remove()
+            }
+        })
+        function rcsOptimizeReady() {
+            if (window.WebContainer != null) {
+                if (window.WebContainer.rcsShowRightMoreButton == null) { alert('rcsGetCurrentLocation is null'); }
+                else {
+
+                    try {
+
+                        window.WebContainer.rcsShowRightMoreButton("[{\"name\": \"分享\", \"id\": \"1\", \"backId\": \"backId1\", \"backFunc\": \"backFunc1\"}]")
+
+                    }
+                    catch (error) {
+                       
+                    }
+                }
+            }
+            else {
+                try {
+                    navigator.WebContainer.rcsShowRightMoreButton("[{\"name\": \"分享\", \"id\": \"1\", \"backId\": \"backId\", \"backFunc\": \"backFunc\"}]")
+
+                }
+                catch (error) {
+                   
+                }
+
+            }
+
+        }
+
+    </script>
+</body>
+</html>

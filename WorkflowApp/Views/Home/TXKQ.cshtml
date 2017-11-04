@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "弹性考勤";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        目前考勤：
+    </h2>
+    <p id="labmqkq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请考勤类型：
+    </h2>
+    <p id="labkqlx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请理由：
+    </h2>
+    <p id="labsqly" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labmqkq").text(processDatajson.processData.f_mqkq);
+        $("#labkqlx").text(processDatajson.processData.f_kqlx);
+        $("#labsqly").text(processDatajson.processData.f_sqly);
+    };
+</script>
+

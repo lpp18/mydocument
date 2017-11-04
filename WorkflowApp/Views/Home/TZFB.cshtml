@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "通知发布";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        联系电话：
+    </h2>
+    <p id="labf_lxdh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发布时间：
+    </h2>
+    <p id="labf_fbsj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        所属事业部：
+    </h2>
+    <p id="labf_syb" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发布缘由：
+    </h2>
+    <p id="labf_fbyy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        计划发布门户：
+    </h2>
+    <p id="labf_ww" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        计划发布版块：
+    </h2>
+    <p id="labf_fbbk" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发布内容标题：
+    </h2>
+    <p id="labf_xwbt" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发布内容概述：
+    </h2>
+    <p id="labf_nrgs" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_lxdh").text(processDatajson.processData.f_lxdh);  //联系电话
+        $("#labf_fbsj").text(processDatajson.processData.f_fbsj);  //发布时间
+        $("#labf_syb").text(processDatajson.processData.f_syb);  //所属事业部
+        $("#labf_fbyy").text(processDatajson.processData.f_fbyy);  //发布缘由
+        $("#labf_ww").text(processDatajson.processData.f_ww);  //计划发布门户
+        $("#labf_fbbk").text(processDatajson.processData.f_fbbk);  //计划发布版块
+        $("#labf_xwbt").text(processDatajson.processData.f_xwbt);  //发布内容标题
+        $("#labf_nrgs").text(processDatajson.processData.f_nrgs);  //发布内容概述
+    };
+</script>
+

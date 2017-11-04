@@ -1,0 +1,353 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>公文审批</title>
+    <link href="~/Content/aui/css/aui.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui-slide.css" rel="stylesheet" />
+    <link href="~/Content/css/OpenAndCloseCss.css" rel="stylesheet" />
+    <link href="~/Content/css/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/font/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .footbanli {
+            width: 100%;
+            height: 50px;
+            background-color: #FFFFFF;
+            position: absolute;
+            bottom: 0px;
+        }
+
+            .footbanli div {
+                width: 186px;
+                margin: 0px auto;
+                margin-top: 9px;
+            }
+
+                .footbanli div input {
+                    font-size: 19px;
+                    width: 90px;
+                    height: 30px;
+                    -webkit-border-radius: 22px;
+                    border-radius: 22px;
+                    color: #ffffff;
+                    background-color: #EF8200;
+                }
+
+        nav div {
+            width: 130px;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="aui-bar aui-bar-nav" style="background-color: #EF8200;">
+        <div class="aui-title">公文处理</div>
+    </header>
+    <div class="mui-content" style="padding-bottom: 50px;">
+        <div class="aui-content">
+            <div class="aui-content" id="jibenxinxi" style="border-radius: 5px;">
+                <div class="aui-content" id="jibenxinxis" style="border-radius: 5px;">
+                    <div class="aui-content aui-margin-b-15" style="border-radius: 5px;">
+                        <ul class="aui-list aui-form-list">
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        选择方式
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <select onchange="selectpeopleoption()" id="selectpeopleoption">
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        处理意见
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <textarea placeholder="处理意见" id="chuliyijian"></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-header">请选择人员</li>
+                            <ul class="aui-list aui-form-list" id="selectpeople"></ul>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        关注此单
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <span class='tg-list-item'>
+                                            <input class='tgl tgl-flat' id='cb4' type='checkbox'>
+                                            <label class='tgl-btn' for='cb4'></label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="mui-bar mui-bar-tab">
+        <div>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="SvcWorkflowMWF()">审批</button>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="returnIndex()">返回</button>
+        </div>
+    </nav>
+</body>
+
+</html>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/mui.min.js"></script>
+<script src="~/Content/aui/script/aui-dialog.js"></script>
+<script src="~/Content/aui/script/aui-toast.js"></script>
+<script src="~/Content/aui/script/api.js"></script>
+<script>
+    var gwqb = [];
+    apiready = function () {
+        api.parseTapmode();
+    }
+    var dialog = new auiDialog({});
+    var toast = new auiToast({});
+    var InterValObj; //timer变量，控制时间
+    var curCount = 1;//当前剩余秒数
+    $(function () {
+        selectprocess();
+    });
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    function selectprocess() {
+        debugger;
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+                toast.loading({
+                    title: "请稍等",
+                    duration: 2000
+                })
+            },
+            success: function (mes) {
+                debugger;
+                gwqb = mes;
+                var processDatajson = $.parseJSON(mes[0].ProcessData);
+                var zhongshenfawen = "";
+                var xiangshangchengbao = "";
+                var qita = "";
+                var str = "";
+                for (var i = 0; i < processDatajson.processData.dealModeList.length; i++) {
+                    if (processDatajson.processData.dealModeList[i].dealName == "终审发文")
+                    {
+                        zhongshenfawen += "<option    value=\"" + processDatajson.processData.dealModeList[i].dealCode + "\">" + processDatajson.processData.dealModeList[i].dealName + "</option>";
+                    } else if (processDatajson.processData.dealModeList[i].dealName == "向上呈报") {
+                        xiangshangchengbao += "<option    value=\"" + processDatajson.processData.dealModeList[i].dealCode + "\">" + processDatajson.processData.dealModeList[i].dealName + "</option>";
+                    } else {
+                        qita += "<option    value=\"" + processDatajson.processData.dealModeList[i].dealCode + "\">" + processDatajson.processData.dealModeList[i].dealName + "</option>";
+                    }
+                }
+                str = zhongshenfawen + xiangshangchengbao + qita;
+
+                if (zhongshenfawen == "" && xiangshangchengbao == "" && qita == "")
+                {
+                    qita += "<option    value=\"1\">审批通过</option>";
+                    str = qita
+                }
+
+                $("#selectpeopleoption").append(str);
+                setTimeout(function () {
+                    toast.hide();
+                }, 1000);
+                selectpeopleoption();
+            },
+            error: function () {
+                setTimeout(function () {
+                    toast.hide();
+                }, 1000);
+                dialog.alert({
+                    title: "",
+                    msg: '程序发生异常',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            }
+        });
+    }
+
+    function rgb2hex(rgb) {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        function hex(x) {
+            return ("0" + parseInt(x).toString(16)).slice(-2);
+        }
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+
+
+    function selectpeopleoption() {
+        debugger;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var selecttype = $("#selectpeopleoption").find("option:selected").text();
+        $("#selectpeople").find("li").remove();
+        for (var i = 0; i < processDatajson.processData.dealModeList.length; i++) {
+            var ss = processDatajson.processData.dealModeList[i].dealName;
+            if (processDatajson.processData.dealModeList[i].dealName == selecttype)
+            {
+                var str = "";
+                for (var j = 0; j < processDatajson.processData.dealModeList[i].dealEmplList.length; j++) {
+                    if (selecttype == "征求他人意见")
+                    {
+                        str += "<li class='aui-list-item'  id=\"" + processDatajson.processData.dealModeList[i].dealEmplList[j].loginName.substring(0, processDatajson.processData.dealModeList[i].dealEmplList[j].loginName.length - 1) + "\" >"
+                    } else
+                    {
+                        str += "<li class='aui-list-item'  id=\"" + processDatajson.processData.dealModeList[i].dealEmplList[j].loginName + "\" >"
+                    }
+                    str += "<div class='aui-list-item-inner'>";
+                    str += "<div class='aui-list-item-title'>" + processDatajson.processData.dealModeList[i].dealEmplList[j].name + "</div>";
+                    str += "<div class='aui-list-item-right'  style='margin-right: 10px;'>";
+                    str += "<span class='tg-list-item'>";
+                    str += "<input class='tgl tgl-flat' id='" + j + 4 + "' type='checkbox'>";
+                    str += "<label class='tgl-btn' for='" + j + 4 + "'></label></span></div></div>";
+                    str += "</li>";
+                }
+                $("#selectpeople").find("li").remove();
+                $("#selectpeople").append(str);
+            }
+        }
+    }
+
+    function SvcWorkflowMWF() {
+        debugger;
+        var snum = 0;
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var strApproveNote = $("#chuliyijian").val(); //审批意见
+        var ServerID = processDatajson.serverId;   //serverID
+        var Project = "HD2012"    //project
+        var taskId = processDatajson.taskID;  //taskid
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var ProcessID = processDatajson.processId;   //processId;
+        var xuanzerenID = "";
+        $("#selectpeople").find("li").each(function () {
+            debugger;
+            var zhuangtai = $(this).find("input[type='checkbox']").prop('checked');
+            if (zhuangtai == true) {
+                if (xuanzerenID.length == 0) {
+                    xuanzerenID = $(this).attr("id");
+                } else {
+                    xuanzerenID = xuanzerenID + "," + $(this).attr("id");
+                }
+                snum = snum + 1;
+            }
+        });
+        var Processing_Code = $("#selectpeopleoption").val();
+        var Processing_CodeName = $("#selectpeopleoption").find("option:selected").text();
+        if (snum == 0 && Processing_Code != 11 && Processing_Code != 1) {
+            dialog.alert({
+                title: "",
+                msg: '请选择审批人',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else if (snum == 0 && (Processing_CodeName == "送董事长审批" || Processing_CodeName == "送总经理审批")) {
+            dialog.alert({
+                title: "",
+                msg: '请选择审批人',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else if (strApproveNote == "" && Processing_Code != 1 && Processing_Code != 11) {
+            dialog.alert({
+                title: "",
+                msg: '请填入审批意见',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else {
+            $.ajax({
+                type: 'post',
+                url: '/Workflow/Home/SvcWorkflowMWFs',
+                cache: false,
+                data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + strApproveNote + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=' + xuanzerenID + '&Processing_Code=' + Processing_Code + '&liuchengType=1' + '&Processing_CodeName=' + Processing_CodeName,
+                dataType: "text", //返回数据形式为json
+                beforeSend: function () {
+                    toast.loading({
+                        title: "正在处理",
+                        duration: 1000
+                    })
+                },
+                success: function (mes) {
+                    setTimeout(function () {
+                        toast.hide();
+                    });
+                    if (mes == "OK") {
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        dialog.alert({
+                            title: "",
+                            msg: '处理成功1秒后返回首页',
+                            buttons: [''],
+                        }, function (ret) {
+
+                        });
+                    } else if (mes == "NO") {
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        dialog.alert({
+                            title: "",
+                            msg: '处理失败1秒后返回首页',
+                            buttons: [''],
+                        }, function (ret) {
+                        });
+                    }
+                    else {
+                        InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                        dialog.alert({
+                            title: "",
+                            msg: '' + mes + '1秒后返回首页',
+                            buttons: [''],
+                        }, function (ret) {
+
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            window.location.href = '/Workflow/Home/Index';
+        }
+        else {
+            curCount--;
+        }
+    }
+
+    function returnIndex() {
+        window.location.href = '/Workflow/Home/Index';
+    }
+</script>

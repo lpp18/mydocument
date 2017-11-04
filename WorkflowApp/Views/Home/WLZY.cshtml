@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "网路资源";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        申请人所在地区：
+    </h2>
+    <p id="labf_area" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请资源：
+    </h2>
+    <p id="labf_resource" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请描述：
+    </h2>
+    <p id="labf_sqsy" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_area").text(processDatajson.processData.f_area);  //申请人所在地区
+        $("#labf_resource").text(processDatajson.processData.f_resource);  //申请的资源
+        $("#labf_sqsy").text(processDatajson.processData.f_sqsy);  //申请描述
+    };
+</script>

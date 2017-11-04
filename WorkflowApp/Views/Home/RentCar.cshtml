@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "租车";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        联系电话：
+    </h2>
+    <p id="f_lxdh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        用车城市：
+    </h2>
+    <p id="f_ycdy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        供应商：
+    </h2>
+    <p id="f_gysname" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        实际租车日期：
+    </h2>
+    <p id="f_sjzcrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        实际还车日期：
+    </h2>
+    <p id="f_sjhcrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发车地址：
+    </h2>
+    <p id="f_fcdz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        目的地址：
+    </h2>
+    <p id="f_mddz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        车牌号：
+    </h2>
+    <p id="f_cph" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        司机电话：
+    </h2>
+    <p id="f_sjdh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        派车情况：
+    </h2>
+    <p id="f_sjpcqk" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //联系电话
+        $("#f_lxdh").text(processDatajson.processData.f_lxdh);
+        //用车城市
+        $("#f_ycdy").text(processDatajson.processData.f_ycdy);
+        //供应商
+        $("#f_gysname").text(processDatajson.processData.f_gysname);
+        console.log(processDatajson.processData);
+        //实际租车日期
+        $("#f_sjzcrq").text((processDatajson.processData.f_sjzcrq) + " " + (processDatajson.processData.f_sjzcsj));
+        //实际租车日期
+        $("#f_sjhcrq").text(processDatajson.processData.f_sjhcrq + " " + processDatajson.processData.f_sjhcsj);
+        //发车地址
+        $("#f_fcdz").text(processDatajson.processData.f_fcdz);
+        //目的地地址
+        $("#f_mddz").text(processDatajson.processData.f_mddz);
+        //车牌号
+        $("#f_cph").text(processDatajson.processData.f_cph);
+        //司机电话
+        $("#f_sjdh").text(processDatajson.processData.f_sjdh);
+        //派车情况
+        $("#f_sjpcqk").text(processDatajson.processData.f_sjpcqk);
+    };
+</script>
+

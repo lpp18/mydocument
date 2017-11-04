@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "机票变更";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        出发地：
+    </h2>
+    <p id="labcfd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        目的地：
+    </h2>
+    <p id="labmdd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出差日期：
+    </h2>
+    <p id="labccrq" class="mydocument_infor_title_text"></p>
+</li>
+
+<li>
+    <h2 class="mydocument_infor_title">
+        预计返回日期：
+    </h2>
+    <p id="labfhrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        机票代理商：
+    </h2>
+    <p id="labdls" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labcfd").text(processDatajson.processData.f_cfd);
+        $("#labmdd").text(processDatajson.processData.f_mdd);
+        $("#labccrq").text(processDatajson.processData.f_ccrq);
+        $("#labfhrq").text(processDatajson.processData.f_fhrq);
+        $("#labdls").text(processDatajson.processData.f_dls);
+    };
+</script>
+

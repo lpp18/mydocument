@@ -1,0 +1,593 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>工作流</title>
+    <link href="~/Content/font/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui-slide.css" rel="stylesheet" />
+    <link href="~/Content/css/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/GongzuoLiuIndex.css" rel="stylesheet" />
+    <style type="text/css">
+        nav div {
+            width: 190px;
+            margin: 0px auto;
+        }
+
+        .log-table {
+            width: 100%;
+            border: 1px solid #808080;
+        }
+
+        .log-table-tr {
+            height: 30px;
+            border: 1px solid #808080;
+        }
+
+        .log-table-tr-td {
+            border: 1px solid #808080;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mui-content" style="padding-bottom: 50px;">
+        <div class="aui-content">
+            <div class="aui-tab" id="tab">
+                <div class="aui-tab-item aui-active">基本信息</div>
+                <div class="aui-tab-item">报销附件</div>
+                <div class="aui-tab-item">审批日志</div>
+            </div>
+        </div>
+        <div class="aui-content">
+            <div class="aui-content" id="jibenxinxi" style="border-radius: 5px;">
+                <div class="aui-content-padded" id="jibenxinxis" style="border-radius: 5px;">
+                    <div class="aui-content aui-margin-b-15" style="border-radius: 5px;">
+                        <ul class="aui-list aui-form-list">
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        编号
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labbillNo"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        标题
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labtitle"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        申请人
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labproposerName"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        申请日期
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labapplyTime"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        申请部门
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labbillDept"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        申请金额
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labdocType"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label" style="width: 100%;">
+                                        审批意见:
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <textarea id="RejectOpinion" style="width:90%;height:100px"></textarea>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="aui-content-padded" id="baoxiaofujian" style="display: none;">
+
+            </div>
+            <div class="aui-content-padded" id="liuchenggenzong" style="display: none;">
+                <table class="log-table" id="logtable">
+                    <thead>
+                        <tr class="log-table-tr ">
+                            <td class="log-table-tr-td">审批人</td>
+                            <td class="log-table-tr-td">审批时间</td>
+                            <td class="log-table-tr-td">审批意见</td>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <nav class="mui-bar mui-bar-tab">
+        <div>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="Agree()">同意</button>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="Reject()">驳回</button>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="Turntodo()">转办</button>
+        </div>
+    </nav>
+</body>
+
+</html>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/mui.min.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-dialog.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-toast.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/api.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-tab.js"></script>
+<script>
+    var gwqb = [];
+    var billNo = "";
+    var dialog = new auiDialog({});
+    var toast = new auiToast({});
+    var InterValObj; //timer变量，控制时间
+    var curCount = 2;//当前剩余秒数
+    var panduan = 0;
+    var file = [];
+    apiready = function () {
+        api.parseTapmode();
+    }
+
+    $(function () {
+        selectprocess();
+    })
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    };
+
+    function selectprocess() {
+        debugger
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+                toast.loading({
+                    title: "请稍等",
+                    duration: 500
+                })
+            },
+            success: function (mes) {
+                debugger
+                gwqb = mes;
+                for (var i = 0; i < mes.length; i++) {
+                    $("#labbillNo").text(mes[i].BillNo);
+                    billNo = mes[i].BillNo;
+                    var processDatajson = $.parseJSON(mes[i].ProcessData);
+                    $("#labproposerName").text(mes[i].BillEmpName);
+                    $("#labtitle").text(processDatajson.billTitle);
+                    $("#labapplyTime").text(processDatajson.billDate);
+                    $("#labFphone").text(processDatajson.phone);
+                    $("#labbillDept").text(processDatajson.billDept);
+                    $("#labdocType").text(processDatajson.processData.Amount_apply);
+                    //填充附件
+                    for (var j = 0; j < processDatajson.attachedFile.length; j++) {
+
+                        var File = processDatajson.attachedFile[j].fileUrl + "," + processDatajson.attachedFile[j].fileName + "," + mes[i].ServerID + "," + mes[i].ModelId;
+                        file.push(File)
+                    };
+                    //开始填充审批日志
+                    for (var j = 0; j < processDatajson.approveLog.length; j++) {
+                        var str = "";
+                        str += " <tr class=\"log-table-tr\">";
+                        str += " <td class=\"log-table-tr-td\">" + processDatajson.approveLog[j].auditorName + "</td>";
+                        str += " <td class=\"log-table-tr-td\">" + processDatajson.approveLog[j].auditTime + "</td>";
+                        str += " <td class=\"log-table-tr-td\"> " + processDatajson.approveLog[j].remark + "</td> </tr>";
+                        $("#logtable").find("tbody").append(str);
+                    };
+                    setTimeout(function () {
+                        toast.hide();
+                    }, 500);
+                }
+            },
+            error: function () {
+                setTimeout(function () {
+                    toast.hide();
+                }, 500);
+                dialog.alert({
+                    title: "",
+                    msg: '程序发生异常',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            }
+        });
+    }
+
+
+
+    //驳回操作
+    function Reject() {
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //驳回意见
+        var Processing_Code = 2; //驳回代码
+        var ServerID = 3;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        if (RejectOpinion == "" || RejectOpinion == "null") {
+            dialog.alert({
+                title: "",
+                msg: '前填写驳回意见',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else {
+            dialog.alert({
+                title: "",
+                msg: '确定驳回吗？',
+                buttons: ['关闭', '确定'],
+            }, function (ret) {
+                console.log(ret);
+                if (ret) {
+                    if (ret.buttonIndex == 2) {
+                        $.ajax({
+                            type: 'post',
+                            url: '/Workflow/Home/SvcWorkflowMWFs',
+                            cache: false,
+                            data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=0',
+                            dataType: "text", //返回数据形式为json
+                            beforeSend: function () {
+                                toast.loading({
+                                    title: "正在处理",
+                                    duration: 1000
+                                })
+                            },
+                            success: function (mes) {
+                                setTimeout(function () {
+                                    toast.hide();
+                                });
+                                if (mes == "OK") {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '处理成功2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+
+                                    });
+                                } else if (mes == "NO") {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '处理失败2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+                                    });
+                                }
+                                else {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '' + mes + '2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+
+    //同意操作
+    function Agree() {
+        //同意意见
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //驳回意见
+        var Processing_Code = 1; //驳回代码
+        var ServerID = 3;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        dialog.alert({
+            title: "",
+            msg: '确定审批通过吗？',
+            buttons: ['关闭', '确定'],
+        }, function (ret) {
+            console.log(ret);
+            if (ret) {
+                if (ret.buttonIndex == 2) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Workflow/Home/SvcWorkflowMWFs',
+                        cache: false,
+                        data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=1',
+                        dataType: "text", //返回数据形式为json
+                        beforeSend: function () {
+                            toast.loading({
+                                title: "正在处理",
+                                duration: 1000
+                            })
+                        },
+                        success: function (mes) {
+                            setTimeout(function () {
+                                toast.hide();
+                            });
+                            if (mes == "OK") {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '处理成功2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+
+                                });
+                            } else if (mes == "NO") {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '处理失败2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+                                });
+                            }
+                            else {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '' + mes + '2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
+
+    }
+
+
+    //转办
+    function Turntodo() {
+        dialog.alert({
+            title: "",
+            msg: '转办功能暂时未开放',
+            buttons: ['关闭'],
+        }, function (ret) {
+            console.log(ret)
+        });
+    }
+
+
+
+    function selectFile() {
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/getFile',
+            cache: false,
+            data: 'file=' + $.toJSON(file),
+            dataType: "json", //返回数据形式为json
+            success: function (mes) {
+                panduan = 1;
+                for (var j = 0; j < mes.length; j++) {
+                    var str = "";
+                    str += "<div class='gongzuoliudiv'  style='margin-top:10px' >";
+                    str += "<div class='gongzuoliudiv-top'>";
+                    str += "<img class='gongzuoliudiv-img' src=\"../../Content/img/WorkFlow/fujian.png\" />";
+                    str += "<span class='gongzuoliudiv-shenqingren'></span>";
+                    str += "</div>";
+                    str += "<div class='gongzuoliudiv-bottom'>";
+                    str += "<div class='gongzuoliudiv-gongzuoname'>";
+                    str += "<p>" + mes[j].name + "</p>";
+                    str += "<span></span>";
+                    str += "</div>";
+                    str += "<div class='gongzuoliudiv-anniu'>";
+                    //str += "<a href=\"" + mes[j].url + "\"  download=\"w3logo\"  >下载</a>";
+                    str += "<button type='button' class='mui-btn mui-btn-primary mui-btn-outlined'  onclick='downloadFile(\"" + mes[j].url + "\")'    >下载</button>";
+                    str += "</div>";
+                    str += "</div>";
+                    str += "</div>";
+                    $("#baoxiaofujian").append(str);
+                };
+            },
+            error: function () {
+                dialog.alert({
+                    title: "错误提示",
+                    msg: '程序发生异常',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            }
+        });
+    }
+
+
+
+    function downloadFile(url) {
+        try {
+            var elemIF = document.createElement("iframe");
+            elemIF.src = url;
+            elemIF.style.display = "none";
+            document.body.appendChild(elemIF);
+        } catch (e) {
+
+        }
+    }
+
+
+
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            window.location.href = '/Workflow/Home/Index';
+        }
+        else {
+            curCount--;
+        }
+    }
+
+    var tab = new auiTab({
+        element: document.getElementById("tab"),
+    }, function (ret) {
+        console.log(ret)
+        if (ret) {
+            if (ret.index == "1") {
+                $("#jibenxinxi").show();
+                $("#baoxiaofujian").hide();
+                $("#liuchenggenzong").hide();
+            } else if (ret.index == "2") {
+                $("#jibenxinxi").hide();
+                $("#baoxiaofujian").show();
+                $("#liuchenggenzong").hide();
+                //if (panduan == 0) {
+                //    selectFile();
+                //}
+            } else if (ret.index == "3") {
+                $("#jibenxinxi").hide();
+                $("#baoxiaofujian").hide();
+                $("#liuchenggenzong").show();
+            };
+        };
+    });
+
+     $.toJSON = typeof JSON === 'object' && JSON.stringify ? JSON.stringify : function (o) {
+        if (o === null) {
+            return 'null';
+        }
+        var pairs, k, name, val,
+            type = $.type(o);
+        if (type === 'undefined') {
+            return undefined;
+        }
+        if (type === 'number' || type === 'boolean') {
+            return String(o);
+        }
+        if (type === 'string') {
+            return $.quoteString(o);
+        }
+        if (typeof o.toJSON === 'function') {
+            return $.toJSON(o.toJSON());
+        }
+        if (type === 'date') {
+            var month = o.getUTCMonth() + 1,
+                day = o.getUTCDate(),
+                year = o.getUTCFullYear(),
+                hours = o.getUTCHours(),
+                minutes = o.getUTCMinutes(),
+                seconds = o.getUTCSeconds(),
+                milli = o.getUTCMilliseconds();
+            if (month < 10) {
+                month = '0' + month;
+            }
+            if (day < 10) {
+                day = '0' + day;
+            }
+            if (hours < 10) {
+                hours = '0' + hours;
+            }
+            if (minutes < 10) {
+                minutes = '0' + minutes;
+            }
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+            if (milli < 100) {
+                milli = '0' + milli;
+            }
+            if (milli < 10) {
+                milli = '0' + milli;
+            }
+            return '"' + year + '-' + month + '-' + day + 'T' +
+                hours + ':' + minutes + ':' + seconds +
+                '.' + milli + 'Z"';
+        }
+        pairs = [];
+        if ($.isArray(o)) {
+            for (k = 0; k < o.length; k++) {
+                pairs.push($.toJSON(o[k]) || 'null');
+            }
+            return '[' + pairs.join(',') + ']';
+        }
+        if (typeof o === 'object') {
+            for (k in o) {
+                if (hasOwn.call(o, k)) {
+                    type = typeof k;
+                    if (type === 'number') {
+                        name = '"' + k + '"';
+                    } else if (type === 'string') {
+                        name = $.quoteString(k);
+                    } else {
+                        continue;
+                    }
+                    type = typeof o[k];
+                    if (type !== 'function' && type !== 'undefined') {
+                        val = $.toJSON(o[k]);
+                        pairs.push(name + ':' + val);
+                    }
+                }
+            }
+            return '{' + pairs.join(',') + '}';
+        }
+    };
+</script>

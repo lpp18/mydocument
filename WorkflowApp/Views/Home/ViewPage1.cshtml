@@ -1,0 +1,45 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+    
+    </div>
+</body>
+</html>
+<script>
+    //获取cookie
+    function getCookie(name) {
+        alert('a');
+        var search = name + '=';//查询检索的值
+        var returnvalue = '';//返回值
+        alert('a');
+        if (document.cookie.length > 0) {
+            sd = document.cookie.indexOf(search);
+            if (sd != -1) {
+                sd += search.length;
+                end = document.cookie.indexOf(";", sd);
+                if (end == -1)
+                    end = document.cookie.length;
+                //unescape() 函数可对通过 escape() 编码的字符串进行解码。
+                alert(unescape(document.cookie.substring(sd, end)));
+                if (unescape(document.cookie.substring(sd, end)) == "zhangjinglei")
+                    $("#kongshuju").show();
+                else
+                    $("#kongshuju").hide();
+            }
+        }
+        return returnvalue;
+    }
+    window.onload = function () {
+        getCookie('UserloginNameCookie');
+    }
+</script>

@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="@(Model!=null?Model.CompanyName:"")" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/main.css" />
+    <title>发票信息</title>
+    <style type="text/css">
+        body {
+            padding: .3rem;
+            box-sizing: border-box;
+        }
+
+          .layui-m-layer0 .layui-m-anim-scale {
+            width: 70% !important;
+        }
+
+        .layui-m-anim-scale .layui-m-layercont {
+            padding: 35px 30px !important;
+            font-size: .4rem;
+        }
+
+        .layui-m-layerbtn span[yes] {
+            color: #f88686 !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h2 class="ftitle">增值税发票开具信息</h2>
+        <div class="line"></div>
+        <form action="" method="" class="form1">
+            <ul class="newlist dlist">
+                <li>
+                    <span>单位名称</span>
+                    <textarea name="11" value="@(Model!=null?Model.CompanyName:"")" rows="2" readonly>@(Model != null ? Model.CompanyName : "")</textarea>
+                </li>
+                <li>
+                    <span>税号</span>
+                    <textarea name="22" value="@(Model!=null?Model.DutyParagraph:"")" rows="2" readonly>@(Model != null ? Model.DutyParagraph : "")</textarea>
+                </li>
+                <li>
+                    <span>单位地址</span>
+                    <textarea name="33" value="@(Model!=null?Model.Address:"")" rows="2" readonly>@(Model != null ? Model.Address : "")</textarea>
+                </li>
+                <li>
+                    <span>电话号码</span>
+                    <textarea name="44" value="@(Model!=null?Model.Tel:"")" rows="2" readonly>@(Model != null ? Model.Tel : "")</textarea>
+                </li>
+                <li>
+                    <span>开户银行</span>
+                    <textarea name="55" value="@(Model!=null?Model.BankOfDeposit:"")" rows="2" readonly>@(Model != null ? Model.BankOfDeposit : "")</textarea>
+                </li>
+                <li>
+                    <span>银行账号</span>
+                    <textarea name="55" value="@(Model!=null?Model.BankAccount:"")" rows="2" readonly>@(Model != null ? Model.BankAccount : "")</textarea>
+                </li>
+                <li>
+                    <p class="dashed"></p>
+                </li>
+            </ul>
+        </form>
+        <div style="flex:1">
+            <div class="ma">
+                <img src="@(Model!=null?Model.QRCode:"")" />
+            </div>
+            <p style="text-align: center;font-size:.29rem;margin-top:.3rem;color:#038886;">扫一扫，分享发票抬头信息</p>
+        </div>
+
+    </div>
+@if (ViewBag.IsSupperAdmin != null && ViewBag.IsSupperAdmin)
+{
+    <div id="OptionBtn" class="bot-icon bot-icon1">
+
+        <p class=" disflex bline tedit">
+            <img src="@Url.Content("~/Content/Receipt/img/edit1.png")" alt="" />
+            <span class="font26">编辑</span>
+        </p>
+        <p class=" disflex bline tdelet">
+            <img src="@Url.Content("~/Content/Receipt/img/delet1.png")" alt="" />
+            <span class="font26">删除</span>
+        </p>
+        
+            <p class=" disflex tshare">
+                <img src="@Url.Content("~/Content/Receipt/img/share1.png")" />
+                <span class="font26" onclick="javascript:location.href='../ReceiptHome/Share?id=@(Model!=null?Model.id.ToString():"")'">分享</span>
+            </p>
+        
+    </div>
+}
+
+    @*弹框*@
+    <div  class="tbox" style="transform-origin: 0px 0px 0px; opacity: 0; transform: scale(0, 0); display: none;">
+        <form action="" method="" class="ichange">
+            <ul class="newlist newlist1">
+                <li>
+                    <span>抬头</span>
+                    <input id="txt_CompanyName" type="text" placeholder="请输入公司名称(必填)" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+                <li>
+                    <span>税号</span>
+                    <input id="txt_DutyParagraph" class="input2" type="text" value="" placeholder="请输入纳税人识别号(必填)" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+                <li>
+                    <span>地址</span>
+                    <input id="txt_Address" class="input3" type="text" placeholder="请输入企业地址" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+                <li>
+                    <span>电话号码</span>
+                    <input id="txt_Tel" class="input4" type="text" placeholder="请输入电话号码" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+                <li>
+                    <span>开户银行</span>
+                    <input id="txt_BankOfDeposit" class="input5" type="text" placeholder="请输入开户银行名称" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+                <li>
+                    <span>银行账号</span>
+                    <input id="txt_BankAccount" class="input6" type="text" placeholder="请输入银行账号" />
+                    <img src="~/Content/Receipt/img/close.png" />
+                </li>
+            </ul>
+        </form>
+        <div class="newfa bottom">
+            <span  class="active" onclick="javascript: UpdateReceipt('@(Model!=null?Model.id.ToString():"")')">保存</span>
+            <span class="line1"></span>
+            <span class="cancel" >取消</span>
+        </div>
+    </div>
+    <script type="text/javascript" src="../Content/Receipt/js/fontSize.js"></script>
+    <script type="text/javascript" src="../Content/Receipt/js/zepto.min.js"></script>
+    <script type="text/javascript" src="../Content/Receipt/js/layer.js"></script>
+    <script src="~/Content/Receipt/js/mui.min.js"></script>
+    <script src="~/Content/Receipt/js/main.js"></script>
+    <script>
+        //写入参数
+        //localStorage.setItem("IsRefresh","1");
+        //setTimeout(function () {
+        //    mui.ajax("../ReceiptHome/ClearSession");
+        //}, 1);
+        //setTimeout(function () {
+        //    mui.ajax("../ReceiptHome/WriteSession");
+        //}, 1);
+        var id = '@(Model!=null?Model.id.ToString():"")';
+        //删除
+       
+        $(".tdelet").click(function () {
+            //询问框
+            layer.open({
+                content: '您确定要删除吗？'
+              , btn: ['删除', '取消']
+              , yes: function (index) {
+                  //删除操作
+                  DelReceipt(id, index);
+
+              }
+            });
+        })
+        //编辑
+        $(".tedit").click(function () {
+            $(".tbox").show("swing")
+          
+            var arr = $(".form1").serializeArray();
+            $(".newlist1 input").each(function (i) {
+                    if (arr[i]) { 
+                        $(this).val(arr[i].value);
+                    }
+                })
+            
+            //var index = Math.random()
+           // sessionStorage.setItem(id, JSON.stringify(arr));
+           // window.location.href = "../ReceiptHome/AddReceipt?option=edit&id=" + id + "&index=" + index;
+            //console.log(JSON.parse(sessionStorage.getItem(index)))
+        });
+   
+        $(".newfa .cancel").tap(function () {
+
+
+            $(".tbox").hide("swing")
+        })
+
+
+        //根据id删除发票信息方法
+        function DelReceipt(id) {
+            mui.ajax(
+                //请求服务URL
+                "../ReceiptHome/DelReceipt",
+                {
+                    data: { id: id },
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //10秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            MsgAlert(data.Message, 2);
+                            console.log(data);
+                            return;
+                        }
+                        layer.close(index);
+                        location.href = "../ReceiptHome/index";
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        }
+        //获取参数方法
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        var Receipt;
+        function GetField() {
+            //添加发票信息id ，服务默认处理为空，更新发票信息根据id更新，不能为空！
+            //var id = "";
+            var CompanyName = $("#txt_CompanyName").val();
+            var DutyParagraph = $("#txt_DutyParagraph").val();
+            var Address = $("#txt_Address").val();
+            var Tel = $("#txt_Tel").val();
+            var BankOfDeposit = $("#txt_BankOfDeposit").val();
+            var BankAccount = $("#txt_BankAccount").val();
+            //定义全局变量保存发票信息
+            Receipt = {
+                id: id,
+                CompanyName: CompanyName,		// 公司名称
+                DutyParagraph: DutyParagraph,	// 税号
+                Address: Address,				// 地址
+                Tel: Tel,						// 电话
+                BankOfDeposit: BankOfDeposit,	// 开户银行
+                BankAccount: BankAccount,	    // 银行账号
+            };
+            if (CompanyName == "") {
+                MsgAlert("公司名称(发票抬头)不能为空，请重新填写！", 2);
+                // $("#txt_CompanyName").focus();
+                return false;
+            }
+            if (DutyParagraph == "") {
+                MsgAlert("税号不能为空，请重新填写！", 2);
+                // $("#txt_DutyParagraph").focus();
+                return false;
+            }
+            return true;
+        }
+        //更新发票信息方法
+        function UpdateReceipt(id) {
+            if (!GetField()) {
+                return;
+            }
+            mui.ajax(
+                //请求服务URL
+                "../ReceiptHome/UpdateReceipt",
+                {
+                    data: Receipt,
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //10秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            MsgAlert(data.Message, 2);
+                            //console.log(data);
+                            return;
+                        }
+                        MsgAlert(data.Message, 2);
+                        
+                        var arr1 = $(".ichange").serializeArray();
+                        console.log(arr1)
+                        $(".form1 textarea").each(function (i) {
+                            if(arr1[i]) {
+                                $(this).val(arr1[i].value);
+                            }
+                        })
+                       
+                        $(".tbox").hide("swing")
+                        //var id = GetQueryString("id")
+                        //location.href = "../ReceiptHome/ReceiptDetails?id=" + id
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+       
+        //window.onload=function(){
+        //    if(navigator!=null)
+        //    {
+        //        alert("navigator不为空！ ");
+        //        if(navigator.userAgent!=null)
+        //        {
+        //            //alert("navigator.userAgent不为空！ ");
+        //            alert("浏览器信息"+navigator.userAgent);
+        //        }else
+        //        {
+        //            alert("navigator.userAgent为空！ ");
+        //        }
+        //    }else{
+        //        alert("navigator为空！ ");
+        //    }
+
+
+        //}
+
+        function rcsOptimizeReady() {
+            if (window.WebContainer != null) {
+                if (window.WebContainer.rcsShowRightMoreButton == null) { alert('rcsGetCurrentLocation is null'); }
+                else {
+
+                    try {
+
+
+                    }
+                    catch (error) {
+                        alert(error);
+                    }
+                }
+            }
+            else {
+                try {
+                    navigator.WebContainer.rcsShowRightMoreButton("[]")
+
+                }
+                catch (error) {
+                    alert(error);
+                }
+
+            }
+
+        }
+
+    </script>
+</body>
+</html>

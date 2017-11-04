@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Mis.WcfLib.WorkFlow.WF.DAL" />
+  <xs:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Mis.Common.Model" />
+  <xs:element name="test">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="testResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="testResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Submit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TaskID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isTesting" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserLoginName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveNote" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqbz" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_zbrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqrxx" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SubmitResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitWithValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TaskID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isTesting" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserLoginName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveNote" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqbz" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_zbrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqxx" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Value" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitWithValueResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SubmitWithValueResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitWithJSon">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="TaskID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="isTesting" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strUserLoginName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveNote" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqbz" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_zbrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqrID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqxx" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="f_hqlx" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="FieldValue" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strApproveJSon" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitWithJSonResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SubmitWithJSonResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewBillSubmitByXML">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="UserLoginName" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strXmlDoc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewBillSubmitByXMLResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewBillSubmitByXMLResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewBillSubmitByXML_RepeaingTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="KeyWord" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strXmlDoc" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NewBillSubmitByXML_RepeaingTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="NewBillSubmitByXML_RepeaingTableResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="P_GetMobileDetailByLoinName">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="loginname" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="year" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="P_GetMobileDetailByLoinNameResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="P_GetMobileDetailByLoinNameResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="exWebServiceSaveBill2DB">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jsonStrBill" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="exWebServiceSaveBill2DBResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="exWebServiceSaveBill2DBResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitOnLine">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jsonStr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitOnLineResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/Mis.WcfLib.WorkFlow.WF.DAL" minOccurs="0" name="SubmitOnLineResult" nillable="true" type="q1:Return_Model" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitOnLine_Check">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="jsonStr" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitOnLine_CheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Mis.WcfLib.WorkFlow.WF.DAL" minOccurs="0" name="SubmitOnLine_CheckResult" nillable="true" type="q2:Return_Model" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCfgRepeaingTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Keyword" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetCfgRepeaingTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GetCfgRepeaingTableResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitRepeaingTable">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/Mis.Common.Model" minOccurs="0" name="SerializeRepeaingTable" nillable="true" type="q3:SerializationRepeaingTable" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SubmitRepeaingTableResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="SubmitRepeaingTableResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GWYY">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ModelID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="ProcessID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="user" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GWYYResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="GWYYResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_MenuSmall">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="MenuSmall_BigId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_MenuSmallResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_MenuSmallResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_Post">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_SmallId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PageSize" type="xs:int" />
+        <xs:element minOccurs="0" name="PageCount" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_PostResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostBack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_PostId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PageCount" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostBackResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_PostBackResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Insert_Post">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Title" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Content" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Sender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_SmallId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Insert_PostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Insert_PostResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Insert_PostBack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_Content" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_Sender" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_PostId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Insert_PostBackResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Insert_PostBackResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Update_Post">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Title" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Content" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Update_PostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Update_PostResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Update_PostBack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_Content" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Update_PostBackResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Update_PostBackResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_Before_Post">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_SmallId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PageCount" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_Before_PostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_Before_PostResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_After_Post">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_SmallId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_After_PostResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_After_PostResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostBackCount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostBackCountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_PostBackCountResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostInfo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Post_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_PostInfoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_PostInfoResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_AfterPostBack">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_PostId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PostBack_Id" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="PageCount" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_AfterPostBackResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_AfterPostBackResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_User">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ServerID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="Project" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="User_Id" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bbs_Get_UserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="Bbs_Get_UserResult" nillable="true">
+          <xs:complexType>
+            <xs:annotation>
+              <xs:appinfo>
+                <ActualType Name="DataSet" Namespace="http://schemas.datacontract.org/2004/07/System.Data" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+            </xs:annotation>
+            <xs:sequence>
+              <xs:element ref="xs:schema" />
+              <xs:any />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MsgSendSys">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="strMailTo" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strMailSubject" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strMailBody" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strEieNum" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strEieBody" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="strSystemName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MsgSendSysResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="MsgSendSysResult" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

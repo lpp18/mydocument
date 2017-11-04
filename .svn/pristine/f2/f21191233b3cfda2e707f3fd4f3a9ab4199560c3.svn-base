@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "虚拟结算";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        核算体系：
+    </h2>
+    <p id="labf_HSTX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        正文：
+    </h2>
+    <p id="labf_zwcontent" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        审批人：
+    </h2>
+    <p id="labf_spsxname" class="mydocument_infor_title_text"></p>
+</li>
+
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_HSTX").text(processDatajson.processData.f_HSTX);  //核算体系
+        $("#labf_zwcontent").text(processDatajson.processData.f_zwcontent);  //正文
+        $("#labf_spsxname").text(processDatajson.processData.f_spsxname);  //审批人
+    };
+</script>
+

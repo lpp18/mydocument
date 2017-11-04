@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "名片申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        手机号：
+    </h2>
+    <p id="labPhone" class="mydocument_infor_title_text"></p>
+</li>
+
+<li>
+    <h2 class="mydocument_infor_title">
+        邮箱：
+    </h2>
+    <p id="Email" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        地址：
+    </h2>
+    <p id="address" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        备注：
+    </h2>
+    <p id="labRemarks" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"    //project
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labPhone").text(processDatajson.phone); //联系方式
+        $("#Email").text(processDatajson.processData.mailaddr);//邮件
+        $("#address").text(processDatajson.processData.address);//地址
+        $("#labRemarks").text(processDatajson.processData.bz);  //备注
+    };
+</script>

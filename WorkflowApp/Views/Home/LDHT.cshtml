@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "劳动合同";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        员工姓名：
+    </h2>
+    <p id="labf_xqygname" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        员工工号：
+    </h2>
+    <p id="labf_xqyggh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        员工所属部门：
+    </h2>
+    <p id="labf_xqygssbmname" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        入职日期：
+    </h2>
+    <p id="labf_xqygrzrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        职位：
+    </h2>
+    <p id="labf_xqygzw" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        上次合同到期日期：
+    </h2>
+    <p id="labf_xqyghtdqrq" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        本次合同开始日期：
+    </h2>
+    <p id="labf_xqygxhtksqr" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        新合同到期日期：
+    </h2>
+    <p id="labf_hrjyhtqx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        新合同签订情况：
+    </h2>
+    <p id="labf_htqdyjlx" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_xqygname").text(processDatajson.processData.f_xqygname);  //员工姓名
+        $("#labf_xqyggh").text(processDatajson.processData.f_xqyggh);  //员工工号
+        $("#labf_xqygssbmname").text(processDatajson.processData.f_xqygssbmname);  //员工所属部门
+        $("#labf_xqygrzrq").text(processDatajson.processData.f_xqygrzrq);  //入职日期
+        $("#labf_xqygzw").text(processDatajson.processData.f_xqygzw);  //职位
+        $("#labf_xqyghtdqrq").text(processDatajson.processData.f_xqyghtdqrq);  //上次合同到期日期
+        $("#labf_xqygxhtksqr").text(processDatajson.processData.f_xqygxhtksqr);  //本次合同开始日期
+        $("#labf_hrjyhtqx").text(processDatajson.processData.f_expstartdate);  //新合同到期日期
+        $("#labf_htqdyjlx").text(processDatajson.processData.f_htqdyjlx);  //新合同签订情况
+    };
+</script>
+
+

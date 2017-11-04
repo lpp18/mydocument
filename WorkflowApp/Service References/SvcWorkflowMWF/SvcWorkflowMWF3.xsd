@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/Mis.Common.Model" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Mis.Common.Model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="SerializationRepeaingTable">
+    <xs:sequence>
+      <xs:element name="KeyWord" nillable="true" type="xs:string" />
+      <xs:element name="ModelID" nillable="true" type="xs:string" />
+      <xs:element name="ProcessID" nillable="true" type="xs:string" />
+      <xs:element name="ServerID" nillable="true" type="xs:string" />
+      <xs:element name="XMLData" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SerializationRepeaingTable" nillable="true" type="tns:SerializationRepeaingTable" />
+</xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="57e2f50f-04d2-40a6-b05b-d09672472a1e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SvcWorkflowMWF.xsd" MetadataType="Schema" ID="3f55fce8-542e-4c61-bf01-09d613959516" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd0" />
+    <MetadataFile FileName="SvcWorkflowMWF1.xsd" MetadataType="Schema" ID="4452a755-cda3-46d1-836a-7dde65d3f8a2" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd1" />
+    <MetadataFile FileName="SvcWorkflowMWF2.xsd" MetadataType="Schema" ID="c3c7f1ed-530d-4a47-a6f9-d6bd1ed6a84c" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd2" />
+    <MetadataFile FileName="SvcWorkflowMWF3.xsd" MetadataType="Schema" ID="d32b06b0-19e9-44fd-b4d1-d18f47a46e7a" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd3" />
+    <MetadataFile FileName="SvcWorkflowMWF4.xsd" MetadataType="Schema" ID="ee7145ef-3ecb-4601-aebd-90c85ca2efae" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd4" />
+    <MetadataFile FileName="SvcWorkflowMWF.wsdl" MetadataType="Wsdl" ID="985bbc88-1be1-42d7-9749-0974601601bb" SourceId="1" SourceUrl="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

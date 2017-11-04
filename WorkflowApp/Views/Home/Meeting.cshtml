@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "会议申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        会议类型：
+    </h2>
+    <p id="f_hylx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会议背景：
+    </h2>
+    <p id="f_hybj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会议内容：
+    </h2>
+    <p id="f_hynr" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会议开始时间：
+    </h2>
+    <p id="f_startDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会议结束时间：
+    </h2>
+    <p id="f_endDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        会议召开地点：
+    </h2>
+    <p id="f_hyzkdd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        备注：
+    </h2>
+    <p id="f_remark" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#f_hylx").text(processDatajson.processData.f_hylx);
+        $("#f_hybj").append(decodeURIComponent(processDatajson.processData.f_hybj));
+        $("#f_hynr").append(decodeURIComponent(processDatajson.processData.f_hynr));
+        $("#f_startDate").text(processDatajson.processData.f_startDate);
+        $("#f_endDate").text(processDatajson.processData.f_endDate);
+        $("#f_hyzkdd").text(processDatajson.processData.f_hyzkdd);
+        $("#f_remark").append(decodeURIComponent(processDatajson.processData.f_remark));
+    };
+</script>                   

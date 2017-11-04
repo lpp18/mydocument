@@ -1,0 +1,214 @@
+/**
+ * Created by wuzhenjie on 2017/9/26 0026.
+ */
+var myDocument = {
+    init: function(){
+        myDocument.mydocument_infor.listener();
+    },
+    mydocument_infor: {
+        listener: function(){
+            $(document).on('touchend','.mydocument_infor_btn',function(e){
+                e.stopPropagation();
+                e.preventDefault();
+                $(this).hide(200);
+                $(".tab-content-1").animate({  
+                    scrollTop: $("#footer_do").offset().top  
+                }, 400); 
+            });
+            $(document).on('click','.report_up',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+            $(document).on('click','.ask_advice',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+            $(document).on('click','.transfer_others',function(){
+                var _this = this;
+                myDocument.mydocument_infor.select(_this);
+            });
+            //已阅按钮，此代码废弃
+            //$(document).on('click','.has_see',function(){
+            //    window.location.href = '../index.html'
+            //});
+            //$(document).on('click','.mydocument_infor_footer .disagree',function(){
+            //    window.location.href = 'return.html'
+            //})
+       //公文详情     
+            //选择人员
+            //$(".sel").on("click", function () {
+            //    $(".manlist").animate({ bottom: 0 }, 200, "swing");
+            //});
+            //选择人员完成
+              
+		    //$(".finished").on("click",function(){
+		    //	$(".manlist").animate({bottom:"-100%"},200,"swing")
+		    //	var len=$(".manlist").find("input:checked").length
+		    //    var html="";
+		    //	len==0?$(".sel span").html("请选择(必选)"):$(".sel span").html("共"+len+"人")
+		    //})
+            //公文提交
+            //$(document).on('click','.mydocument_infor_footer .agree',function(){
+            //    var index=layer.open({
+			//    content: '您确定要提交吗？',
+			//    shade: 'background-color: rgba(0,0,0,.5)' 
+			//    ,btn: ['取消', '提交']
+			//    ,yes: function(index){
+			//      layer.close(index);
+            //},no:function(index){
+			//      //退回操作
+			//      layer.close(index);
+			//      var index1=layer.open({
+			//      	    shade: 'background-color: rgba(0,0,0,.5)' ,
+			//			type: 2,
+			//			content: '加载中'
+			//			});
+						
+			//		setTimeout(function(){
+			//			layer.close(index1)
+			//		},1000)
+			//      $.ajax({
+			//      	type:"get",
+			//      	url:"",
+			//      	async:true
+			//      });
+			      
+			//      //处理完成
+			//    var html='<div class="over">'+
+			//		    	'<p><img src="../img/succ1.png" alt="" /></p>'+
+			//		    	'<p>处理完成！</p>'+
+			//		    	'</div>'	  
+			//      setTimeout(function(){
+			//      	 var index2=layer.open({
+			//			  style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+			//			  content:html
+			//	   })
+			//      },1100)
+			   
+			//      setTimeout(function(){
+			//      	layer.closeAll()
+			//      },2000)
+	        //    }
+	    	//  })
+            //})
+            
+            
+       //电子流同意
+            /*
+            $(document).on('click','.mydocument_infor_footer .eagree',function(){
+       
+			      var index1=layer.open({
+			      	    shade: 'background-color: rgba(0,0,0,.5)' ,
+						type: 2,
+						content: '加载中'
+						});
+						
+					setTimeout(function(){
+						layer.close(index1)
+					},1000)
+					
+				      $.ajax({
+				      	type:"get",
+				      	url:"",
+				      	async:true
+				      });
+			      
+			      //处理完成
+			    var html='<div class="over">'+
+					    	'<p><img src="../Content/img/succ1.png" alt="" /></p>'+
+					    	'<p>处理完成！</p>'+
+					    	'</div>'	  
+			      setTimeout(function(){
+			      	 var index2=layer.open({
+						  style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+						  content:html
+				   })
+			      },1100)
+			   
+			      setTimeout(function(){
+			      	layer.closeAll()
+			      },2000)
+			      setTimeout(function(){
+			          //location.href="../index.html"
+			          location.href = "../Home/index";
+			      },2500)
+            })
+            
+            电子流驳回
+             $(document).on('click','.mydocument_infor_footer .edisagree',function(){
+                var index=layer.open({
+			    content: '您确定要驳回吗？',
+			    shade: 'background-color: rgba(0,0,0,.5)' 
+			    ,btn: ['取消', '驳回']
+			    ,yes: function(index){
+			      layer.close(index);
+            },no:function(index){
+			      //退回操作
+			      layer.close(index);
+			      var index1=layer.open({
+			      	    shade: 'background-color: rgba(0,0,0,.5)' ,
+						type: 2,
+						content: '加载中'
+						});
+						
+					setTimeout(function(){
+						layer.close(index1)
+					},1000)
+			      $.ajax({
+			      	type:"get",
+			      	url:"",
+			      	async:true
+			      });
+			      
+			      //处理完成
+			    var html='<div class="over">'+
+					    	'<p><img src="../img/succ1.png" alt="" /></p>'+
+					    	'<p>处理完成！</p>'+
+					    	'</div>'	  
+			      setTimeout(function(){
+			      	 var index2=layer.open({
+						  style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+						  content:html
+				   })
+			      },1100)
+			   
+			      setTimeout(function(){
+			      	layer.closeAll()
+			      },2000)
+			      setTimeout(function(){
+			      	location.href="../index.html"
+			      },2000)
+	            }
+	    	})
+            })*/
+            if ($("body").height() - $(".mydocument_infor_deal")[0].offsetTop - document.body.scrollTop > 40) {
+                $("#SkipAgree").hide(0)
+            }
+            $(".tab-content-1").scroll(function(){
+            	
+            	
+//		    	setInterval(function(){
+//		    		console.log(1)
+//		    		$(".mydocument_infor_btn").css("bottom",0)
+//		    	},30)
+                console.log($(".mydocument_infor").height() - $(".swiper-wrapper").height())
+		    	if($(this).scrollTop()==0){
+		    		
+		    		$(".mydocument_infor_btn").fadeIn(100)
+		    	}else if($(this).scrollTop()>=$(".mydocument_infor").height()-$(".swiper-wrapper").height()-50){
+		    		$(".mydocument_infor_btn").fadeOut(100)
+		    	}
+		    	
+		    })
+        },
+        select:function(_this){//选中事件
+            if($(_this).attr('checked')){
+                $(_this).removeAttr('checked');
+                console.log("移除")
+            }else {
+                $(_this).attr('checked',true);
+                console.log("选中")
+            }
+        }
+    }
+}

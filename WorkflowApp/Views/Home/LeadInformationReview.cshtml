@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "领导信息评审";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        资料内容：
+    </h2>
+    <p id="f_ZLNR" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        资料类型：
+    </h2>
+    <p id="f_ZLLX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        使用理由：
+    </h2>
+    <p id="f_SYSY" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        使用期限：
+    </h2>
+    <p id="f_SYQX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="f_LXFS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请资料人：
+    </h2>
+    <p id="f_SQRLoginNameCN" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //资料内容
+        $("#f_ZLNR").text(processDatajson.processData.f_ZLNR);
+        //资料类型
+        $("#f_ZLLX").text(processDatajson.processData.f_ZLLX);
+        //使用理由
+        $("#f_SYSY").text(processDatajson.processData.f_SYSY);
+        //使用期限
+        $("#f_SYQX").text(processDatajson.processData.f_SYQX);
+        //联系方式
+        $("#f_LXFS").text(processDatajson.processData.f_LXFS);
+        //申请人资料
+        $("#f_SQRLoginNameCN").text(processDatajson.processData.f_SQRLoginNameCN);
+    };
+</script>

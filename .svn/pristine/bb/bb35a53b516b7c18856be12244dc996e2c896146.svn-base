@@ -1,0 +1,583 @@
+requirejs.config({
+    baseUrl: '../Content/js/libs',
+    shim: {
+        "swiper.jquery.min": {
+            deps: ["jquery"],
+            exports: 'Swiper'
+        }
+    }
+});
+
+
+require(["jquery", "swiper.jquery.min"], function ($, Swiper) {
+    var loadFlag = true;
+    var oi = 0;
+    var mySwiper = new Swiper('.swiper-container', {
+        resistanceRatio : 0,
+        direction: 'vertical',
+        scrollbar: '.swiper-scrollbar',
+        slidesPerView: 'auto',
+        mousewheelControl: true,
+        freeMode: true,
+        onTouchMove: function (swiper) {		//手动滑动中触发
+            var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+            var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+
+
+            if (mySwiper.translate < 50 && mySwiper.translate > 0) {
+                $(".init-loading").html('下拉刷新...').show();
+            } else if (mySwiper.translate > 50) {
+                $(".init-loading").html('释放刷新...').show();
+            }
+        },
+        onTouchEnd: function (swiper) {
+            var _viewHeight = document.getElementsByClassName('swiper-wrapper')[0].offsetHeight;
+            var _contentHeight = document.getElementsByClassName('swiper-slide')[0].offsetHeight;
+            // 上拉加载
+            if (mySwiper.translate <= _viewHeight - _contentHeight - 50 && mySwiper.translate < 0) {
+                // console.log("已经到达底部！");
+                if (loadFlag) {
+                    $(".loadtip").html('正在加载...');
+                } else {
+                    $(".loadtip").html('没有更多啦！');
+                }
+                if (mySwiper2.activeIndex == 0) {
+                    countIndex1 += 5;
+                    WorkflowProcess(countIndex1);
+                } else if (mySwiper2.activeIndex == 1) {
+                    countIndex2 += 5;
+                    DocumentProcess(countIndex2);
+                }
+
+                $(".loadtip").html('上拉加载更多...');
+                mySwiper.update(); // 重新计算高度;
+                //setTimeout(function () {
+                //    //for (var i = 0; i < 5; i++) {
+                //    //    oi++;
+                //    //    $(".list-group").eq(mySwiper2.activeIndex).append(html);
+                //    //}
+                //    $(".loadtip").html('上拉加载更多...');
+                //    mySwiper.update(); // 重新计算高度;
+                //}, 800);
+            }
+
+            // 下拉刷新
+            if (mySwiper.translate >= 50) {
+                $(".init-loading").html('正在刷新...').show();
+                $(".loadtip").html('上拉加载更多');
+                loadFlag = true;
+                WorkflowProcess(countIndex1);
+                DocumentProcess(countIndex2);
+                setTimeout(function () {
+                    $(".refreshtip").show(0);
+                    $(".init-loading").html('刷新成功！');
+                    setTimeout(function () {
+                        $(".init-loading").html('').hide();
+                    }, 800);
+                    $(".loadtip").show(0);
+
+                    //刷新操作
+                    mySwiper.update(); // 重新计算高度;
+                }, 1000);
+            } else if (mySwiper.translate >= 0 && mySwiper.translate < 50) {
+                $(".init-loading").html('').hide();
+            }
+            return false;
+        }
+    });
+    var mySwiper2 = new Swiper('.swiper-container2', {
+        resistanceRatio : 0,
+        onTransitionEnd: function (swiper) {
+
+            $('.w').css('transform', 'translate3d(0px, 0px, 0px)')
+            $('.swiper-container2 .swiper-slide-active').css('height', 'auto').siblings('.swiper-slide').css('height', '0px');
+            mySwiper.update();
+
+            $('.tab a').eq(mySwiper2.activeIndex).addClass('active').siblings('a').removeClass('active');
+        }
+
+    });
+    //顶部选项卡事件
+    $('.tab a').click(function () {
+
+        $(this).addClass('active').siblings('a').removeClass('active');
+        mySwiper2.slideTo($(this).index(), 500, false)
+
+        $('.w').css('transform', 'translate3d(0px, 0px, 0px)')
+        $('.swiper-container2 .swiper-slide-active').css('height', 'auto').siblings('.swiper-slide').css('height', '0px');
+        mySwiper.update();
+    });
+    //搜索按钮事件
+    $("#Search").on("focus", function () {
+        QueryProcessAssemble();
+        if ($(this).val() == "") {
+            $(".sfind").show("swing");
+        }
+    }).on("blur", function () {
+        $(".sfind").hide("swing");
+
+    });
+    $("#Search").keyup(function () {
+        if ($(this).val() != "") {
+            $(".sfind").hide("swing");
+            Name = $(this).val();
+            QueryProcessByName(countIndex1, Name);
+            QueryDocumentProcessByName(countIndex2, Name);
+        } else {
+            $(".sfind").show("swing");
+        }
+    });
+    var Name = "";  //搜索名称
+    var page = 1;
+    var countIndex1 = 60;  //每页加载数量
+    var countIndex2 = 20;
+    $(function () {
+
+        WorkflowProcess(countIndex1);
+        DocumentProcess(countIndex2);
+    });
+    var TotalCount = 0;
+
+    //根据
+    function GetProcessName(ModelId) {
+        var ProcessName = "";
+        var url = "";
+        switch (ModelId) {
+            case "38926":
+                ProcessName = "发票申请";
+                url = "";
+                break;
+            case "7281":
+                ProcessName = "报销申请";
+                url = "";
+                break;
+            case "332373":
+                ProcessName = "印章申请";
+                break;
+            case "7559":
+                ProcessName = "请假申请";
+                break;
+            case "183443":
+                ProcessName = "外出申请";
+                break;
+            case "181382":
+                ProcessName = "考勤申请";
+                break;
+            case "7575":
+                ProcessName = "名片申请";
+                break;
+            case "183445":
+                ProcessName = "加班申请";
+                break;
+            case "7573":
+                ProcessName = "出差申请";
+                break;
+            case "184002":
+                ProcessName = "工卡申请";
+                break;
+            case "374334":
+                ProcessName = "会议申请";
+                break;
+            case "22283":
+                ProcessName = "培训申请";
+                break;
+            case "164584":
+                ProcessName = "工会活动申请";
+                break;
+            case "35876":
+                ProcessName = "机票变更申请";
+                break;
+            case "364244":
+                ProcessName = "弹性考勤申请";
+                break;
+            case "343373":
+                ProcessName = "外包变更申请";
+                break;
+            case "239336":
+                ProcessName = "外包到场申请";
+                break;
+            case "243670":
+                ProcessName = "外包离场申请";
+                break;
+            case "163755":
+                ProcessName = "合同评审申请";
+                break;
+            case "266961":
+                ProcessName = "采购申请";
+                break;
+            case "181943":
+                ProcessName = "薪酬申请";
+                break;
+            case "9597":
+                ProcessName = "员工变动申请";
+                break;
+            case "10788":
+                ProcessName = "员工离职申请";
+                break;
+            case "10767":
+                ProcessName = "员工入职申请";
+                break;
+            case "41556":
+                ProcessName = "员工转正申请";
+                break;
+            case "181603":
+                ProcessName = "招聘需求申请";
+                break;
+            case "411557":
+                ProcessName = "卓学平台资源申请";
+                break;
+            case "270494":
+                ProcessName = "方案决策申请";
+                break;
+            case "270497":
+                ProcessName = "结果确认申请";
+                break;
+            case "181846":
+                ProcessName = "内容发布申请";
+                break;
+            case "19788":
+                ProcessName = "公司用车申请";
+                break;
+            case "326448":
+                ProcessName = "通知发布申请";
+                break;
+            case "11058":
+                ProcessName = "因公出国申请";
+                break;
+            case "205944":
+                ProcessName = "领导信息评审申请";
+                break;
+            case "37931":
+                ProcessName = "租车申请";
+                break;
+            case "62487":
+                ProcessName = "虚拟申请";
+                break;
+            case "27195":
+                ProcessName = "劳动合同申请";
+                break;
+            case "23966":
+                ProcessName = "采购预审申请";
+                break;
+            case "7542":
+                ProcessName = "办公用品申请";
+                break;
+            case "129472":
+                ProcessName = "网路资源申请";
+                break;
+            case "661089":
+                ProcessName = "报备收入申请";
+                break;
+            case "661091":
+                ProcessName = "报备支出申请";
+                break;
+            case "661086":
+                ProcessName = "报备非收支申请";
+                break;
+            default:
+                ProcessName = "未知流程";
+                break;
+        }
+        if (ModelId == "97028" || ModelId == "440370" || ModelId == "233206" || ModelId == "440871" || ModelId == "440839" || ModelId == "261242" || ModelId == "237386" || ModelId == "216219")  //公文签报
+        {
+            ProcessName = "公文签报";
+        }
+        return ProcessName;
+    };
+    //加载流程信息
+    function WorkflowProcess(count) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/WorkflowProcess',
+            cache: false,
+            dataType: "json",
+            data: {
+                page: page,
+                count: count
+            },
+            success: function (mes) {
+                var HtmlStr = "";
+                var count = 0;
+                if (mes.length > 0) {
+                    //流程名称
+                    for (var i = 0; i < mes.length; i++) {
+                        try {
+                            //20171010
+                            //去掉字符串回车换行符
+                            mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                            var processDatajson = $.parseJSON(mes[i].ProcessData);
+                            var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                            var BillNO = mes[i].BillNo.toString();
+                            var Status = mes[i].Status ? "1" : "0";
+                            var ProcessName = GetProcessName(ModelId);  //流程名称
+                            var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                            var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                            var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                            //test();
+                            HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','0')\" >  <div>";
+                            //HtmlStr += "<input type='hidden' value='' /><div>";
+                            HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                            HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                            HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                            HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+                            count++;
+                        } catch (e) {
+                            //异常
+                            console.log(count + e);
+                        }
+                    }
+                } else {
+                    HtmlStr += "<div class=\"list-group-item\"  >  <div>";
+                    HtmlStr += "<p class=\"tit\">数据为空！</p></div>";
+                };
+                document.getElementById("DbInfo").innerHTML = HtmlStr;
+                mySwiper.update();
+                //TotalCount = mes.length;
+                //MsgAlert("测试使用,待办 流程" + TotalCount + "条", 2);
+            }
+        });
+    };
+    //加载公文流程
+    function DocumentProcess(count) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/DocumentProcess',
+            cache: false,
+            dataType: "json",
+            data: {
+                page: page,
+                count: count
+            },
+            success: function (mes) {
+                var HtmlStr = "";
+                var count = 0;
+                if (mes.length > 0) {
+                    //流程名称
+                    for (var i = 0; i < mes.length; i++) {
+                        try {
+                            //20171010
+                            //去掉字符串回车换行符
+                            mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                            var processDatajson = $.parseJSON(mes[i].ProcessData);
+                            var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                            var BillNO = mes[i].BillNo.toString();
+                            var Status = mes[i].Status ? "1" : "0";
+                            var IsTips = mes[i].IsTips ? "1" : "0";
+                            var ProcessName = "公文签报";  //流程名称
+                            var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                            var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                            var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                            //test();
+                            HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','0','" + IsTips + "')\" >  <div>";
+                            //HtmlStr += "<input type='hidden' value='' /><div>";
+                            HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                            HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                            HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                            HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+
+                        } catch (e) {
+                            //异常
+                            console.log(e);
+                        }
+                    }
+                } else {
+                    HtmlStr += "<div class=\"list-group-item\"  >  <div>";
+                    HtmlStr += "<p class=\"tit\">数据为空！</p></div>";
+                };
+                document.getElementById("DocumentInfo").innerHTML = HtmlStr;
+                mySwiper.update();
+                //TotalCount = mes.length;
+                //MsgAlert("测试使用,待办 流程" + TotalCount + "条", 2);
+            }
+        });
+    }
+    //搜索栏快速查询
+    function QueryProcessAssemble() {
+        $.ajax({
+            url: "../Home/QueryProcessAssemble",
+            type: "post",
+            dataType: "json",
+            cache: false,
+            success: function (data) {
+                //console.log(data);
+                if (data.length > 0) {
+                    var HtmlStr = "<p>点击下方流程标题，可进行快捷筛选</p>";
+                    for (var item in data) {
+                        var Total = data[item].Total;
+                        var ModelId = data[item].ModelId;
+                        var ProcessName = GetProcessName(ModelId);
+                        console.log(ProcessName);
+                        HtmlStr += "<p class=\"gcolor\">" + ProcessName + "，" + Total + "条</p>";
+                        HtmlStr += "<input type='hidden' value='" + ModelId + "'>";
+                        HtmlStr += "<input type='hidden' value='" + Total + "'>";
+                    };
+
+                } else {
+                    HtmlStr = "<p>流程数据为空！</p>";
+                };
+                $("#QuickLook").html(HtmlStr);
+                $("#QuickLook p").on("click", function (e) {
+                    var ModelId = $(this).next().val();
+                    var Total = $(this).next().next().val();
+                    QueryProcessByModelId(Total, ModelId)
+                });
+            }
+        });
+    };
+
+    //根据ModelId查询
+    function QueryProcessByModelId(count, ModelId) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/QueryProcessByModelId',
+            cache: false,
+            dataType: "json",
+            data: {
+                page: page,
+                count: count,
+                ModelId: ModelId
+            },
+            success: function (mes) {
+                if (mes.length == 0) {
+
+                } else {
+                    var HtmlStr = "";
+                    //流程名称
+                    var count = 0;
+                    for (var i = 0; i < mes.length; i++) {
+                        try {
+                            //20171010
+                            //去掉字符串回车换行符
+                            mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                            var processDatajson = $.parseJSON(mes[i].ProcessData);
+                            var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                            var BillNO = mes[i].BillNo.toString();
+                            var Status = mes[i].Status ? "1" : "0";
+                            var ProcessName = GetProcessName(ModelId);  //流程名称
+                            var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                            var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                            var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                            //test();
+                            HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','0')\" >  <div>";
+                            //HtmlStr += "<input type='hidden' value='' /><div>";
+                            HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                            HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                            HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                            HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+                            count++;
+                        } catch (e) {
+                            //异常
+                            console.log(count + e);
+                        }
+                    }
+                    document.getElementById("DbInfo").innerHTML = HtmlStr;
+                    TotalCount = mes.length;
+                    MsgAlert("测试使用,待办 流程" + TotalCount + "条", 2);
+                };
+            }
+        });
+    };
+    //根据标题或申请人查询待办流程
+    function QueryProcessByName(count, Name) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/QueryProcessByName',
+            cache: false,
+            dataType: "json",
+            data: {
+                page: page,
+                count: count,
+                Name: Name
+            },
+            success: function (mes) {
+                var HtmlStr = "";
+                var count = 0;
+                if (mes.length > 0) {
+                    //流程名称
+                    for (var i = 0; i < mes.length; i++) {
+                        try {
+                            //20171010
+                            //去掉字符串回车换行符
+                            mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                            var processDatajson = $.parseJSON(mes[i].ProcessData);
+                            var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                            var BillNO = mes[i].BillNo.toString();
+                            var Status = mes[i].Status ? "1" : "0";
+                            var ProcessName = GetProcessName(ModelId);  //流程名称
+                            var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                            var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                            var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                            //test();
+                            HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','0')\" >  <div>";
+                            //HtmlStr += "<input type='hidden' value='' /><div>";
+                            HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                            HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                            HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                            HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+                            count++;
+                        } catch (e) {
+                            //异常
+                            console.log(count + e);
+                        }
+                    }
+                } else {
+                    HtmlStr += "<div class=\"list-group-item\"  >  <div>";
+                    HtmlStr += "<p class=\"tit\">数据为空！</p></div>";
+                };
+                document.getElementById("DbInfo").innerHTML = HtmlStr;
+            }
+        });
+    };
+    //根据标题或申请人查询公文流程
+    function QueryDocumentProcessByName(count, Name) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/QueryDocumentProcessByName',
+            cache: false,
+            dataType: "json",
+            data: {
+                page: page,
+                count: count,
+                Name: Name
+            },
+            success: function (mes) {
+                var HtmlStr = "";
+                var count = 0;
+                if (mes.length > 0) {
+                    //流程名称
+                    for (var i = 0; i < mes.length; i++) {
+                        try {
+                            //20171010
+                            //去掉字符串回车换行符
+                            mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                            var processDatajson = $.parseJSON(mes[i].ProcessData);
+                            var ModelId = mes[i].ModelId != null ? mes[i].ModelId : "";
+                            var BillNO = mes[i].BillNo.toString();
+                            var Status = mes[i].Status ? "1" : "0";
+                            var IsTips = mes[i].IsTips ? "1" : "0";
+                            var ProcessName = "公文签报";  //流程名称
+                            var Applicant = mes[i].BillEmpName != null ? mes[i].BillEmpName : "";  //申请人
+                            var Title = processDatajson.billTitle != null ? processDatajson.billTitle : "";  //标题
+                            var CreateTime = processDatajson.billDate != null ? processDatajson.billDate : "";  //创建时间
+                            //test();
+                            HtmlStr += "<div class=\"list-group-item\" onclick=\"ProcessDetails('" + BillNO + "','" + ModelId + "','" + Status + "','0','" + IsTips + "')\" >  <div>";
+                            //HtmlStr += "<input type='hidden' value='' /><div>";
+                            HtmlStr += "<p class=\"tit\">" + ProcessName + "-" + Applicant + "</p>";
+                            HtmlStr += "<p class=\"cont\">事项 : " + Title + "</p>";
+                            HtmlStr += "<p class=\"mydate\">提交日期 : " + CreateTime + "</p>";
+                            HtmlStr += "</div><p class=\"arrow\"><img src=\"../Content/img/arrow.png\" /></p></div>";
+
+                        } catch (e) {
+                            //异常
+                            console.log(e);
+                        }
+                    }
+                } else {
+                    HtmlStr += "<div class=\"list-group-item\"  >  <div>";
+                    HtmlStr += "<p class=\"tit\">数据为空！</p></div>";
+                };
+                document.getElementById("DocumentInfo").innerHTML = HtmlStr;
+            }
+        });
+    };
+});

@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!--设置网页编码-->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <!--页面关键字-->
+    <meta http-equiv="keywords" content="" />
+    <!--640宽meta头-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!-- 删除默认的苹果工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 苹果手机顶部为黑色 -->
+    <meta name="apple-mobile-web-status-bar-style" content="block" />
+    <!-- 屏蔽浏览器自动识别数字为电话号码 -->
+    <meta name="fromat-detecition" content="telephone=no" />
+    <title>公文详情</title>
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 375 + 'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link href="../Content/css/swiper-3.3.1.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../Content/js/libs/need/layer.css" />
+    <link rel="stylesheet" href="../Content/css/main.css" />
+    <link rel="stylesheet" href="../Content/css/my_common.css">
+    <link rel="stylesheet" href="../Content/css/my_document.css">
+    <style type="text/css">
+        /*-----------------------content-------------------------------*/
+        .wrapper {
+            margin: 0 auto;
+        }
+        .tab-content-1, .tab-content-2 {
+            width: 100%;
+            height: 17.875rem;
+            text-align: center;
+            font-size: 3.75rem;
+        }
+
+        .tab-content-1 {
+            color: #f76755;
+        }
+
+        .tab-content-2 {
+            color: mediumslateblue;
+        }
+
+        .swiper-wrapper {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: 100%;
+            overflow: auto;
+        }
+
+        .mydocument_infor {
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" style="height:100%">
+
+        <!--列表切换选项卡-->
+        <div class="maple-tab clearFix">
+            <ul class="nav_tab">
+                <li class="active"><p class="m-border-right">基本信息</p></li>
+                <li><p>公文正文</p></li>
+                <li><p>公文附件</p></li>
+            </ul>
+        </div>
+
+        <!--列表内容-->
+        <div class="swiper-container" style="height:100%">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide tab-content-1">
+                    <ul class="mydocument_infor">
+                        <li class="title">
+                            <h2 class="mydocument_infor_title">主题：</h2>
+                            <p id="labtitle" class="mydocument_infor_title_text">@*关于2017-2018年卓望公司设备保修服务内部实施的请示*@</p>
+                        </li>
+                        <li class="user">
+                            <h2 class="mydocument_infor_title">申请人：</h2>
+                            <p id="labproposerName" class="mydocument_infor_title_text">@*杜旭*@</p>
+                        </li>
+                        <li class="timer">
+                            <h2 class="mydocument_infor_title">签报日期：</h2>
+                            <p id="labapplyTime" class="mydocument_infor_title_text">@*2017-09-21 16:33:21*@</p>
+                        </li>
+                        <li class="mobile">
+                            <h2 class="mydocument_infor_title">联系电话：</h2>
+                            <p id="labFphone" class="mydocument_infor_title_text">@*15201420109*@</p>
+                        </li>
+                        <li class="document_type">
+                            <h2 class="mydocument_infor_title">公文种类：</h2>
+                            <p id="labdocType" class="mydocument_infor_title_text">@*签报公文：（10）请示、（11）报告、（12）建议方案*@</p>
+                        </li>
+                        <li class="overtime_type">
+                            <h2 class="mydocument_infor_title">
+                                申请部门：
+                            </h2>
+                            <p id="labbillDept" class="mydocument_infor_title_text">@*卓望公司/卓望信息/平台业务部*@</p>
+                        </li>
+                        <div id="AgreeOperate" class="mydocument_infor_deal">
+                            <h3>审批意见</h3>
+                            <div class="deal-content">
+                                <textarea id="ApproveOpinion" placeholder="请输入内容"></textarea>
+                            </div>
+                            <div id="BtnToRead" class="has_see">
+                                <img src="../Content/img/readed.png" alt="">
+                                <p>已阅</p>
+                            </div>
+                        </div>
+                    </ul>
+                    <div class="areawrap"></div>
+                </div>
+                <div id="DocumentBody" class="swiper-slide tab-content-2">@*公文正文*@</div>
+                <div id="AttachmentInfo" class="swiper-slide tab-content-2 appendix">
+                    @*附件*@
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../Content/js/require.js" defer async="true" data-main="../Content/js/document"></script>
+    <script src="~/Content/js/libs/jquery.js"></script>
+
+    <script type="text/javascript">
+        function timeConvert(obj, IsMi) {
+            var correcttime1 = eval('( new ' + obj.replace(new RegExp("\/", "gm"), "") + ')');
+            var myDate = correcttime1;
+            var year = myDate.getFullYear();
+            var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+            var day = ("0" + myDate.getDate()).slice(-2);
+            var h = ("0" + myDate.getHours()).slice(-2);
+            var m = ("0" + myDate.getMinutes()).slice(-2);
+            var s = ("0" + myDate.getSeconds()).slice(-2);
+            var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+            if (IsMi == false) {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+            }
+            else {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s + " " + mi;
+            }
+        }
+        //获取参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        };
+        //说明，option=0，代表未处理待办操作，option=1，已处理待办操作
+        var option = getUrlParam("option");
+        var Url = "../Home/select_bumphdetails";
+        if (option == "1") {
+            $("#AgreeOperate").remove();
+            Url = "../Home/QueryProcessedDocument";
+        }
+        var gwqb;
+        var Processing_Code = "";//选择处理方式
+        var Processing_CodeName = "";  //处理方式中文名
+        $(function () {
+            selectprocess();
+        });
+        //1、公文流程详细信息
+        function selectprocess() {
+            //debugger
+            $.ajax({
+                type: 'post',
+                url: '../Home/select_bumphdetails',
+                cache: false,
+                data: 'billNo=' + getUrlParam("billNo"),
+                dataType: "json", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    gwqb = mes;
+                    //console.log(mes);
+                    for (var i = 0; i < mes.length; i++) {
+                        billNo = mes[i].BillNo;
+                        var processDatajson = $.parseJSON(mes[i].ProcessData);
+                        //$("#labbillNo").text(mes[i].BillNo);
+                        $("#labtitle").text(processDatajson.billTitle);
+                        $("#labproposerName").text(mes[i].BillEmpName);
+                        $("#labapplyTime").text(processDatajson.billDate);
+                        $("#labFphone").text(processDatajson.phone);
+                        var textContentHtml = processDatajson.processData.textContentHtml;
+                        console.log(textContentHtml);
+                        $("#DocumentBody").html(mes[i].selecttextcontenthtml);
+                        $("#labbillDept").text(processDatajson.billDept);
+                        $("#labdocType").text(processDatajson.processData.docType);
+
+                        selectatt(mes[i].ServerID, mes[i].ModelId, mes[i].ProcessID);
+                    }
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        }
+
+        //2、附件
+        function selectatt(sid, mid, pid) {
+            $.ajax({
+                type: 'post',
+                url: '../Home/selectAttachment',
+                cache: false,
+                data: 'sid=' + sid + '&mid=' + mid + '&pid=' + pid,
+                dataType: "json", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    //开始附件
+                    $("#AttachmentInfo").text("");
+                    var strlog = "";
+                    for (var j = 0; j < mes.length; j++) {
+                        var FileUrl = mes[j].FileUrl;
+                        var FileName = mes[j].FileName;
+                        var UserLoginName = mes[j].UserLoginName;
+                        var CreateTime = timeConvert(mes[j].AddTime, false);
+                        if (FileUrl == "") {
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].FileName + "</td>";
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        else {
+                            //strlog += "<td><a href='" + mes[j].FileUrl + "'>" + mes[j].FileName + "</a></td>";
+                            //strlog += "<td>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        strlog = "<div class=\"list-group-item li\"><div>";
+                        strlog += "<p><img src=\"../Content/img/fujian.png\" /><span>" + FileName + "</span></p>";
+                        strlog += "<p><span>添加人 : " + UserLoginName + "</span><span> 添加日期 : " + CreateTime + "</span></p></div>";
+                        strlog += "<p><a href=\"" + FileUrl + "\" target=\"_blank\" download class=\"mui-btn mui-btn-outlined font24\">下载</a></p></div>";
+                    };
+                    $("#AttachmentInfo").html(strlog);
+                },
+                error: function () {
+                }
+            });
+        };
+
+        //3、公文待阅处理
+        $(document).on("click", "#BtnToRead", function () {
+            WorkflowToRead();
+        });
+        function WorkflowToRead() {
+            //debugger;
+            var snum = 0;
+            var BillNo = gwqb[0].BillNo;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var ServerID = processDatajson.serverId;   //serverID
+            var Project = "HD2012"    //project
+            var taskId = processDatajson.taskID;  //taskid
+            var ModelId = gwqb[0].ModelId;     //模块ID
+            var ProcessID = processDatajson.processId;   //processId;
+            $.ajax({
+                type: 'post',
+                url: '../Home/SvcWorkflowToRead',
+                cache: false,
+                data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&Project=' + Project + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID,
+                dataType: "text", //返回数据形式为json
+                beforeSend: function () {
+                    Loading("处理中");
+                },
+                success: function (mes) {
+                    layer.closeAll();
+                    if (mes == "OK") {
+                        SkipIndex("处理完成！", "succ1")
+                    } else if (mes == "NO") {
+                        SkipIndex("处理失败！", "edit")
+                    } else {
+                        SkipIndex("处理失败，" + mes, "succ1")
+                    }
+                }
+            });
+        };
+
+        //进度显示
+        function Loading(content) {
+            var index1 = layer.open({
+                shade: 'background-color: rgba(0,0,0,.5)',
+                type: 2,
+                content: content
+            });
+        }
+        //消息提示
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        };
+        //跳转首页
+        function SkipIndex(content, ico) {
+            //处理完成
+            var html = '<div class="over">' +
+                        '<p><img src="../Content/img/' + ico + '.png" alt="" /></p>' +
+                        '<p>' + content + '</p>' +
+                        '</div>';
+            var index2 = layer.open({
+                style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+                content: html
+            });
+            setTimeout(function () {
+                location.href = "../Home/index";
+            }, 800);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "报销详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li class="">
+    <h2 class="mydocument_infor_title">
+        报销金额：
+    </h2>
+    <p id="labdocType" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD"    //project
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labdocType").text(processDatajson.processData.Amount_apply);
+    };
+</script>

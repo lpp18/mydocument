@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "员工转正";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        姓名：
+    </h2>
+    <p id="f_UserName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        入职日期：
+    </h2>
+    <p id="f_EntryDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        试用期满日：
+    </h2>
+    <p id="f_EndDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        试用期评估结果：
+    </h2>
+    <p id="f_Result" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //姓名
+        $("#f_UserName").text(processDatajson.processData.F_UserName);
+        //入职日期
+        $("#f_EntryDate").text(processDatajson.processData.F_EntryDate);
+        //试用期满日
+        $("#f_EndDate").text(processDatajson.processData.F_EndDate);
+        //试用期评估结果
+        $("#f_Result").text(processDatajson.processData.F_Result);
+    };
+</script>
+

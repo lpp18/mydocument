@@ -1,0 +1,47 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div id="div1">
+
+    </div>
+    <script src="~/Content/NewUi/Content/js/jquery.min.js"></script>
+    <script src="~/Content/NewUi/Content/js/mui.min.js"></script>
+    <script>
+        $(function () {
+            $.ajax({
+                type: 'post',
+                url: '/Workflow/Home/UpdateAttachmentUrl',
+                cache: false,
+                data: 'key=' + escape(getUrlParam("key")),
+                dataType: "json", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    $("#div1").html(mes);
+                },
+                error: function () {
+                    $("#div1").html("NO");
+                }
+            });
+        })
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        };
+
+    </script>
+
+</body>
+</html>

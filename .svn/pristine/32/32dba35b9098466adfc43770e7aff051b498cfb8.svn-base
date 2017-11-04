@@ -1,0 +1,44 @@
+﻿@{
+    ViewBag.Title = "员工入职";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        姓名：
+    </h2>
+    <p id="f_UserName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        职位：
+    </h2>
+    <p id="f_Jobs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        报到日期：
+    </h2>
+    <p id="f_RegDate" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        报到地点：
+    </h2>
+    <p id="f_RegAddress" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //姓名
+        $("#f_UserName").text(processDatajson.processData.F_UserName);
+        //职位
+        $("#f_Jobs").text(processDatajson.processData.F_Jobs);
+        //报到日期
+        $("#f_RegDate").text(processDatajson.processData.F_RegDate);
+        //报到地点
+        $("#f_RegAddress").text(processDatajson.processData.F_RegAddress);
+    };
+</script>

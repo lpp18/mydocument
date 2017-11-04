@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "外包到场";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        姓名：
+    </h2>
+    <p id="labuser" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        帐号：
+    </h2>
+    <p id="labusername" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        部门：
+    </h2>
+    <p id="labdept" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        核算体系：
+    </h2>
+    <p id="labcompany" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        供应商：
+    </h2>
+    <p id="labgys" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        入场地点：
+    </h2>
+    <p id="labrcdd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        服务费：
+    </h2>
+    <p id="labfwf" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        到场时间：
+    </h2>
+    <p id="labdcsj" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labuser").text(processDatajson.processData.f_user);
+        $("#labusername").text(processDatajson.processData.f_username);
+        $("#labdept").text(processDatajson.processData.f_dept);
+        $("#labcompany").text(processDatajson.processData.f_company);
+        $("#labgys").text(processDatajson.processData.f_gys);
+        $("#labrcdd").text(processDatajson.processData.f_rcdd);
+        $("#labfwf").text(processDatajson.processData.f_fwf);
+        $("#labdcsj").text(processDatajson.processData.f_dcsj);
+    };
+</script>                               
+

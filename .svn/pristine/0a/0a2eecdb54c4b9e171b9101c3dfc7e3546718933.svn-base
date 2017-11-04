@@ -1,0 +1,468 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="gray">
+    <title>请假</title>
+    <link href="~/Content/font/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui-slide.css" rel="stylesheet" />
+    <link href="~/Content/css/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/css/common.css" rel="stylesheet" />
+</head>
+<body>
+
+    <div class="mui-content" style="padding-bottom: 50px;">
+        <div class="aui-content">
+            <div class="aui-tab" id="tab">
+                <div class="aui-tab-item aui-active">基本信息</div>
+                <div class="aui-tab-item">假期信息</div>
+                <div class="aui-tab-item">审批日志</div>
+            </div>
+        </div>
+        <div class="aui-content" id="tabCont">
+            <!-- 基本信息-->
+            <div class="aui-content" id="jibenxinxi" style="border-radius: 5px;">
+                <div class="aui-content-padded" id="jibenxinxis" style="border-radius: 5px;">
+                    <div class="aui-content aui-margin-b-15" style="border-radius: 5px;">
+                        <ul class="aui-list aui-form-list">
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        编号
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labbillNo"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        申请人
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labproposerName"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        联系方式
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labFphone"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        所属部门
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="labbillDept"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        请假事由
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="DayOffReason"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        工作安排
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p id="arrangement"></p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item noBottom" style="border-bottom: 0px solid #dddddd;">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        休假明细
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-input">
+                                        <div class="tableDiv">
+                                            <table class="tableStyle" id="DayOffMX">
+                                                <thead>
+                                                    <tr class="">
+                                                        <th class="">请假类型</th>
+                                                        <th class="">开始时间</th>
+                                                        <th class="">结束时间</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @*<tr class="">
+                                                            <td class="" class="noneBor">郭春宁</td>
+                                                            <td class="" class="noneBor">2017/02/20</td>
+                                                            <td class="">提交申请</td>
+                                                        </tr>
+                                                        <tr class="">
+                                                            <td class="" class="noneBor">郭春宁</td>
+                                                            <td class="" class="noneBor">2017/02/20</td>
+                                                            <td class="">提交申请</td>
+                                                        </tr>*@
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label" style="vertical-align: top;">
+                                        审批意见
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <p>
+                                            <textarea rows="4" cols="50" id="RejectOpinion" placeholder="请输入审批意见..."></textarea>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner aui-list-item-center aui-list-item-btn">
+                                    <div class="aui-btn aui-btn-warning aui-btn-block aui-btn-sm aui-margin-r-10" onclick="Agree()">同意</div>
+                                    <div class="aui-btn aui-btn-warning aui-btn-block aui-btn-sm aui-margin-r-10" onclick="Reject()">驳回</div>
+                                    <div class="aui-btn aui-btn-warning aui-btn-block aui-btn-sm aui-margin-r-10" onclick="Turntodo()">转办</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- 假期信息-->
+            <div class="aui-content-padded" id="shenqingmingxi">
+
+            </div>
+            <!--审批日志-->
+            <div class="aui-content-padded" id="shenpirizhi">
+                <div class="tableDiv">
+                    <table class="tableStyle" id="logtable">
+                        <thead>
+                            <tr class="">
+                                <th class="">审批人</th>
+                                <th class="">审批时间</th>
+                                <th class="">审批意见</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/mui.min.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-dialog.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-toast.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/api.js"></script>
+<script type="text/javascript" src="~/Content/aui/script/aui-tab.js"></script>
+<script>
+    var gwqb = [];
+    var billNo = "";
+    var dialog = new auiDialog({});
+    var toast = new auiToast({});
+    var InterValObj; //timer变量，控制时间
+    var curCount = 2;//当前剩余秒数
+    apiready = function () {
+        api.parseTapmode();
+    }
+
+    $(function () {
+        $('#tabCont').children().not(":first").hide();
+        selectprocess();
+    })
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    };
+
+    function selectprocess() {
+        debugger
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+                toast.loading({
+                    title: "请稍等",
+                    duration: 500
+                })
+            },
+            success: function (mes) {
+                debugger
+                gwqb = mes;
+                for (var i = 0; i < mes.length; i++) {
+                    billNo = mes[i].BillNo;
+                    var processDatajson = $.parseJSON(mes[i].ProcessData);
+                    $("#labbillNo").text(mes[i].BillNo);  //申请编号
+                    $("#labproposerName").text(mes[i].BillEmpName);   // 申请人
+                    $("#labFphone").text(processDatajson.phone);    //电话
+                    $("#labbillDept").text(processDatajson.billDept);  //所属部门
+                    $("#DayOffReason").text(processDatajson.processData.reason);  //请假事由
+                    $("#arrangement").text(processDatajson.processData.arrangement);  //工作安排
+                    //填充请假明细
+                    for (var j = 0; j < processDatajson.processData.onLeave.length; j++) {
+                        var str = "";
+                        str += "<tr class=\"\">";
+                        str += "<td class=\"noneBor\">" + processDatajson.processData.onLeave[j].type + "</td>";
+                        str += "<td class=\"noneBor\">" + processDatajson.processData.onLeave[j].startDate + " " + processDatajson.processData.onLeave[j].startTime + "</td>";
+                        str += "<td class=\"noneBor\">" + processDatajson.processData.onLeave[j].endDate + " " + processDatajson.processData.onLeave[j].endTime + "</td>";
+                        str += "</tr>";
+                        $("#DayOffMX").find("tbody").append(str);
+                    };
+                    setTimeout(function () {
+                        toast.hide();
+                    }, 500);
+                    //开始填充审批日志
+                    for (var a = 0; a < processDatajson.approveLog.length; a++) {
+                        var str = "";
+                        str += " <tr>";
+                        str += " <td class=\"noneBor\">" + processDatajson.approveLog[a].auditorName + "</td>";
+                        str += " <td class=\"noneBor\">" + processDatajson.approveLog[a].auditTime + "</td>";
+                        str += " <td > " + processDatajson.approveLog[a].remark + "</td> </tr>";
+                        $("#logtable").find("tbody").append(str);
+                    };
+                }
+            },
+            error: function () {
+                setTimeout(function () {
+                    toast.hide();
+                }, 500);
+                dialog.alert({
+                    title: "",
+                    msg: '程序发生异常',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            }
+        });
+    }
+
+
+    //驳回操作
+    function Reject() {
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //驳回意见
+        var Processing_Code = 2; //驳回代码
+        var ServerID = 3;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        if (RejectOpinion == "" || RejectOpinion == "null") {
+            dialog.alert({
+                title: "",
+                msg: '前填写驳回意见',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else {
+            dialog.alert({
+                title: "",
+                msg: '确定驳回吗？',
+                buttons: ['关闭', '确定'],
+            }, function (ret) {
+                console.log(ret);
+                if (ret) {
+                    if (ret.buttonIndex == 2) {
+                        $.ajax({
+                            type: 'post',
+                            url: '/Workflow/Home/SvcWorkflowMWFs',
+                            cache: false,
+                            data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=0',
+                            dataType: "text", //返回数据形式为json
+                            beforeSend: function () {
+                                toast.loading({
+                                    title: "正在处理",
+                                    duration: 1000
+                                })
+                            },
+                            success: function (mes) {
+                                setTimeout(function () {
+                                    toast.hide();
+                                });
+                                if (mes == "OK") {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '处理成功2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+
+                                    });
+                                } else if (mes == "NO") {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '处理失败2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+                                    });
+                                }
+                                else {
+                                    InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                    dialog.alert({
+                                        title: "",
+                                        msg: '' + mes + '2秒后返回首页',
+                                        buttons: [''],
+                                    }, function (ret) {
+
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    }
+
+
+    //同意操作
+    function Agree() {
+        //同意意见
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#RejectOpinion").val(); //同意意见
+        var Processing_Code = 1; //同意代码
+        var ServerID = 3;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        dialog.alert({
+            title: "",
+            msg: '确定审批通过吗？',
+            buttons: ['关闭', '确定'],
+        }, function (ret) {
+            console.log(ret);
+            if (ret) {
+                if (ret.buttonIndex == 2) {
+                    $.ajax({
+                        type: 'post',
+                        url: '/Workflow/Home/SvcWorkflowMWFs',
+                        cache: false,
+                        data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=1',
+                        dataType: "text", //返回数据形式为json
+                        beforeSend: function () {
+                            toast.loading({
+                                title: "正在处理",
+                                duration: 1000
+                            })
+                        },
+                        success: function (mes) {
+                            setTimeout(function () {
+                                toast.hide();
+                            });
+                            if (mes == "OK") {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '处理成功2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+
+                                });
+                            } else if (mes == "NO") {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '处理失败2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+                                });
+                            }
+                            else {
+                                InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                                dialog.alert({
+                                    title: "",
+                                    msg: '' + mes + '2秒后返回首页',
+                                    buttons: [''],
+                                }, function (ret) {
+
+                                });
+                            }
+                        }
+                    });
+                }
+            }
+
+        });
+
+    }
+
+    //转办
+    function Turntodo() {
+        dialog.alert({
+            title: "",
+            msg: '转办功能暂时未开放',
+            buttons: ['关闭'],
+        }, function (ret) {
+            console.log(ret)
+        });
+    }
+
+
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            window.location.href = '/Workflow/Home/Index';
+        }
+        else {
+            curCount--;
+        }
+    }
+
+
+    var tab = new auiTab({
+        element: document.getElementById("tab"),
+    }, function (ret) {
+        if (ret) {
+            $('#tabCont').children().hide();
+            if (ret.index == "1") {
+                $('#tabCont').children().eq(ret.index - 1).show();
+            } else if (ret.index == "2") {
+                $('#tabCont').children().eq(ret.index - 1).show();
+            } else if (ret.index == "3") {
+                $('#tabCont').children().eq(ret.index - 1).show();
+            };
+        };
+    });
+
+
+</script>

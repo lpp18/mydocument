@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "考勤";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请描述：
+    </h2>
+    <p id="labdescribe" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        考勤明细：
+    </h2>
+    <p id="CheckWorkDetail" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 11;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labFphone").text(processDatajson.phone);
+        $("#labdescribe").text(decodeURIComponent(processDatajson.processData.applyFor)); //申请描述
+        for (var j = 0; j < processDatajson.processData.applyInfo.length; j++) {
+            var str = "";
+            str += "<div style=\"margin:5px;border: 1px solid #ccc;\"><ul class=\"mui-table-view\">";
+            str += "<li class=\"mui-table-view-cell mui-row\"><div class=\"mui-col-xs-3\">申请项目：</div>";
+            str += "<div class=\"mui-col-xs-9\">" + processDatajson.processData.applyInfo[j].item + "</div></li>";
+            str += "<li class=\"mui-table-view-cell mui-row\"><div class=\"mui-col-xs-3\">工作日期：</div>";
+            str += "<div class=\"mui-col-xs-9\">" + processDatajson.processData.applyInfo[j].workday + "</div></li>";
+            str += "<li class=\"mui-table-view-cell mui-row\"><div class=\"mui-col-xs-3\">开始时间：</div>";
+            str += "<div class=\"mui-col-xs-9\">" + processDatajson.processData.applyInfo[j].startTime + "</div></li>";
+            str += "<li class=\"mui-table-view-cell mui-row\"><div class=\"mui-col-xs-3\">结束时间：</div>";
+            str += "<div class=\"mui-col-xs-9\">" + processDatajson.processData.applyInfo[j].endTime + "</div></li>";
+            str += "<li class=\"mui-table-view-cell mui-row\"><div class=\"mui-col-xs-3\">申请描述：</div>";
+            str += "<div class=\"mui-col-xs-9\">" + processDatajson.processData.applyInfo[j].exceptionInfo + "</div></li>";
+            str += "<ul>";
+            //str += "<span class=\"detailNum\">" + (Number(i) + Number(1)) + "</span></div>";
+            $("#CheckWorkDetail").append(str);
+        };
+    };
+</script>

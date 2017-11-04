@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "工卡申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        补卡理由：
+    </h2>
+    <p id="f_BKReason" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        补卡次数：
+    </h2>
+    <p id="f_BKTimes" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        办公区域：
+    </h2>
+    <p id="f_BG_AREA" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        console.log(processDatajson);
+        $("#f_BKReason").text(processDatajson.processData.f_BKReason);
+        $("#f_BZ").text(decodeURIComponent(processDatajson.processData.f_BZ));
+        $("#f_GKInformation").text(processDatajson.processData.f_GKInformation);
+        $("#f_BKTimes").text(processDatajson.processData.f_BKTimes);
+        $("#f_BG_AREA").text(processDatajson.processData.f_BG_AREA);
+    };
+</script>

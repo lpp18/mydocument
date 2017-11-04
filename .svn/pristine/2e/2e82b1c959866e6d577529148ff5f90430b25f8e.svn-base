@@ -1,0 +1,60 @@
+﻿@{ 
+    ViewBag.Title = "请假";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        请假事由：
+    </h2>
+    <p id="DayOffReason" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        工作安排：
+    </h2>
+    <p id="arrangement" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        休假明细
+    </h2>
+    <p id="DayOffType" class="mydocument_infor_title_text">
+        <table class="mydocument_infor_title_text atable" id="DayOffMX">
+            <thead>
+                <tr class="">
+                    <th class="">请假类型</th>
+                    <th class="">开始时间</th>
+                    <th class="">结束时间</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </p>
+</li>
+                               
+<script type="text/javascript">
+    var Project = "HD"
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        console.log(processDatajson.processData);
+        $("#labFphone").text(processDatajson.phone);
+        $("#DayOffReason").text(processDatajson.processData.reason);  //请假事由
+        $("#arrangement").text(processDatajson.processData.arrangement);  //工作安排
+        for (var j = 0; j < processDatajson.processData.onLeave.length; j++) {
+            var str = "";
+            str += "<tr class=\"\">";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.onLeave[j].type + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.onLeave[j].startDate + " " + processDatajson.processData.onLeave[j].startTime + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.onLeave[j].endDate + " " + processDatajson.processData.onLeave[j].endTime + "</td>";
+            str += "</tr>";
+            $("#DayOffMX").find("tbody").append(str);
+        }
+    };
+</script>        

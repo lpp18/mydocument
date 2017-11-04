@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "考勤";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请描述：
+    </h2>
+    <p id="labdescribe" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        考勤明细：
+    </h2>
+    <p class="mydocument_infor_title_text"><table class="mydocument_infor_title_text atable" id="CheckWorkDetail">
+    <thead>
+        <tr class="">
+            <th class="">申请项目</th>
+            <th class="">工作日期</th>
+            <th class="">开始时间</th>
+            <th class="">结束时间</th>
+            <th class="">申请描述</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 11;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labFphone").text(processDatajson.phone);
+        $("#labdescribe").text(decodeURIComponent(processDatajson.processData.applyFor)); //申请描述
+        for (var j = 0; j < processDatajson.processData.applyInfo.length; j++) {
+            var str = "";
+            str += "<tr class=\"\">";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.applyInfo[j].item + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.applyInfo[j].workday + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.applyInfo[j].startTime + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.applyInfo[j].startTime + "</td>";
+            str += "<td class=\"mydocument_infor_title_text\">" + processDatajson.processData.applyInfo[j].exceptionInfo + "</td>";
+            str += "</tr>";
+            $("#CheckWorkDetail").find("tbody").append(str);
+        };
+    };
+</script>

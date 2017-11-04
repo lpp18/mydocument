@@ -1,0 +1,299 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>公文退回</title>
+    <link href="~/Content/aui/css/aui.css" rel="stylesheet" />
+    <link href="~/Content/aui/css/aui-slide.css" rel="stylesheet" />
+    <link href="~/Content/css/OpenAndCloseCss.css" rel="stylesheet" />
+    <link href="~/Content/css/mui.min.css" rel="stylesheet" />
+    <link href="~/Content/font/css/font-awesome.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .footbanli {
+            width: 100%;
+            height: 50px;
+            background-color: #FFFFFF;
+            position: absolute;
+            bottom: 0px;
+        }
+
+            .footbanli div {
+                width: 186px;
+                margin: 0px auto;
+                margin-top: 9px;
+            }
+
+                .footbanli div input {
+                    font-size: 19px;
+                    width: 90px;
+                    height: 30px;
+                    -webkit-border-radius: 22px;
+                    border-radius: 22px;
+                    color: #ffffff;
+                    background-color: #EF8200;
+                }
+
+        nav div {
+            width: 130px;
+            margin: 0px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="aui-bar aui-bar-nav" style="background-color: #EF8200;">
+        <div class="aui-title">公文退回</div>
+    </header>
+    <div class="mui-content" style="padding-bottom: 50px;">
+        <div class="aui-content">
+            <div class="aui-content" id="jibenxinxi" style="border-radius: 5px;">
+                <div class="aui-content" id="jibenxinxis" style="border-radius: 5px;">
+                    <div class="aui-content aui-margin-b-15" style="border-radius: 5px;">
+                        <ul class="aui-list aui-form-list">
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        退回方式
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <select onchange="selectpeopleoption()" id="selectpeopleoption">
+                                            <option value="2">退回至起点</option>
+                                            <option value="8">退回其他已审批人</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-item">
+                                <div class="aui-list-item-inner">
+                                    <div class="aui-list-item-label">
+                                        退回意见
+                                    </div>
+                                    <div class="aui-list-item-input">
+                                        <textarea placeholder="处理意见" id="chuliyijian"></textarea>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="aui-list-header">请选择人员</li>
+                            <ul class="aui-list aui-form-list" id="selectpeople"></ul>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="mui-bar mui-bar-tab">
+        <div>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="SvcWorkflowMWF()">提交</button>
+            <button type="button" class="mui-btn mui-btn-warning" onclick="returnIndex()">返回</button>
+        </div>
+    </nav>
+</body>
+
+</html>
+<script src="~/Content/js/jquery.min.js"></script>
+<script src="~/Content/js/mui.min.js"></script>
+<script src="~/Content/aui/script/aui-dialog.js"></script>
+<script src="~/Content/aui/script/aui-toast.js"></script>
+<script src="~/Content/aui/script/api.js"></script>
+<script>
+    var gwqb = [];
+    apiready = function () {
+        api.parseTapmode();
+    }
+    var InterValObj; //timer变量，控制时间
+    var curCount = 1;//当前剩余秒数
+    var dialog = new auiDialog({});
+    var toast = new auiToast({});
+    var windowheight = $(window).height();
+    $(function () {
+        selectprocess();
+    });
+
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg); //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+
+    function selectprocess() {
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            beforeSend: function () {
+               
+            },
+            success: function (mes) {
+                gwqb = mes;
+                setTimeout(function () {
+                    toast.hide();
+                }, 1000);
+            },
+            error: function () {
+                setTimeout(function () {
+                    toast.hide();
+                }, 1000);
+                dialog.alert({
+                    title: "",
+                    msg: '程序发生异常',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            }
+        });
+    }
+
+    function rgb2hex(rgb) {
+        rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+        function hex(x) {
+            return ("0" + parseInt(x).toString(16)).slice(-2);
+        }
+        return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+    }
+
+
+    function selectpeopleoption() {
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var selecttype = $("#selectpeopleoption").val();
+        if (selecttype == "2") {
+            var str = "";
+            $("#selectpeople").find("li").remove();
+        } else if (selecttype == "8") {
+            var str = "";
+            for (var i = 0; i < processDatajson.processData.returnModeList[1].returnEmplList.length; i++) {
+                str += "<li class='aui-list-item'  id=\"" + processDatajson.processData.returnModeList[1].returnEmplList[i].loginName + "\" >"
+                str += "<div class='aui-list-item-inner'>";
+                str += "<div class='aui-list-item-title'>" + processDatajson.processData.returnModeList[1].returnEmplList[i].name + "</div>";
+                str += "<div class='aui-list-item-right'  style='margin-right: 10px;'>";
+                str += "<span class='tg-list-item'>";
+                str += "<input class='tgl tgl-flat' id='" + i + 4 + "' type='checkbox'>";
+                str += "<label class='tgl-btn' for='" + i + 4 + "'></label></span></div></div>";
+                str += "</li>"
+            }
+            $("#selectpeople").find("li").remove();
+            $("#selectpeople").append(str);
+        }
+    }
+
+    function SvcWorkflowMWF() {
+        debugger;
+        var snum = 0;
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var strApproveNote = $("#chuliyijian").val(); //审批意见
+        var ServerID = processDatajson.serverId;   //serverID
+        var Project = "HD2012"    //project
+        var taskId = processDatajson.taskID;  //taskid
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var ProcessID = processDatajson.processId;   //processId;
+        var xuanzerenID = "";
+        $("#selectpeople").find("li").each(function () {
+            debugger;
+            var zhuangtai = $(this).find("input[type='checkbox']").prop('checked');
+            if (zhuangtai == true) {
+                if (xuanzerenID.length == 0) {
+                    xuanzerenID = $(this).attr("id");
+                } else {
+                    xuanzerenID = xuanzerenID + "," + $(this).attr("id");
+                }
+                snum = snum + 1;
+            }
+        });
+        var Processing_Code = $("#selectpeopleoption").val();
+        if (snum == 0 && Processing_Code == "8") {
+            dialog.alert({
+                title: "",
+                msg: '请选择审批人',
+                buttons: ['关闭'],
+            }, function (ret) {
+                console.log(ret)
+            });
+        } else {
+            if (strApproveNote == "") {
+                dialog.alert({
+                    title: "",
+                    msg: '请填入退回意见',
+                    buttons: ['关闭'],
+                }, function (ret) {
+                    console.log(ret)
+                });
+            } else {
+                $.ajax({
+                    type: 'post',
+                    url: '/Workflow/Home/SvcWorkflowMWFs',
+                    cache: false,
+                    data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + strApproveNote + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=' + xuanzerenID + '&Processing_Code=' + Processing_Code + '&liuchengType=0',
+                    dataType: "text", //返回数据形式为json
+                    beforeSend: function () {
+                        toast.loading({
+                            title: "正在处理",
+                            duration: 1000
+                        })
+                    },
+                    success: function (mes) {
+                        setTimeout(function () {
+                            toast.hide();
+                        });
+                        if (mes == "OK") {
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            dialog.alert({
+                                title: "",
+                                msg: '处理成功1秒后返回首页',
+                                buttons: [''],
+                            }, function (ret) {
+
+                            });
+                        } else if (mes == "NO") {
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            dialog.alert({
+                                title: "",
+                                msg: '处理失败1秒后返回首页',
+                                buttons: [''],
+                            }, function (ret) {
+                            });
+                        }
+                        else {
+                            InterValObj = window.setInterval(SetRemainTime, 1000); //启动计时器，1秒执行一次
+                            dialog.alert({
+                                title: "",
+                                msg: '' + mes + '1秒后返回首页',
+                                buttons: [''],
+                            }, function (ret) {
+
+                            });
+                        }
+                    }
+                });
+            }
+        }
+    };
+
+
+    //timer处理函数
+    function SetRemainTime() {
+        if (curCount == 0) {
+            window.clearInterval(InterValObj);//停止计时器
+            window.location.href = '/Workflow/Home/Index';
+        }
+        else {
+            curCount--;
+        }
+    };
+
+
+    function returnIndex() {
+        window.location.href = '/Workflow/Home/Index';
+    };
+</script>

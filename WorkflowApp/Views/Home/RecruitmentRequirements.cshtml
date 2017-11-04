@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "招聘需求申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        预算类别：
+    </h2>
+    <p id="f_yslbe" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        部门类别：
+    </h2>
+    <p id="f_bmlb" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        人员类型：
+    </h2>
+    <p id="f_rylx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        需求接口人：
+    </h2>
+    <p id="f_xqjkr" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        招聘岗位：
+    </h2>
+    <p id="f_zpgw" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        招聘原因：
+    </h2>
+    <p id="f_zpyy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        工作职责：
+    </h2>
+    <p id="f_gzzz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        岗位知识技能及阅历要求：
+    </h2>
+    <p id="f_jnyl" class="mydocument_infor_title_text"></p>
+</li>
+
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //预算类别
+        $("#f_yslbe").text(processDatajson.processData.F_yslbe);
+        //部门类别
+        $("#f_bmlb").text(processDatajson.processData.F_bmlb);
+        //人员类型                                    
+        $("#f_rylx").text(processDatajson.processData.F_rylx);
+        //需求接口人                                  
+        $("#f_xqjkr").text(processDatajson.processData.F_xqjkr);
+        //招聘岗位                                    
+        $("#f_zpgw").text(processDatajson.processData.F_zpgw);
+        //招聘原因                                    
+        $("#f_zpyy").text(processDatajson.processData.F_zpyy);
+        //工作职责                                    
+        $("#f_gzzz").text(processDatajson.processData.F_gzzz);
+        //岗位知识技能及阅历要求                      
+        $("#f_jnyl").text(processDatajson.processData.F_jnyl);
+    };
+</script>
+

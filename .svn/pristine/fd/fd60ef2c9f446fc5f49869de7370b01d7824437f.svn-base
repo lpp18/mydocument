@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "员工变动";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        姓名：
+    </h2>
+    <p id="f_ChangeEmployeeName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        学历：
+    </h2>
+    <p id="f_EducationBackground" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        变动类别：
+    </h2>
+    <p id="f_ChangeCategory" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        变动前职位：
+    </h2>
+    <p id="f_Jobs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        变动后部门：
+    </h2>
+    <p id="f_NewDeptFullName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        变动前办公地点：
+    </h2>
+    <p id="f_workBuilding" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        备注：
+    </h2>
+    <p id="f_Remark" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //变动员工姓名
+        $("#f_ChangeEmployeeName").text(processDatajson.processData.F_ChangeEmployeeName);
+        //学历
+        $("#f_EducationBackground").text(processDatajson.processData.F_EducationBackground);
+        //变动类别
+        $("#f_ChangeCategory").text(processDatajson.processData.F_ChangeCategory);
+        //变动前序列
+        //$("#f_ProjectAndDemandBrief").text(processDatajson.field14);
+        //变动前职位
+        $("#f_Jobs").text(processDatajson.processData.F_Jobs);
+        //变动后部门
+        $("#f_NewDeptFullName").text(processDatajson.processData.F_NewDeptFullName);
+        //变动前办公地点
+        $("#f_workBuilding").text(processDatajson.processData.F_workBuilding);
+        //备注
+        $("#f_Remark").text(processDatajson.processData.F_Remark);
+    };
+</script>
+

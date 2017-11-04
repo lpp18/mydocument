@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "发票申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        开具主体：
+    </h2>
+    <p id="f_company" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同签订状态：
+    </h2>
+    <p id="f_makeContract" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同名称：
+    </h2>
+    <p id="f_contractName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同编号：
+    </h2>
+    <p id="f_contractNum" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同总金额：
+    </h2>
+    <p id="F_contractAllMoney" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        合同类别：
+    </h2>
+    <p id="f_contractType" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        收入类型：
+    </h2>
+    <p id="f_incomeType" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        发票类型：
+    </h2>
+    <p id="f_billType" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        本次申请金额：
+    </h2>
+    <p id="f_billMoney" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        本次申请比例：
+    </h2>
+    <p id="f_billProportion" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        客户名称：
+    </h2>
+    <p id="f_userName" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        地址：
+    </h2>
+    <p id="f_userAddress" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        纳税人识别号：
+    </h2>
+    <p id="f_taxpayerNum" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#f_company").text(processDatajson.processData.f_company);
+        $("#f_makeContract").text(processDatajson.processData.f_makeContract);
+        $("#f_contractName").text(processDatajson.processData.f_contractName);
+        $("#f_contractNum").text(processDatajson.processData.f_contractNum);
+        $("#f_contractAllMoney").text(processDatajson.processData.f_contractAllMoney);
+        $("#f_contractType").text(processDatajson.processData.f_contractType);
+        $("#f_incomeType").text(processDatajson.processData.f_incomeType);
+        $("#f_billType").text(processDatajson.processData.f_billType);
+        $("#f_billMoney").text(processDatajson.processData.f_billMoney);
+        $("#f_billProportion").text(processDatajson.processData.f_billProportion);
+        $("#f_userName").text(processDatajson.processData.f_userName);
+        $("#f_userAddress").text(processDatajson.processData.f_userAddress);
+        $("#f_taxpayerNum").text(processDatajson.processData.f_taxpayerNum);
+    };
+</script>

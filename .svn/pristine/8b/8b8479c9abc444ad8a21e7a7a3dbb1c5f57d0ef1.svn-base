@@ -1,0 +1,50 @@
+requirejs.config({  
+    baseUrl: '../Content/js/libs',  
+    shim:{  
+        "swiper.jquery.min":{  
+              deps:["jquery"],  
+              exports: 'Swiper'  
+        },
+        "my_document":{
+        	deps:["jquery","layer"],  
+            exports: 'myDocument'
+        }
+    }  
+});  
+  
+  
+require(["jquery","layer","swiper.jquery.min","my_document"], function($,layer,Swiper,myDocument) {  
+
+    $(function () {
+    	myDocument.init();
+        var mySwiper = new Swiper('.swiper-container', {
+            onSlideChangeEnd: function (swiper) {
+                var j=mySwiper.activeIndex;
+                if(j!=0){
+	               	$(".mydocument_infor_btn").fadeOut(0)
+	               }else if($(".tab-content-1").scrollTop()<=50){
+	               	$(".mydocument_infor_btn").fadeIn(100)
+	               }
+                $('.maple-tab li, .maple-tab2 li').removeClass('active').eq(j).addClass('active');
+            }
+        })
+        /*列表切换*/
+        $('.maple-tab li, .maple-tab2 li').on('click', function (e) {
+            e.preventDefault();
+            //得到当前索引
+            var i=$(this).index();
+            if(i!=0){
+               	$(".mydocument_infor_btn").fadeOut(0)
+	               }else if($(".tab-content-1").scrollTop()<=50){
+	               	$(".mydocument_infor_btn").fadeIn(100)
+	             }
+            $('.maple-tab li, .maple-tab2 li').removeClass('active').eq(i).addClass('active');
+            mySwiper.slideTo(i,500,false);
+        });
+    });
+    
+   
+    $(".approval_log_style p").each(function () {
+        $(this).height($(this).closest("li").find(".approval_log_access").height())
+    })
+});

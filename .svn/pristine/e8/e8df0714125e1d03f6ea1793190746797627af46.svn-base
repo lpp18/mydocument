@@ -1,0 +1,483 @@
+﻿@*待办详细页公共页*@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <!--设置网页编码-->
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <!--页面关键字-->
+    <meta http-equiv="keywords" content="" />
+    <!--640宽meta头-->
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <!-- 删除默认的苹果工具栏和菜单栏 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- 苹果手机顶部为黑色 -->
+    <meta name="apple-mobile-web-status-bar-style" content="block" />
+    <!-- 屏蔽浏览器自动识别数字为电话号码 -->
+    <meta name="fromat-detecition" content="telephone=no" />
+    <title>@ViewBag.Title</title>
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 375 + 'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link href="../Content/css/swiper-3.3.1.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../Content/js/libs/need/layer.css" />
+    <link rel="stylesheet" href="../Content/css/main.css" />
+    <link rel="stylesheet" href="../Content/css/my_common.css">
+    <link rel="stylesheet" href="../Content/css/my_document.css">
+    <link rel="stylesheet" href="../Content/css/essential_infor.css">
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #e8e8e8;
+        }
+        /*-----------------------content-------------------------------*/
+        .wrapper {
+            width: 18.75rem;
+            margin: 0 auto;
+        }
+        /*列表切换*/
+        .maple-tab {
+            background-color: #fff;
+            width: 18.75rem;
+        }
+
+            .maple-tab ul {
+                width: 18.75rem;
+                overflow: hidden;
+            }
+
+                .maple-tab ul li {
+                    list-style-type: none;
+                    float: left;
+                    width: 33%;
+                    text-align: center;
+                    color: #333;
+                    font-size: 3rem;
+                    border-bottom: 2px solid #dedede;
+                    cursor: pointer;
+                }
+
+            /*tab活动状态样式*/
+            .maple-tab .active {
+                color: #2ec4c2;
+                border-bottom: 2px solid #2ec4c2;
+            }
+
+
+        .tab-content-1, .tab-content-2 {
+            width: 100%;
+            height: 17.875rem;
+            text-align: center;
+            font-size: 3.75rem;
+        }
+
+        .tab-content-1 {
+            color: #f76755;
+        }
+
+        .tab-content-2 {
+            color: mediumslateblue;
+        }
+
+        .nav_tab {
+            margin-top: .1875rem;
+            position: fixed;
+            top: 0;
+            background: #fff;
+            z-index: 1000;
+        }
+
+            .nav_tab li {
+                height: 2.194rem;
+                box-sizing: border-box;
+            }
+
+                .nav_tab li p {
+                    font-size: .75rem;
+                    line-height: 2.194rem;
+                }
+
+        .swiper-container {
+            box-sizing: border-box;
+            padding-top: 2.25rem;
+        }
+
+        .swiper-wrapper {
+            height: 100%;
+        }
+
+        .swiper-slide {
+            height: 100%;
+            overflow: auto;
+        }
+
+        .mydocument_infor {
+            background: #fff;
+        }
+
+            .mydocument_infor li > h2 {
+                width: 24%;
+            }
+    </style>
+
+    <script src="~/Content/js/libs/jquery.js"></script>
+    <script src="~/Content/js/libs/layer.js"></script>
+</head>
+<body>
+
+    <div class="wrapper" style="height:100%">
+
+        <!--列表切换选项卡-->
+        <div class="maple-tab clearFix">
+            <ul class="nav_tab">
+                <li class="active"><p class="m-border-right">基本信息</p></li>
+                <li><p>附件</p></li>
+                <li><p>审批日志</p></li>
+            </ul>
+        </div>
+
+        <!--列表内容-->
+        <div class="swiper-container" style="height:100%">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide tab-content-1">
+                    <ul class="mydocument_infor">
+                        <li class="title">
+                            <h2 class="mydocument_infor_title">主题：</h2>
+                            <p id="labtitle" class="mydocument_infor_title_text"></p>
+                        </li>
+                        <li class="user">
+                            <h2 class="mydocument_infor_title">申请人：</h2>
+                            <p id="labproposerName" class="mydocument_infor_title_text"></p>
+                        </li>
+                        <li class="timer">
+                            <h2 class="mydocument_infor_title">申请日期：</h2>
+                            <p id="labapplyTime" class="mydocument_infor_title_text"></p>
+                        </li>
+                        @RenderBody()
+                        <li class="overtime_type">
+                            <h2 class="mydocument_infor_title">
+                                申请部门：
+                            </h2>
+                            <p id="labbillDept" class="mydocument_infor_title_text"></p>
+                        </li>
+
+                        <div id="AgreeOperate" class="mydocument_infor_deal">
+                            <h3>审批意见：</h3>
+                            <div class="deal-content">
+                                <textarea id="ApprovalOpinion" placeholder="请输入内容"></textarea>
+                            </div>
+                            <div class="mydocument_infor_footer" id="footer_do">
+                                <p id="agree" class="eagree">
+                                    <i class="agree_img"></i>
+                                    <span>同意</span>
+                                </p>
+                                <p id="reject" class="edisagree">
+                                    <i class="disagree_img disagree_img_back"></i>
+                                    <span>驳回</span>
+                                </p>
+                                <div class="footer_line"></div>
+                            </div>
+                        </div>
+
+
+                    </ul>
+                </div>
+
+                <div id="AttachmentInfo" class="swiper-slide tab-content-2 appendix">
+                    @*<div class="list-group-item li">
+                            <div>
+                                <p><img src="../Content/img/fujian.png" /><span>卓望公司设备维保服务内部设施的.doc</span></p>
+                                <p><span>添加人 : 杜旭</span><span> 添加日期 : 2017-08-15</span></p>
+                            </div>
+                            <p><a href="lpp.docx" target="_blank" download class="mui-btn mui-btn-outlined font24">下载</a></p>
+                        </div>*@
+                </div>
+                <div class="swiper-slide tab-content-2">
+                    <ul id="ApproveLog" class="approval_log">
+                        @*<li>
+                                <div class="approval_log_name">李阔</div>
+                                <div class="approval_log_style">
+                                    <img src="../Content/img/succ1.png" alt="">
+                                    <p><em></em></p>
+                                </div>
+                                <div class="approval_log_access">
+                                    <h2>提交申请</h2>
+                                    <p>2017-09-26 14:40:00</p>
+                                </div>
+                            </li>
+                        *@
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 id="SkipAgree" class="mydocument_infor_btn">
+        <i></i>
+        电子流处理
+    </h2>
+    <script src="../Content/js/require.js" defer async="true" data-main="../Content/js/document"></script>
+
+    <script type="text/javascript">
+        //获取参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        //说明，option=0，代表未处理待办操作，option=1，已处理待办操作
+        var option = getUrlParam("option");
+        var Url = "../Home/select_bumphdetails";
+        if (option == "1") {
+            $("#AgreeOperate").remove();
+            $("#SkipAgree").remove();
+            Url = "../Home/QueryProcessedDocument";
+        };
+        var gwqb;
+        $(function () {
+            selectprocess();
+        });
+        //1、流程详细
+        function selectprocess() {
+            //debugger
+            $.ajax({
+                type: 'post',
+                url: Url,
+                cache: false,
+                data: 'billNo=' + getUrlParam("billNo"),
+                dataType: "json", //返回数据形式为json
+                success: function (mes) {
+                    console.log(mes);
+                    gwqb = mes;
+                    for (var i = 0; i < mes.length; i++) {
+                        $("#labbillNo").text(mes[i].BillNo);
+                        billNo = mes[i].BillNo;
+                        //去掉字符串回车换行符
+                        mes[i].ProcessData = mes[i].ProcessData.replace(/[\r\n]/g, "");
+                        var processDatajson = $.parseJSON(mes[i].ProcessData);
+                        $("#labproposerName").text(mes[i].BillEmpName);
+                        $("#labtitle").text(processDatajson.billTitle);
+                        $("#labapplyTime").text(processDatajson.billDate);
+                        $("#labFphone").text(processDatajson.phone);
+                        $("#labbillDept").text(processDatajson.billDept);
+                        //待办详细信息
+                        ToDoDetails(processDatajson);
+                        //开始填充审批日志
+                        ApproveLog(processDatajson.approveLog);
+                        selectatt(mes[i].ServerID, mes[i].ModelId, mes[i].ProcessID);
+                    }
+                },
+                error: function () {
+                }
+            });
+        }
+        //2、附件
+        function selectatt(sid, mid, pid) {
+            $.ajax({
+                type: 'post',
+                url: '../Home/selectAttachment',
+                cache: false,
+                data: 'sid=' + sid + '&mid=' + mid + '&pid=' + pid,
+                dataType: "json", //返回数据形式为json
+                success: function (mes) {
+                    //开始附件
+                    $("#AttachmentInfo").text("");
+                    var strlog = "";
+                    for (var j = 0; j < mes.length; j++) {
+                        var FileUrl = mes[j].FileUrl;
+                        var FileName = mes[j].FileName;
+                        var UserLoginName = mes[j].UserLoginName;
+                        var CreateTime = timeConvert(mes[j].AddTime, false);
+                        if (FileUrl == "") {
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].FileName + "</td>";
+                            //strlog += "<td style='background-color:#ddd;'>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        else {
+                            //strlog += "<td><a href='" + mes[j].FileUrl + "'>" + mes[j].FileName + "</a></td>";
+                            //strlog += "<td>" + mes[j].UserLoginName + "</td></tr>";
+                        }
+                        strlog += "<div class=\"list-group-item li\"><div>";
+                        strlog += "<p><img src=\"../Content/img/fujian.png\" /><span>" + FileName + "</span></p>";
+                        strlog += "<p><span>添加人 : " + UserLoginName + "</span><span> 添加日期 : " + CreateTime + "</span></p></div>";
+                        var SkipUrl = "window.location.href='"+FileUrl+"'";
+                        strlog += "<p><a ontouchstart=\"" + SkipUrl + "\" target=\"_blank\" download class=\"mui-btn mui-btn-outlined font24\">下载</a></p></div>";
+                    };
+                    $("#AttachmentInfo").append(strlog);
+                },
+                error: function () {
+                }
+            });
+        };
+        //3、审批日志
+        function ApproveLog(approveLog) {
+            var strlog = "";
+            for (var j = 0; j < approveLog.length; j++) {
+                var auditorName = approveLog[j].auditorName != null ? approveLog[j].auditorName : "";
+                auditorName = auditorName != "" ? auditorName : "系统";
+                var auditTime = approveLog[j].auditTime != null ? approveLog[j].auditTime : "";
+                var remark = approveLog[j].remark != null ? approveLog[j].remark : "";
+                strlog += "<li>";
+                strlog += "<div class=\"approval_log_name\">" + auditorName + "</div>";
+                strlog += "<div class=\"approval_log_style\"><img src=\"../Content/img/succ1.png\" alt=\"\"><p><em></em></p></div>";
+                strlog += "<div class=\"approval_log_access\">";
+                strlog += "<h2>" + remark + "</h2><p>" + auditTime + "</p>"
+                strlog += "</div>";
+                strlog += "</li>";
+            };
+            $("#ApproveLog").html(strlog);
+        }
+        //4、同意操作
+        $(document).on('click', '.mydocument_infor_footer .eagree', function () {
+            var index = layer.open({
+                content: '您确定要提交吗？',
+                shade: 'background-color: rgba(0,0,0,.5)'
+                        , btn: ['取消', '提交']
+                        , yes: function (index) {
+                            layer.close(index);
+                        }, no: function (index) {
+                            //退回操作
+                            layer.close(index);
+                            Agree();
+                        }
+            });
+        });
+        //5、驳回操作
+        $(document).on('click', '.mydocument_infor_footer .edisagree', function () {
+            //是否输入驳回意见
+            var RejectOpinion = $("#ApprovalOpinion").val(); //驳回意见
+            if (RejectOpinion == "" || RejectOpinion == "null") {
+                MsgAlert("请输入驳回意见!", 2);
+                return;
+            }
+            var index = layer.open({
+                content: '您确定要驳回吗？',
+                shade: 'background-color: rgba(0,0,0,.5)'
+                        , btn: ['取消', '驳回']
+                        , yes: function (index) {
+                            layer.close(index);
+                        }, no: function (index) {
+                            //退回操作
+                            layer.close(index);
+                            Reject();
+                        }
+            });
+
+        });
+
+        //同意操作
+        function Agree() {
+            //同意意见
+            var BillNo = gwqb[0].BillNo;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var ModelId = gwqb[0].ModelId;     //模块ID
+            var RejectOpinion = $("#ApprovalOpinion").val(); //驳回意见
+            var Processing_Code = 1; //同意代码
+            var taskId = processDatajson.taskID;
+            var ProcessID = processDatajson.processId;   //processId;
+            $.ajax({
+                type: 'post',
+                url: '../Home/SvcWorkflowMWFs',
+                cache: false,
+                data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=1',
+                dataType: "text", //返回数据形式为json
+                beforeSend: function () {
+                    var index1 = layer.open({
+                        shade: 'background-color: rgba(0,0,0,.5)',
+                        type: 2,
+                        content: '加载中'
+                    });
+                },
+                success: function (mes) {
+                    layer.closeAll();
+                    if (mes == "OK") {
+                        SkipIndex("处理完成", "succ1");
+                    } else if (mes == "NO") {
+                        SkipIndex("处理失败,请刷新页面重试", "succ1");
+                    }
+                    else {
+                    }
+                }
+            });
+
+        };
+        //驳回操作
+        function Reject() {
+            var BillNo = gwqb[0].BillNo;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var ModelId = gwqb[0].ModelId;     //模块ID
+            var RejectOpinion = $("#ApprovalOpinion").val(); //驳回意见
+            var Processing_Code = 2; //驳回代码
+            var taskId = processDatajson.taskID;
+            var ProcessID = processDatajson.processId;   //processId;
+
+            $.ajax({
+                type: 'post',
+                url: '/Workflow/Home/SvcWorkflowMWFs',
+                cache: false,
+                data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=0',
+                dataType: "text", //返回数据形式为json
+                success: function (mes) {
+                    if (mes == "OK") {
+                        SkipIndex("处理完成", "succ1");
+                    } else if (mes == "NO") {
+                        SkipIndex("处理完成", "succ1");
+                    }
+                    else {
+                        SkipIndex("处理失败", "succ1");
+                    }
+                }
+            });
+        };
+
+        //时间格式化
+        function timeConvert(obj, IsMi) {
+            var correcttime1 = eval('( new ' + obj.replace(new RegExp("\/", "gm"), "") + ')');
+            var myDate = correcttime1;
+            var year = myDate.getFullYear();
+            var month = ("0" + (myDate.getMonth() + 1)).slice(-2);
+            var day = ("0" + myDate.getDate()).slice(-2);
+            var h = ("0" + myDate.getHours()).slice(-2);
+            var m = ("0" + myDate.getMinutes()).slice(-2);
+            var s = ("0" + myDate.getSeconds()).slice(-2);
+            var mi = ("00" + myDate.getMilliseconds()).slice(-3);
+            if (IsMi == false) {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s;
+            }
+            else {
+                return year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s + " " + mi;
+            }
+        }
+        //消息提示
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        };
+        //跳转首页
+        function SkipIndex(content, ico) {
+            //处理完成
+            var html = '<div class="over">' +
+                        '<p><img src="../Content/img/' + ico + '.png" alt="" /></p>' +
+                        '<p>' + content + '</p>' +
+                        '</div>';
+            var index2 = layer.open({
+                style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+                content: html
+            });
+            setTimeout(function () {
+                location.href = "../Home/index";
+            }, 800);
+            //setTimeout(function () {
+            //    var index2 = layer.open({
+            //        style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+            //        content: html
+            //    })
+            //}, 1100);
+        };
+    </script>
+
+</body>
+</html>

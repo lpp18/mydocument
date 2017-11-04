@@ -1,0 +1,101 @@
+﻿@{
+    ViewBag.Title = "培训申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<li>
+    <h2 class="mydocument_infor_title">
+        联系方式：
+    </h2>
+    <p id="labFphone" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训费用(预)：
+    </h2>
+    <p id="f_yjpxfy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训性质：
+    </h2>
+    <p id="f_pxxz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训性质(子)：
+    </h2>
+    <p id="f_pxxzzx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训名称：
+    </h2>
+    <p id="f_pxmc" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训对象：
+    </h2>
+    <p id="f_pxdx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训地点：
+    </h2>
+    <p id="f_pxdd" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训开始时间：
+    </h2>
+    <p id="f_pxkssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训结束时间：
+    </h2>
+    <p id="f_pxjssj" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训机构：
+    </h2>
+    <p id="f_pxjg" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        培训讲师：
+    </h2>
+    <p id="f_pxjs" class="mydocument_infor_title_text"></p>
+</li>
+ <li>
+    <h2 class="mydocument_infor_title">
+        培训内容：
+    </h2>
+    <p id="f_pxnr" class="mydocument_infor_title_text"></p>
+</li><li>
+    <h2 class="mydocument_infor_title">
+        培训目标：
+    </h2>
+    <p id="f_pxmb" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labFphone").text(processDatajson.phone);   //联系电话
+        $("#f_pxmb").append(decodeURIComponent(processDatajson.processData.f_pxmb));
+        $("#f_pxnr").append(decodeURIComponent(processDatajson.processData.f_pxnr));
+        $("#f_pxjs").text(processDatajson.processData.f_pxjs);
+        $("#f_pxjg").text(processDatajson.processData.f_pxjg);
+        $("#f_pxjssj").text(processDatajson.processData.f_pxjssj);
+        $("#f_pxkssj").text(processDatajson.processData.f_pxkssj);
+        $("#f_pxdd").text(processDatajson.processData.f_pxdd);
+        $("#f_pxdx").text(processDatajson.processData.f_pxdx);
+        $("#f_pxmc").text(processDatajson.processData.f_pxmc);
+        $("#f_pxxzzx").text(processDatajson.processData.f_pxxzzx);
+        $("#f_pxxz").text(processDatajson.processData.f_pxxz);
+        $("#f_yjpxfy").text(processDatajson.processData.f_yjpxfy);
+    };
+</script>

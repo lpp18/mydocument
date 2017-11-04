@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>发送短信</title>
+</head>
+<body>
+    <div>
+        <button id="btn">发送短信</button>
+    </div>
+    <script src="~/Content/NewList/js/jquery.min.js"></script>
+    <script>
+        $("#btn").on("click", (function () {
+            Agree();
+        }));
+
+        function Agree() {
+            $.ajax({
+                type: 'post',
+                url: '/Workflow/Home/SendMes',
+                cache: false,
+                dataType: "text", //返回数据形式为json
+                beforeSend: function () {
+                },
+                success: function (mes) {
+                    if (mes == "OK") {
+                        alert("短信发送成功", " ", " ", function () { }, "div");
+                    }
+                    else {
+                        alert("短信发送失败" + mes, " ", " ", function () { }, "div");
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

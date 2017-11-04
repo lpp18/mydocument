@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>公文退回</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <script>
+        document.documentElement.style.fontSize = document.documentElement.clientWidth * 20 / 375 + 'px';
+    </script>
+    <link rel="stylesheet" type="text/css" href="../Content/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/swiper-3.3.1.min.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/js/libs/need/layer.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/css/main.css" />
+    <style type="text/css">
+        html, body {
+            background: #eee;
+        }
+
+        .swiper-container, .w {
+            height: calc(100vh - 120px);
+        }
+
+        .tab {
+            top: 0;
+            margin-top: .1875rem;
+        }
+
+        .swiper-container {
+            top: 2.194rem;
+        }
+
+        body {
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <p class="ltit" style=" font-size:.7125rem">退回方式</p>
+    <div id="ProcessMode">
+        <div class="disflex rdiv">
+            <p>退回至起点</p>
+            <div class="checbox">
+                <input type="radio" onclick="selectpeopleoption('2')" checked="checked" value="2" id="checf1" name="1">
+                <label for="checf1"></label>
+            </div>
+        </div>
+        <div class="disflex rdiv">
+            <p>退回至其他已审批人</p>
+            <div class="checbox">
+                <input type="radio" onclick="selectpeopleoption('8')" value="8" id="checf2" name="1">
+                <label for="checf2"></label>
+            </div>
+        </div>
+    </div>
+    @*<div id="ChooseDiv" class="disflex rdiv sman">
+        <p>选择人员</p>
+        <p class="sel" id="ChoosePeople"><span>请选择(必选)</span> <img src="../Content/img/arrow.png" alt="" />	</p>
+    </div>*@
+    <p class="ltit" style=" font-size:.7125rem">退回意见</p>
+    <div class="advice">
+        <textarea id="ApproveOpinion" name="" rows="6" placeholder="请输入内容"></textarea>
+    </div>
+    <div class="bot">
+        <p id="btnOk" class="iconfir">
+            <img src="../Content/img/aggree.png" />
+            <span>确认</span>
+        </p>
+        <p id="btnReturn" class="ireturn">
+            <img src="../Content/img/reject.png" />
+            <span>取消</span>
+        </p>
+    </div>
+    <div id="" class="manlist">
+        <p id="Finished" class="ifinished">完成</p>
+        <ul id="selectpeople">
+            @*<li>
+                <p>王总</p>
+                <div class="recheckbox fl">
+                    <div class="lbord">
+                        <input type="checkbox" id="sendMsg1">
+                        <span></span>
+                    </div>
+                </div>
+            </li>*@
+        </ul>
+    </div>
+    <script src="~/Content/js/libs/jquery.js"></script>
+    <script src="~/Content/js/libs/layer.js"></script>
+    <script type="text/javascript">
+        var gwqb = [];
+        var Processing_Code = "";//选择处理方式
+        var Processing_CodeName = "";  //处理方式中文名
+        var ChoosePeopleId = [];  //保存已选择的审批人
+        $(function () {
+            selectprocess();
+            ShowApprove();
+        });
+        //1、查询公文详情
+        function selectprocess() {
+            $.ajax({
+                type: 'post',
+                url: '../Home/select_bumphdetails',
+                cache: false,
+                data: 'billNo=' + getUrlParam("billNo"),
+                dataType: "json", //返回数据形式为json
+                success: function (mes) {
+                    gwqb = mes;
+                },
+                error: function (e) {
+                    console.log(e);
+                }
+            });
+        };
+        //2、默认选中加载审批人
+        function ShowApprove() {
+            $("#ProcessMode input[type='radio']").each(function () {
+                var ApproveObj = $(this);
+                if (ApproveObj.attr("checked") == "checked") {
+                    //回退至起点，隐藏人员选择按钮
+                    if (ApproveObj.val() == "2") {
+                        DivStr = $("#ChooseDiv").html();
+                        $("#ChooseDiv").html("");
+                        Processing_Code  = "2";
+                        Processing_CodeName = ApproveObj.parent().prev().text();
+                    }
+                }
+            });
+        };
+        //3、打开选择人员按钮,modified byhuangkailong ,去掉此按按钮
+        //$("#ChoosePeople").click(function () {
+        //    $(".manlist").animate({ bottom: 0 }, 200, "swing");
+        //});
+        //4、完成选择审批人操作
+        $("#Finished").click(function () {
+            $(".manlist").animate({ bottom: "-100%" }, 200, "swing");
+            var len = $(".manlist").find("input:checked").length;
+            var html = len == 0 ? "<span class='totals'></span>" : "<span class='totals'> 共 " + len + "人</span>";
+            //document.getElementById("ChoosePeople").innerHTML = html;
+            var $ProcessMode = $("#ProcessMode").find("input:checked").closest(".rdiv").children("p");
+            $ProcessMode.next().remove(".totals");
+            $ProcessMode.after(html);
+        });
+        //5、加载审批人
+        var DivStr;
+        function selectpeopleoption(selecttype) {
+            Processing_Code = selecttype;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var returnModeList = processDatajson.processData.returnModeList[1];  //处理方式
+            if (selecttype == "2") {
+                //选择处理方式，清空选择人,
+                ChoosePeopleId.splice(0, ChoosePeopleId.length);
+                var $ProcessMode = $("#ProcessMode").find("input").closest(".rdiv").children("p");
+                $ProcessMode.next().remove(".totals");
+                $(".manlist").animate({ bottom: "-100%" }, 200, "swing");
+                $("#selectpeople").find("li").remove();
+                DivStr = $("#ChooseDiv").html();
+                $("#ChooseDiv").html("");
+                return;
+            } else if (selecttype == "8") {
+                $(".manlist").animate({ bottom: 0 }, 200, "swing");
+                $("#ChooseDiv").html(DivStr);
+                for (var i = 0; i < returnModeList.returnEmplList.length; i++) {
+                    var str = "";
+                    var item = returnModeList.returnEmplList[i];    //处理人列表
+                    var name = item.name;
+                    var loginName = item.loginName;
+                    str += "<li id='" + loginName + "'><p>" + name + "</p>";
+                    str += "<div class=\"recheckbox fl\">";
+                    str += "<div class=\"lbord\"><input onclick=\"AddApprovers('" + loginName + "',this)\" type=\"checkbox\" id=\"sendMsg_" + i + "\">";
+                    str += "<span></span>";
+                    str += "</div></div></li>";
+                }
+                $("#selectpeople").find("li").remove();
+                $("#selectpeople").html(str);
+                //去掉选择人员按钮
+                //$("#ChoosePeople").click(function () {
+                //    $(".manlist").animate({ bottom: 0 }, 200, "swing");
+                //});
+                FillApprovers();
+            };
+            
+        };
+
+        //保存已选择审批人
+        function AddApprovers(loginName, obj) {
+            if ($(obj).is(":checked")) {
+                ChoosePeopleId.push(loginName);
+            } else {
+                //取消选中，移除对应审批人
+                for (var i = ChoosePeopleId.length - 1; i >= 0; i--) {
+                    if (ChoosePeopleId[i] == loginName) {
+                        ChoosePeopleId.splice(i, 1);
+                    };
+                };
+            };
+        }
+        //重新填充已选择审批人
+        function FillApprovers() {
+            var item = "";
+            for (var i = 0; i < ChoosePeopleId.length; i++) {
+                item = ChoosePeopleId[i];
+                $("#selectpeople").find("li").each(function () {
+                    if ($(this).attr("id") == item) {
+                        $(this).find("input[type='checkbox']").prop("checked", true);
+                    };
+                });
+            }
+        }
+        //获取选择人Id
+        function GetChoosePeopleId() {
+            xuanzerenID = "";
+            snum = 0;
+            for (var item in ChoosePeopleId) {
+                if (xuanzerenID.length == 0) {
+                    xuanzerenID = ChoosePeopleId[item];
+                } else {
+                    xuanzerenID = xuanzerenID + "," + ChoosePeopleId[item];
+                }
+                snum = snum + 1;
+            };
+        }
+        var snum = 0;
+        var xuanzerenID = "";//选择人id
+        //6、驳回操作
+        $("#btnOk").click(function () {
+            DocumentReturn();
+        });
+        
+        function DocumentReturn() {
+            var BillNo = gwqb[0].BillNo;
+            var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+            var strApproveNote = $("#ApproveOpinion").val(); //审批意见
+            var ServerID = processDatajson.serverId;   //serverID
+            var Project = "HD2012"    //project
+            var taskId = processDatajson.taskID;  //taskid
+            var ModelId = gwqb[0].ModelId;     //模块ID
+            var ProcessID = processDatajson.processId;   //processId;
+
+            GetChoosePeopleId();
+            //是否选择审批人
+            var Condition1 = (snum == 0 && Processing_Code == "8");
+            var Condition2 = (strApproveNote == "");
+            if (Condition1) {
+                MsgAlert("请选择审批人", 1); return;
+            } else if (Condition2) {
+                MsgAlert("请填入退回意见", 1); return;
+            };
+            var index = layer.open({
+                content: '确定退回吗？',
+                shade: 'background-color: rgba(0,0,0,.5)'
+                   , btn: ['取消', '确定']
+                   , yes: function (index) {
+                       layer.close(index);
+                   }, no: function (index) {
+                       //退回操作
+                       layer.close(index);
+                       $.ajax({
+                           type: 'post',
+                           url: '../Home/SvcWorkflowMWFs',
+                           cache: false,
+                           data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + strApproveNote + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=' + xuanzerenID + '&Processing_Code=' + Processing_Code + '&liuchengType=0' + '&Processing_CodeName=' + Processing_CodeName,
+                           dataType: "text", //返回数据形式为json
+                           beforeSend: function () {
+                               Loading("正在处理");
+                           },
+                           success: function (mes) {
+                               layer.closeAll();
+                               if (mes == "OK") {
+                                   SkipIndex("处理成功", "succ1");
+                               } else if (mes == "NO") {
+                                   SkipIndex("处理失败", "error");
+                               }
+                               else {
+                                   SkipIndex(mes + ",处理失败", "error");
+                               };
+                           }
+                       });
+                   }
+            });
+            
+        };
+        //7、返回操作
+        $("#btnReturn").click(function () {
+            location.href = "../Home/DocumentDetails?billNo=" + getUrlParam("billNo");
+        });
+        //获取url参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        };
+        //进度显示
+        function Loading(content) {
+            var index1 = layer.open({
+                shade: 'background-color: rgba(0,0,0,.5)',
+                type: 2,
+                content: content
+            });
+        }
+        //消息提示
+        function MsgAlert(msg, second) {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        };
+        //跳转首页
+        function SkipIndex(content, ico) {
+            //处理完成
+            var html = '<div class="over">' +
+                        '<p><img src="../Content/img/' + ico + '.png" alt="" /></p>' +
+                        '<p>处理完成！</p>' +
+                        '</div>';
+            var index2 = layer.open({
+                style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+                content: html
+            });
+            setTimeout(function () {
+                location.href = "../Home/index";
+            }, 800);
+        }
+    </script>
+</body>
+</html>

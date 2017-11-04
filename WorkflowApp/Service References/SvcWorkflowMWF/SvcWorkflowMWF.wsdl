@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SvcWorkflowMWF" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/Mis.WcfLib.WorkFlow.WF.DAL" />
+      <xsd:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Mis.Common.Model" />
+      <xsd:import schemaLocation="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc?xsd=xsd4" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISvcWorkflowMWF_test_InputMessage">
+    <wsdl:part name="parameters" element="tns:test" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_test_OutputMessage">
+    <wsdl:part name="parameters" element="tns:testResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Submit_InputMessage">
+    <wsdl:part name="parameters" element="tns:Submit" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Submit_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitWithValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWithValue" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitWithValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWithValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitWithJSon_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWithJSon" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitWithJSon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitWithJSonResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_NewBillSubmitByXML_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewBillSubmitByXML" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_NewBillSubmitByXML_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewBillSubmitByXMLResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_NewBillSubmitByXML_RepeaingTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:NewBillSubmitByXML_RepeaingTable" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_NewBillSubmitByXML_RepeaingTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:NewBillSubmitByXML_RepeaingTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_P_GetMobileDetailByLoinName_InputMessage">
+    <wsdl:part name="parameters" element="tns:P_GetMobileDetailByLoinName" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_P_GetMobileDetailByLoinName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:P_GetMobileDetailByLoinNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_exWebServiceSaveBill2DB_InputMessage">
+    <wsdl:part name="parameters" element="tns:exWebServiceSaveBill2DB" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_exWebServiceSaveBill2DB_OutputMessage">
+    <wsdl:part name="parameters" element="tns:exWebServiceSaveBill2DBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitOnLine_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitOnLine" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitOnLine_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitOnLineResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitOnLine_Check_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitOnLine_Check" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitOnLine_Check_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitOnLine_CheckResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_GetCfgRepeaingTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCfgRepeaingTable" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_GetCfgRepeaingTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCfgRepeaingTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitRepeaingTable_InputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitRepeaingTable" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_SubmitRepeaingTable_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SubmitRepeaingTableResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_GWYY_InputMessage">
+    <wsdl:part name="parameters" element="tns:GWYY" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_GWYY_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GWYYResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_MenuSmall_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_MenuSmall" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_MenuSmall_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_MenuSmallResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_Post_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_Post" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_Post_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostBack_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostBack" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostBack_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostBackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Insert_Post_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Insert_Post" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Insert_Post_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Insert_PostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Insert_PostBack_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Insert_PostBack" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Insert_PostBack_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Insert_PostBackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Update_Post_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Update_Post" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Update_Post_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Update_PostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Update_PostBack_InputMessage">
+    <wsdl:part name="parameters" element="tns:Update_PostBack" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Update_PostBack_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Update_PostBackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_Before_Post_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_Before_Post" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_Before_Post_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_Before_PostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_After_Post_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_After_Post" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_After_Post_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_After_PostResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostBackCount_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostBackCount" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostBackCount_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostBackCountResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostInfo" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_PostInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_PostInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_AfterPostBack_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_AfterPostBack" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_AfterPostBack_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_AfterPostBackResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_User_InputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_User" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_Bbs_Get_User_OutputMessage">
+    <wsdl:part name="parameters" element="tns:Bbs_Get_UserResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_MsgSendSys_InputMessage">
+    <wsdl:part name="parameters" element="tns:MsgSendSys" />
+  </wsdl:message>
+  <wsdl:message name="ISvcWorkflowMWF_MsgSendSys_OutputMessage">
+    <wsdl:part name="parameters" element="tns:MsgSendSysResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISvcWorkflowMWF">
+    <wsdl:operation name="test">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/test" message="tns:ISvcWorkflowMWF_test_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/testResponse" message="tns:ISvcWorkflowMWF_test_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Submit" message="tns:ISvcWorkflowMWF_Submit_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitResponse" message="tns:ISvcWorkflowMWF_Submit_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWithValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitWithValue" message="tns:ISvcWorkflowMWF_SubmitWithValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitWithValueResponse" message="tns:ISvcWorkflowMWF_SubmitWithValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWithJSon">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitWithJSon" message="tns:ISvcWorkflowMWF_SubmitWithJSon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitWithJSonResponse" message="tns:ISvcWorkflowMWF_SubmitWithJSon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewBillSubmitByXML">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXML" message="tns:ISvcWorkflowMWF_NewBillSubmitByXML_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXMLResponse" message="tns:ISvcWorkflowMWF_NewBillSubmitByXML_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="NewBillSubmitByXML_RepeaingTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXML_RepeaingTable" message="tns:ISvcWorkflowMWF_NewBillSubmitByXML_RepeaingTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXML_RepeaingTableResponse" message="tns:ISvcWorkflowMWF_NewBillSubmitByXML_RepeaingTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="P_GetMobileDetailByLoinName">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/P_GetMobileDetailByLoinName" message="tns:ISvcWorkflowMWF_P_GetMobileDetailByLoinName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/P_GetMobileDetailByLoinNameResponse" message="tns:ISvcWorkflowMWF_P_GetMobileDetailByLoinName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="exWebServiceSaveBill2DB">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/exWebServiceSaveBill2DB" message="tns:ISvcWorkflowMWF_exWebServiceSaveBill2DB_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/exWebServiceSaveBill2DBResponse" message="tns:ISvcWorkflowMWF_exWebServiceSaveBill2DB_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOnLine">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLine" message="tns:ISvcWorkflowMWF_SubmitOnLine_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLineResponse" message="tns:ISvcWorkflowMWF_SubmitOnLine_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOnLine_Check">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLine_Check" message="tns:ISvcWorkflowMWF_SubmitOnLine_Check_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLine_CheckResponse" message="tns:ISvcWorkflowMWF_SubmitOnLine_Check_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgRepeaingTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/GetCfgRepeaingTable" message="tns:ISvcWorkflowMWF_GetCfgRepeaingTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/GetCfgRepeaingTableResponse" message="tns:ISvcWorkflowMWF_GetCfgRepeaingTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRepeaingTable">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitRepeaingTable" message="tns:ISvcWorkflowMWF_SubmitRepeaingTable_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/SubmitRepeaingTableResponse" message="tns:ISvcWorkflowMWF_SubmitRepeaingTable_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GWYY">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/GWYY" message="tns:ISvcWorkflowMWF_GWYY_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/GWYYResponse" message="tns:ISvcWorkflowMWF_GWYY_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_MenuSmall">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_MenuSmall" message="tns:ISvcWorkflowMWF_Bbs_Get_MenuSmall_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_MenuSmallResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_MenuSmall_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_Post">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_Post" message="tns:ISvcWorkflowMWF_Bbs_Get_Post_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_Post_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostBack">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBack" message="tns:ISvcWorkflowMWF_Bbs_Get_PostBack_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBackResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_PostBack_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Insert_Post">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_Post" message="tns:ISvcWorkflowMWF_Bbs_Insert_Post_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_PostResponse" message="tns:ISvcWorkflowMWF_Bbs_Insert_Post_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Insert_PostBack">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_PostBack" message="tns:ISvcWorkflowMWF_Bbs_Insert_PostBack_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_PostBackResponse" message="tns:ISvcWorkflowMWF_Bbs_Insert_PostBack_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Update_Post">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Update_Post" message="tns:ISvcWorkflowMWF_Bbs_Update_Post_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Update_PostResponse" message="tns:ISvcWorkflowMWF_Bbs_Update_Post_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Update_PostBack">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Update_PostBack" message="tns:ISvcWorkflowMWF_Update_PostBack_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Update_PostBackResponse" message="tns:ISvcWorkflowMWF_Update_PostBack_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_Before_Post">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_Before_Post" message="tns:ISvcWorkflowMWF_Bbs_Get_Before_Post_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_Before_PostResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_Before_Post_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_After_Post">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_After_Post" message="tns:ISvcWorkflowMWF_Bbs_Get_After_Post_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_After_PostResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_After_Post_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostBackCount">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBackCount" message="tns:ISvcWorkflowMWF_Bbs_Get_PostBackCount_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBackCountResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_PostBackCount_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostInfo" message="tns:ISvcWorkflowMWF_Bbs_Get_PostInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostInfoResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_PostInfo_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_AfterPostBack">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_AfterPostBack" message="tns:ISvcWorkflowMWF_Bbs_Get_AfterPostBack_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_AfterPostBackResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_AfterPostBack_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_User">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_User" message="tns:ISvcWorkflowMWF_Bbs_Get_User_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_UserResponse" message="tns:ISvcWorkflowMWF_Bbs_Get_User_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="MsgSendSys">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/MsgSendSys" message="tns:ISvcWorkflowMWF_MsgSendSys_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISvcWorkflowMWF/MsgSendSysResponse" message="tns:ISvcWorkflowMWF_MsgSendSys_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SvcMWF" type="tns:ISvcWorkflowMWF">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="test">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/test" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Submit">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Submit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWithValue">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/SubmitWithValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitWithJSon">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/SubmitWithJSon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewBillSubmitByXML">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXML" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="NewBillSubmitByXML_RepeaingTable">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/NewBillSubmitByXML_RepeaingTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="P_GetMobileDetailByLoinName">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/P_GetMobileDetailByLoinName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="exWebServiceSaveBill2DB">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/exWebServiceSaveBill2DB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOnLine">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitOnLine_Check">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/SubmitOnLine_Check" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCfgRepeaingTable">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/GetCfgRepeaingTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SubmitRepeaingTable">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/SubmitRepeaingTable" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GWYY">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/GWYY" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_MenuSmall">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_MenuSmall" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_Post">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_Post" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostBack">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Insert_Post">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_Post" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Insert_PostBack">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Insert_PostBack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Update_Post">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Update_Post" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Update_PostBack">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Update_PostBack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_Before_Post">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_Before_Post" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_After_Post">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_After_Post" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostBackCount">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostBackCount" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_PostInfo">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_PostInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_AfterPostBack">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_AfterPostBack" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Bbs_Get_User">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/Bbs_Get_User" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="MsgSendSys">
+      <soap:operation soapAction="http://tempuri.org/ISvcWorkflowMWF/MsgSendSys" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SvcWorkflowMWF">
+    <wsdl:port name="SvcMWF" binding="tns:SvcMWF">
+      <soap:address location="http://10.2.6.35/WorkFlow/SvcWorkflowMWF.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "印章";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        决策级别：
+    </h2>
+    <p id="labf_jcjb" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        是否上会：
+    </h2>
+    <p id="labSfsh" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        项目简述：
+    </h2>
+    <p id="labf_xmjs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        采购方式：
+    </h2>
+    <p id="labf_cgfs" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        需求类型：
+    </h2>
+    <p id="labf_xqlx" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        预（估）算金额：
+    </h2>
+    <p id="labf_HTJELX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        评估情况汇总：
+    </h2>
+    <p id="labf_jspg" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        执行中特殊情况说明：
+    </h2>
+    <p id="labf_actionDes" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        其他决策点：
+    </h2>
+    <p id="labothers" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_jcjb").text(processDatajson.processData.f_jcjb);  //决策级别
+        $("#labSfsh").text(processDatajson.processData.f_sfsh);  //是否上会
+        $("#labf_xmjs").text(processDatajson.processData.f_xmjs);  //项目简述
+        $("#labf_cgfs").text(processDatajson.processData.f_cgfs);  //采购方式
+        $("#labf_xqlx").text(processDatajson.processData.f_xqlx);  //需求类型
+        $("#labf_HTJELX").text(processDatajson.processData.f_HTJELX);  //预（估）算金额
+        $("#labf_jspg").text(processDatajson.processData.f_jspg);  //评估情况汇总
+        $("#labf_actionDes").text(processDatajson.processData.f_actionDes);  //执行中特殊情况说明
+        $("#labothers").text(processDatajson.processData.f_qtsm);  //其他决策点
+    };
+</script>

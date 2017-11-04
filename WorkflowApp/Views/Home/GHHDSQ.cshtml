@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "工会活动申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        活动性质：
+    </h2>
+    <p id="labhdxz" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        活动类别：
+    </h2>
+    <p id="labhdlb" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        活动摘要：
+    </h2>
+    <p id="labhdzy" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        活动人数：
+    </h2>
+    <p id="labcount" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        申请费用：
+    </h2>
+    <p id="labmoney" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labhdxz").text(processDatajson.processData.f_hdxz);
+        $("#labhdlb").text(processDatajson.processData.f_hdlb);
+        $("#labhdzy").text(processDatajson.processData.f_hdzy);
+        $("#labcount").text(processDatajson.processData.f_hdrs);
+        $("#labmoney").text(processDatajson.processData.f_money);
+    };
+</script>

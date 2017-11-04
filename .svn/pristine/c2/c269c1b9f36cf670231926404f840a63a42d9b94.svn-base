@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "卓学平台资源申请";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        资源类型：
+    </h2>
+    <p id="f_ZYLX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        面向对象：
+    </h2>
+    <p id="f_MXDX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        学习方式：
+    </h2>
+    <p id="f_XXFS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        开始日期：
+    </h2>
+    <p id="f_KSRQ" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        结束日期：
+    </h2>
+    <p id="f_JSRQ" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        资源管理员：
+    </h2>
+    <p id="f_ZYGLY" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        需求描述：
+    </h2>
+    <p id="f_XQMS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        期望资源上线日期：
+    </h2>
+    <p id="f_QWZYSXRQ" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD2012";
+    var ServerID = 7;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        //资源类型
+        $("#f_ZYLX").text(processDatajson.processData.F_ZYLX);
+        //面向对象
+        $("#f_MXDX").text(processDatajson.processData.F_MXDX);
+        //学习方式
+        $("#f_XXFS").text(processDatajson.processData.F_XXFS);
+        //开始日期
+        $("#f_KSRQ").text(processDatajson.processData.F_KSRQ);
+        //结束日期
+        $("#f_JSRQ").text(processDatajson.processData.F_JSRQ);
+        //资源管理员
+        $("#f_ZYGLY").text(processDatajson.processData.F_ZYGLY);
+        //需求描述
+        $("#f_XQMS").text(processDatajson.processData.F_XQMS);
+        //期望资源上线日期
+        $("#f_QWZYSXRQ").text(processDatajson.processData.F_QWZYSXRQ);
+    };
+</script>

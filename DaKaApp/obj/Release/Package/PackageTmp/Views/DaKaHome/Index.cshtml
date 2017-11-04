@@ -1,0 +1,116 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="noindex, nofollow">
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title>考勤机</title>
+    <link href="~/Content/DaKa/daka/css/main.css" rel="stylesheet" />
+    <style>
+        .header {
+            background: #007dfe;
+            height: 80px;
+        }
+
+            .header span {
+                display: inline-block;
+            }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=iUhodcsUKCPdzqmnKnkgZWO7Qk1vhq5b"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="myinfo disflex">
+            <p class="fir">
+                <img src="~/Content/DaKa/daka/img/head.png" alt="" />
+                <span>@ViewBag.DaKaName</span>
+            </p>
+
+            <div class="two">
+                <p><img src="~/Content/DaKa/daka/img/calender.png" alt="" /></p>
+                <p class="thr" id="tday">@ViewBag.DaKaName</p>
+            </div>
+        </div>
+        <div id="mappage">
+            <div id="relocate">重新定位</div>
+            <div id="allmap">
+
+            </div>
+            <div>
+                <div class="disflex cposition">
+                    <div><img src="~/Content/DaKa/daka/img/locatec.png" alt="" /></div>
+                    <div>
+                        <p><span class="yposi">您当前位置:</span></p>
+                        <textarea name="" id="address" cols="36" rows="2" readonly></textarea><input id="as" type="text" value="" />
+                    </div>
+                </div>
+                <div class="content" id="cont">
+                    <!-- <p id="up">今日您还未打卡</p>-->
+                    <div id="record">
+                        <p class="card" id="card">工作打卡</p>
+                        <p id="time"></p>
+                        <p id="vtime"></p>
+                    </div>
+                    <!-- <p id="down"></p>-->
+                </div>
+            </div>
+        </div>
+
+        <div id="records">
+
+        </div>
+    </div>
+    <div class="footer">
+        <p id="locate" class="disflex">
+            <img src="~/Content/DaKa/daka/img/locate.png" />
+            <span id="locatespan">打卡</span>
+        </p>
+        <p id="stat" class="disflex">
+            <img src="~/Content/DaKa/daka/img/stath.png" />
+            <span id="statspan">统计</span>
+        </p>
+
+
+        @*<span class="locate">打卡</span>
+            <span class="stat">统计</span>*@
+    </div>
+
+    <div id='tips'>
+        <div id='mytip'></div>
+    </div>
+    <div id="spinwrap">
+        <div class="backwrap">
+            <div class="spinwrap">
+                <img src="~/Content/DaKa/daka/img/loading.png" alt="">
+                <p><b>请稍等...</b></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function timestamp(url) {
+            var getTimestamp = new Date().getTime();
+            if (url.indexOf("?") > -1) {
+                url = url + "&timestamp=" + getTimestamp
+            } else {
+                url = url + "?timestamp=" + getTimestamp
+            }
+            return url;
+        }
+        
+    </script>
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/DaKa/daka/js/layer.js"></script>
+    <script src="~/Content/DaKa/daka/js/main.js"></script>
+    
+</body>
+</html>

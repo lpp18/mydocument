@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html style="width:100%;overflow:hidden">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>新建</title>
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../Content/Receipt/css/main.css" />
+    <script src="../Content/Receipt/js/mui.min.js"></script>
+    <style type="text/less">
+        
+
+        body {
+        }
+    </style>
+</head>
+<body style="padding-top:1px;box-sizing:border-box;">
+    <form action="" method="">
+        <ul class="newlist newlist1">
+            <li>
+                <span>抬头</span>
+                <input id="txt_CompanyName" type="text" placeholder="请输入公司名称(必填)" />
+                <img src="~/Content/Receipt/img/close.png" />
+            </li>
+            <li>
+                <span>税号</span>
+                <input id="txt_DutyParagraph" class="input2" type="text" value="" placeholder="请输入纳税人识别号(必填)" />
+                <img src="~/Content/Receipt/img/close.png" />
+             </li>
+            <li>
+                <span>地址</span>
+                <input id="txt_Address" class="input3" type="text" placeholder="请输入企业地址" />
+                <img src="~/Content/Receipt/img/close.png" />
+            </li>
+            <li>
+                <span>电话号码</span>
+                <input id="txt_Tel" class="input4" type="text" placeholder="请输入电话号码" />
+                <img src="~/Content/Receipt/img/close.png" />
+            </li>
+            <li>
+                <span>开户银行</span>
+                <input id="txt_BankOfDeposit" class="input5" type="text" placeholder="请输入开户银行名称" />
+                <img src="~/Content/Receipt/img/close.png" />
+            </li>
+            <li>
+                <span>银行账号</span>
+                <input id="txt_BankAccount" class="input6" type="text" placeholder="请输入银行账号" />
+                <img src="~/Content/Receipt/img/close.png" />
+            </li>
+        </ul>
+    </form>
+   
+
+
+    <div class="newfa bottom">
+        <span style="left:0;" class="active" onclick="Save()">保存</span>
+        <span class="line1"></span>
+        <span class="cancel" onclick="Cancle()">取消</span>
+    </div>
+    <script type="text/javascript" src="../Content/Receipt/js/fontSize.js"></script>
+    <script type="text/javascript" src="../Content/Receipt/js/zepto.min.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Receipt/js/layer.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Content/Receipt/js/main.js")"></script>
+    <script>
+        //var index = window.location.href.split("?")[1] == undefined ? "" : window.location.href.split("=")[1]
+        //获取参数
+        //var index = GetQueryString("index");
+        
+        var id = GetQueryString("id");
+        var option = GetQueryString("option");
+        //if (option != null && option == "edit") {
+        //    var arr = JSON.parse(sessionStorage.getItem(id));
+        //    $(".newlist1 input").each(function (i) {
+        //        if (arr[i]) {
+        //            $(this).val(arr[i].value);
+        //        }
+        //    })
+        //}
+        //取消
+        //$(".cancel").tap(function () {
+        //    window.location.href = "../ReceiptHome/ReceiptDetails?id=" + id;
+        //})
+        //保存
+        //$(".save", function () {
+        //    var obj = $("form").serialize()
+        //    $.ajax({
+        //        type: "get",
+        //        url: "",
+        //        async: true,
+        //        data: obj
+        //    });
+        //})
+        //获取参数方法
+        function GetQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]); return null;
+        }
+        //-----------------------------------------------
+        //保存发票信息
+        var tflag = true;
+        function Save() {
+            setTimeout(function () {
+                tflag=false
+            },50)
+            if (tflag) {
+                if (option == 'edit') { UpdateReceipt(); } else { AddReceipt(); }
+            }
+            setTimeout(function () {
+                tflag = true
+            }, 2000)
+        }
+        //取消按钮
+        function Cancle() {
+            if (option == "add") {
+                location.href = '../ReceiptHome/index';
+            } else if (option == "edit") {
+                location.href = '../ReceiptHome/ReceiptDetails?id=' + id;
+            } else {
+                location.href = '../ReceiptHome/index';
+            }
+        }
+        var Receipt;
+        function GetField() {
+            //添加发票信息id ，服务默认处理为空，更新发票信息根据id更新，不能为空！
+            //var id = "";
+            var CompanyName = $("#txt_CompanyName").val();
+            var DutyParagraph = $("#txt_DutyParagraph").val();
+            var Address = $("#txt_Address").val();
+            var Tel = $("#txt_Tel").val();
+            var BankOfDeposit = $("#txt_BankOfDeposit").val();
+            var BankAccount = $("#txt_BankAccount").val();
+            //定义全局变量保存发票信息
+            Receipt = {
+                id: id,
+                CompanyName: CompanyName,		// 公司名称
+                DutyParagraph: DutyParagraph,	// 税号
+                Address: Address,				// 地址
+                Tel: Tel,						// 电话
+                BankOfDeposit: BankOfDeposit,	// 开户银行
+                BankAccount: BankAccount,	    // 银行账号
+            };
+            if (CompanyName == "") {
+                MsgAlert("公司名称(发票抬头)不能为空，请重新填写！", 2);
+               // $("#txt_CompanyName").focus();
+                return false;
+            }
+            if (DutyParagraph == "") {
+                MsgAlert("税号不能为空，请重新填写！", 2);
+               // $("#txt_DutyParagraph").focus();
+                return false;
+            }
+            return true;
+        }
+        //添加发票信息方法
+        function AddReceipt() {
+            if (!GetField()) {
+                return;
+            }
+            mui.ajax(
+                //请求服务URL
+                "../ReceiptHome/AddReceiptInfo",
+                {
+                    data: Receipt,
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //10秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            MsgAlert(data.Message, 2);
+                            return;
+                        }
+                        //mui.toast("发票信息添加成功！");
+                        location.href = "../ReceiptHome/index";
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+
+        //更新发票信息方法
+        function UpdateReceipt(id) {
+            if (!GetField()) {
+                return;
+            }
+            mui.ajax(
+                //请求服务URL
+                "../ReceiptHome/UpdateReceipt",
+                {
+                    data: Receipt,
+                    dataType: "json",
+                    type: "post",    //HTTP请求类型
+                    timeout: 10000,  //10秒
+                    headers: { 'Content-Type': 'application/json' },
+                    success: function (data) {
+                        //Success为false，查询出错
+                        if (data.Success != null && (!data.Success)) {
+                            MsgAlert(data.Message, 2);
+                            //console.log(data);
+                            return;
+                        }
+                        MsgAlert(data.Message, 2);
+                        var id = GetQueryString("id")
+                        location.href = "../ReceiptHome/ReceiptDetails?id=" + id
+                    },
+                    error: function (xhr, type, errorThrown) {
+                        console.log(type);
+                    }
+                });
+        }
+        function MsgAlert(msg, second)
+        {
+            layer.open({
+                content: msg,
+                skin: 'msg',
+                time: second //2秒后自动关闭
+            });
+        }
+    </script>
+</body>
+</html>

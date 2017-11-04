@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "因公出国";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li>
+    <h2 class="mydocument_infor_title">
+        主办公司：
+    </h2>
+    <p id="labf_ZBGS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        团组长姓名：
+    </h2>
+    <p id="labf_TZZXM" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        带队姓名：
+    </h2>
+    <p id="labf_DDXM" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        总人数：
+    </h2>
+    <p id="labf_ZRS" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        前往国家或地区：
+    </h2>
+    <p id="labf_QWGJHDQ" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出境日期：
+    </h2>
+    <p id="labf_CJRQ" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        入境日期：
+    </h2>
+    <p id="labf_RJRQ" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出访路线：
+    </h2>
+    <p id="labf_CFLX" class="mydocument_infor_title_text"></p>
+</li>
+<li>
+    <h2 class="mydocument_infor_title">
+        出访任务：
+    </h2>
+    <p id="labf_CFRW" class="mydocument_infor_title_text"></p>
+</li>
+<script type="text/javascript">
+    var Project = "HD";
+    var ServerID = 3;
+    //待办详细信息
+    function ToDoDetails(processDatajson) {
+        $("#labf_ZBGS").text(processDatajson.processData.f_ZBGS);  //主办公司
+        $("#labf_TZZXM").text(processDatajson.processData.f_TZZXM);  //团组长姓名
+        $("#labf_DDXM").text(processDatajson.processData.f_DDXM);  //带队姓名
+        $("#labf_ZRS").text(processDatajson.processData.f_fbyy);  //总人数
+        $("#labf_QWGJHDQ").text(processDatajson.processData.f_QWGJHDQ);  //前往国家或地区
+        $("#labf_CJRQ").text(processDatajson.processData.f_CJRQ);  //出境日期
+        $("#labf_RJRQ").text(processDatajson.processData.f_xwbt);  //入境日期
+        $("#labf_CFLX").text(processDatajson.processData.f_CFLX);  //出访路线
+        $("#labf_CFRW").text(processDatajson.processData.f_CFRW);  //出访任务
+    };
+</script>
+

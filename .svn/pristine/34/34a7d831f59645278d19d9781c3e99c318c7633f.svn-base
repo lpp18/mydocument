@@ -1,0 +1,222 @@
+﻿@{
+    ViewBag.Title = "报销详情";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<li class="mobile">
+    <h2 class="mydocument_infor_title">
+        报销金额：
+    </h2>
+    <p id="labdocType" class="mydocument_infor_title_text">12元</p>
+</li>
+<script type="text/javascript">
+    var gwqb;
+    $(function () {
+        selectprocess();
+    });
+    //1、流程详细
+    function selectprocess() {
+        //debugger
+        $.ajax({
+            type: 'post',
+            url: '../Home/select_bumphdetails',
+            cache: false,
+            data: 'billNo=' + getUrlParam("billNo"),
+            dataType: "json", //返回数据形式为json
+            success: function (mes) {
+                gwqb = mes;
+                for (var i = 0; i < mes.length; i++) {
+                    $("#labbillNo").text(mes[i].BillNo);
+                    billNo = mes[i].BillNo;
+                    var processDatajson = $.parseJSON(mes[i].ProcessData);
+                    $("#labproposerName").text(mes[i].BillEmpName);
+                    $("#labtitle").text(processDatajson.billTitle);
+                    $("#labapplyTime").text(processDatajson.billDate);
+                    $("#labFphone").text(processDatajson.phone);
+                    $("#labbillDept").text(processDatajson.billDept);
+                    $("#labdocType").text(processDatajson.processData.Amount_apply);
+                    //开始填充审批日志
+                    ApproveLog(processDatajson.approveLog);
+                    selectatt(mes[i].ServerID, mes[i].ModelId, mes[i].ProcessID);
+                }
+            },
+            error: function () {
+            }
+        });
+    }
+
+    //2、附件
+    function selectatt(sid, mid, pid) {
+        $.ajax({
+            type: 'post',
+            url: '../Home/selectAttachment',
+            cache: false,
+            data: 'sid=' + sid + '&mid=' + mid + '&pid=' + pid,
+            dataType: "json", //返回数据形式为json
+            success: function (mes) {
+                //开始附件
+                $("#AttachmentInfo").text("");
+                var strlog = "";
+                for (var j = 0; j < mes.length; j++) {
+                    var FileUrl = mes[j].FileUrl;
+                    var FileName = mes[j].FileName;
+                    var UserLoginName = mes[j].UserLoginName;
+                    var CreateTime = timeConvert(mes[j].AddTime, false);
+                    if (FileUrl == "") {
+                        //strlog += "<td style='background-color:#ddd;'>" + mes[j].FileName + "</td>";
+                        //strlog += "<td style='background-color:#ddd;'>" + mes[j].UserLoginName + "</td></tr>";
+                    }
+                    else {
+                        //strlog += "<td><a href='" + mes[j].FileUrl + "'>" + mes[j].FileName + "</a></td>";
+                        //strlog += "<td>" + mes[j].UserLoginName + "</td></tr>";
+                    }
+                    strlog = "<div class=\"list-group-item li\"><div>";
+                    strlog += "<p><img src=\"../Content/img/fujian.png\" /><span>" + FileName + "</span></p>";
+                    strlog += "<p><span>添加人 : " + UserLoginName + "</span><span> 添加日期 : " + CreateTime + "</span></p></div>";
+                    strlog += "<p><a href=\"" + FileUrl + "\" target=\"_blank\" download class=\"mui-btn mui-btn-outlined font24\">下载</a></p></div>";
+                };
+                $("#AttachmentInfo").html(strlog);
+            },
+            error: function () {
+            }
+        });
+    };
+    //3、审批日志
+    function ApproveLog(approveLog) {
+        var strlog = "";
+        for (var j = 0; j < approveLog.length; j++) {
+            var auditorName = approveLog[j].auditorName != null ? approveLog[j].auditorName : "";
+            var auditTime = approveLog[j].auditTime != null ? approveLog[j].auditTime : "";
+            var remark = approveLog[j].remark != null ? approveLog[j].remark : "";
+            strlog += "<li>";
+            strlog += "<div class=\"approval_log_name\">"+auditorName+"</div>";
+            strlog += "<div class=\"approval_log_style\"><img src=\"../Content/img/succ1.png\" alt=\"\"><p><em></em></p></div>";
+            strlog += "<div class=\"approval_log_access\">";
+            strlog += "<h2>"+remark+"</h2><p>"+auditTime+"</p>"
+            strlog += "</div>";
+            strlog += "</li>";
+        };
+        $("#ApproveLog").html(strlog);
+    }
+
+    $(document).on('click', '.mydocument_infor_footer .eagree', function () {
+        Agree();
+    });
+    $(document).on('click', '.mydocument_infor_footer .eagree', function () {
+        Reject();
+    });
+
+
+    //4、同意操作
+    function Agree() {
+        var index1 = layer.open({
+            shade: 'background-color: rgba(0,0,0,.5)',
+            type: 2,
+            content: '加载中'
+        });
+        //同意意见
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ServerID = 3;
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#ApprovalOpinion").val(); //驳回意见
+        var Processing_Code = 1; //驳回代码
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        $.ajax({
+            type: 'post',
+            url: '../Home/SvcWorkflowMWFs',
+            cache: false,
+            data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=1',
+            dataType: "text", //返回数据形式为json
+            beforeSend: function () {
+            },
+            success: function (mes) {
+                layer.close(index1);
+                if (mes == "OK") {
+                    SkipIndex("处理完成", "succ1");
+                } else if (mes == "NO") {
+                    SkipIndex("处理失败,请刷新页面重试", "succ1");
+                }
+                else {
+                }
+            }
+        });
+
+    }
+    //5、驳回操作
+    function Reject() {
+        if (Confirm("您确定要驳回吗？")) {
+            return;
+        }
+        var BillNo = gwqb[0].BillNo;
+        var processDatajson = $.parseJSON(gwqb[0].ProcessData);
+        var Project = "HD"    //project
+        var ModelId = gwqb[0].ModelId;     //模块ID
+        var RejectOpinion = $("#ApprovalOpinion").val(); //驳回意见
+        var Processing_Code = 2; //驳回代码
+        var ServerID = 3;
+        var taskId = processDatajson.taskID;
+        var ProcessID = processDatajson.processId;   //processId;
+        //是否输入驳回意见
+        if (RejectOpinion == "" || RejectOpinion == "null") {
+            mui.alert("请输入驳回意见", " ", "关闭", function () { }, "div");
+            return;
+        }
+        $.ajax({
+            type: 'post',
+            url: '/Workflow/Home/SvcWorkflowMWFs',
+            cache: false,
+            data: 'BillNo=' + BillNo + '&ServerID=' + ServerID + '&strApproveNote=' + RejectOpinion + '&Project=' + Project + '&taskId=' + taskId + '&ModelId=' + ModelId + '&ProcessID=' + ProcessID + '&xuanzerenID=""&Processing_Code=' + Processing_Code + '&liuchengType=0',
+            dataType: "text", //返回数据形式为json
+            success: function (mes) {
+                if (mes == "OK") {
+                    SkipIndex("处理完成", "succ1");
+                } else if (mes == "NO") {
+                    SkipIndex("处理完成", "succ1");
+                }
+                else {
+                    SkipIndex("处理完成", "succ1");
+                }
+            }
+        });
+    };
+    //确认框
+    var Confirm = function (content) {
+        var index = layer.open({
+            content: content,
+            shade: 'background-color: rgba(0,0,0,.5)'
+                    , btn: ['取消', '确定']
+                    , yes: function (index) {
+                        layer.close(index);
+                        return false;
+                    }, no: function (index) {
+                        //退回操作
+                        layer.close(index);
+                        return true;
+                    }
+        });
+    }
+    //跳转首页
+    function SkipIndex(content, ico) {
+        //处理完成
+        var html = '<div class="over">' +
+                    '<p><img src="../Content/img/' + ico + '.png" alt="" /></p>' +
+                    '<p>处理完成！</p>' +
+                    '</div>';
+        var index2 = layer.open({
+            style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+            content: html
+        });
+        setTimeout(function () {
+            location.href = "../Home/index";
+        }, 800);
+        //setTimeout(function () {
+        //    var index2 = layer.open({
+        //        style: 'font-size:.4rem;width:70%;border:none; background-color:#fff; color:#555;text-align:center;',
+        //        content: html
+        //    })
+        //}, 1100);
+    }
+</script>
